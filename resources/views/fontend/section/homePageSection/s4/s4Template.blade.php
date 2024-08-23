@@ -1,0 +1,59 @@
+<section class="services-card-section">
+    <div class="auto-container">
+        <!-- Header Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card-header-section mx-auto">
+                    <div class="py-5">
+                        <div class="sub-title ">{{$data->lebel}}</div>
+                        @php
+                            $title = preg_replace('/\*\*(.*?)\*\*/', "<span class='highlight'>$1</span>", $data->title);
+                        @endphp
+                        <div class="title mt-3">
+                            {!! $title !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach ($services as $v)
+                @php
+                    if ($v->is_displayed_in_home !=1) {continue;}
+                    if ($v->index+1 == 5) {
+                        break;
+                    }
+                @endphp
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="card card-custom h-100">
+                        <picture>
+                            <img src="{{asset('assets/images/services/'.$v->thumbnail)}}" class="card-img-top mx-auto" alt="{{$v->title}}">
+                        </picture>
+                        <div class="card-body">
+                            @if ($v->icon)
+                                <div class="card-icon">
+                                    <i class="fas {{$v->icon}}"></i>
+                                </div>
+                            @endif
+
+                            <div class="card-center">
+                                <h5 class="card-title">{{$v->title}}</h5>
+                                <p class="card-text">{{ Str::substr($v->short_description,0, 50) }}...</p>
+                                <a class="btn-style-tean theme-btn btn-item" href="{{ route( 'service.details',$v->slug )}}">
+                                    <div class="btn-wrap">
+                                        <span class="text-one">{{$v->button_name}} <i class="fas fa-plus"></i></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+        <div class="text-center service-btn">
+            <a href="{{route('services')}}" class="btn btn-primary">{{$data->btn1}} <i
+                    class="fas fa-plus"></i></a>
+        </div>
+    </div>
+</section>
