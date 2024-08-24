@@ -37,7 +37,7 @@ function cropImage(inputObj, newInputID='',cropHeight=150, cropWidth=150, viewIm
     var $modal = $('#modal');
     var image = document.getElementById('image');
     var cropper;
-    console.log( inputObj);
+    // console.log( inputObj);
 
     if (files && files.length > 0) {
         var file = files[0];

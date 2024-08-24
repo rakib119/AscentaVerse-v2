@@ -22,13 +22,13 @@ class RoutePermission
             $permissions_array = session('permission_route', []);
             $currentRoute = Route::currentRouteName();
 
-            if ($currentRoute === 'home') {
+           /*  if ($currentRoute === 'home') {
                 return $next($request);
             }
 
             if (!isset($permissions_array[$currentRoute])) {
                 return redirect()->route('home');
-            }
+            } */
 
             return $next($request);
         } catch (\Exception $e) {

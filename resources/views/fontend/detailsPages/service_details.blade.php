@@ -3,27 +3,45 @@
     <!-- Page Title -->
     <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$data->value)}})">
         <div class="auto-container">
-			<h2>Blog Details</h2>
+			<h2>Service Details</h2>
 			<ul class="bread-crumb clearfix">
 				<li><a href="{{route('home')}}">Home</a></li>
-				<li>Blog Details</li>
+				<li>Service Details</li>
 			</ul>
         </div>
     </section>
     <!-- End Page Title -->
-
-	<div class="sidebar-page-container">
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
     	<div class="auto-container">
         	<div class="row clearfix">
-                <!--Content Side-->
-                <div class="content-side col-xl-9 col-lg-8 col-md-12 col-sm-12">
-                    @if ($details)
-                        <div class="blog-single">
+				<!-- Sidebar Side -->
+                <div class="sidebar-side left-sidebar col-lg-4 col-md-12 col-sm-12">
+                	<aside class="sidebar">
+						<!-- Contact Widget -->
+						<div class="sidebar-widget contact-widget">
+							<div class="widget-content"  style="background-image:url({{ asset('assets/images/background/8.jpg')}})">
+								<div class="title">Contact us now</div>
+								{{-- <div class="help">If need help!</div>
+								<a class="phone" href="tel:+557-3452-234">557-3452-234</a>
+								<div class="form">or go to contact form:</div> --}}
+								<div class="button-box text-center">
+									<a href="{{route('about')}}">Let’s start now <span class="fa-solid fa-link fa-fw"></span></a>
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+
+				<!-- Content Side -->
+                <div class="content-side right-sidebar col-lg-8 col-md-12 col-sm-12">
+					<div class="service-detail">
+						@if ($details)
                             <div class="inner-box">
                                 @if ($details?->photo1)
                                     <div class="image">
                                         <picture>
-                                            <img src="{{ asset('assets/images/blogs/details/'.$details?->photo1) }}" alt="not Found" />
+                                            <img src="{{ asset('assets/images/services/details/'.$details?->photo1) }}" alt="not Found" />
                                         </picture>
                                     </div>
                                 @endif
@@ -61,56 +79,13 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                    @else
-                        <h6 class="text-center text-danger">** Content not found **</h6>
-                    @endif
-                </div>
-
-
-
-
-				<!--Sidebar Side-->
-                <div class="sidebar-side col-xl-3 col-lg-4 col-md-12 col-sm-12">
-                	<aside class="sidebar sticky-top">
-
-						<!--Blog Category Widget-->
-                        {{-- <div class="sidebar-widget sidebar-blog-category">
-                            <div class="sidebar-title">
-                                <h4>Categories</h4>
-                            </div>
-                            <ul class="blog-cat">
-                                @foreach ($categories as $v)
-                                    <li><a href="{{route('blog.category',$v['cat_name'])}}">{{ $v['cat_name'] }} <span>{{$v['total_blogs']}}</span></a></li>
-                                @endforeach
-                            </ul>
-                        </div> --}}
-
-						<!-- Popular Post Widget-->
-                        <div class="sidebar-widget popular-posts">
-                            <div class="sidebar-title">
-                                <h4>Recent News</h4>
-                            </div>
-                            @foreach ($blogs as $blog_id=>$v)
-                                @php
-                                    if($loop->index ==7)  { break;}
-                                    if($blog_id == $details->blog_id )      { continue;}
-                                    $dtls_link = route('blog-details',$v['slug']);
-                                @endphp
-                                <article class="post">
-                                    <figure class="post-thumb">
-                                        <a href="{{  $dtls_link }}" class="overlay-box">
-                                        <img src="{{ $v['thumbnail'] }}" alt=""></a>
-                                    </figure>
-                                    <div class="text"><a href="{{  $dtls_link }}">{{ Str::substr($v['title'], 0, 30)."..." }}</a></div>
-                                </article>
-                            @endforeach
-						</div>
-					</aside>
+                        @else
+                            <h6 class="text-center text-danger">** Content not found **</h6>
+                        @endif
+					</div>
 				</div>
 
 			</div>
 		</div>
 	</div>
-
 @endsection

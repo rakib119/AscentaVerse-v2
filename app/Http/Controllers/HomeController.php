@@ -78,10 +78,30 @@ class HomeController extends Controller
             $blogs[$v->blog_id]['thumbnail']    = asset('assets/images/blogs/'.$v->thumbnail) ;
             $blogs[$v->blog_id]['slug']         = $v->slug;
         }
+        $details = DB::table('blog_details','a')
+            ->join('blogs as b', 'a.blog_id', '=', 'b.id')
+            ->select('b.category_id','a.photo1','a.blog_id','a.photo2','a.photo3','a.content1','a.content2','b.slug')
+            ->where('b.slug',$slug)
+            ->first();
         // return $blogs;
-        $data = GenarelInfo::select('value')->where('field_name','blog-background')->first();
-        return view('fontend.detailsPages.blog_details',compact('data','categories','blogs'));
+        $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
+        return view('fontend.detailsPages.blog_details',compact('data','categories','blogs','details'));
     }
+    public function services_details($slug)
+    {
+
+
+        $details = DB::table('service_details','a')
+            ->join('services as b', 'a.service_id', '=', 'b.id')
+            ->select('a.photo1','a.service_id','a.photo2','a.photo3','a.content1','a.content2','b.slug')
+            ->where('b.slug',$slug)
+            ->first();
+        // return $blogs;
+        $data = GenarelInfo::select('value')->where('field_name','service_background')->first();
+        return view('fontend.detailsPages.service_details',compact('data','details'));
+    }
+
+
     public function team_member_dtls($slug)
     {
         $data = Team::where('slug',$slug)->first();
@@ -91,7 +111,7 @@ class HomeController extends Controller
         {
             $iconArray [$v->id] =  $v->icon;
         }
-        $img = GenarelInfo::select('value')->where('field_name','blog-background')->first();
+        $img = GenarelInfo::select('value')->where('field_name','blog_background')->first();
         return view('fontend.detailsPages.team_details',compact('data','img','iconArray'));
     }
 }

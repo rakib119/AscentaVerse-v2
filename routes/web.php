@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-$sectionIdArray = array( 1=>'Home Sec 1 left',2=>'Home Sec 1 Right(Banner)',3=>'Home Sec 2(About)',4=>'Home Sec 3 Right',5=>'Home Sec 3 Left',6=>'Home Sec 4',7=>'Faq',8=>'Team',9=>'Blog',10=>'Testimonial');
+$sectionIdArray = array( 1=>'Home Sec 1 left',2=>'Home Sec 1 Right(Banner)',3=>'Home Sec 2(About)',4=>'Home Sec 3 Right',5=>'Home Sec 3 Left',6=>'Home Sec 4',7=>'Faq',8=>'Team',9=>'Blog',10=>'Testimonial',11=>'Blog Details');
 Auth::routes();
 
 Route::controller(HomeController::class)->group(function(){
@@ -64,6 +64,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::post('homeS4/title/store',[hs4Controller::class, 'title_store'])->name('homeS4.title_store');
     Route::put('homeS4/title/update/{id}',[hs4Controller::class, 'title_update'])->name('homeS4.title_update');
     Route::post('homeS4/published',[hs4Controller::class, 'published'])->name('homeS4.publish');
+    Route::get('homeS4/edit/details/{id}',[hs4Controller::class, 'serviceDetails'])->name('homeS4.details.edit');
+    Route::put('homeS4/update/details',[hs4Controller::class, 'serviceDetailsUpdate'])->name('homeS4.details.update');
 
     //FAQ
     Route::resource('faq', FaqController::class);
@@ -85,6 +87,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::post('blog/title/store',[BlogController::class, 'title_store'])->name('blog.title_store');
     Route::put('blog/title/update/{id}',[BlogController::class, 'title_update'])->name('blog.title_update');
     Route::post('blog/published',[BlogController::class, 'published'])->name('blog.publish');
+    Route::get('blog/edit/details/{id}',[BlogController::class, 'blogDetails'])->name('blog.details.edit');
+    Route::put('blog/update/details',[BlogController::class, 'blogDetailsUpdate'])->name('blog.details.update');
 
     //TESTIMONIAL
     Route::resource('testimonial', TestimonialController::class);

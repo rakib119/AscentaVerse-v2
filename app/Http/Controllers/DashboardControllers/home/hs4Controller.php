@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers\home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceDetail;
 use App\Models\SingleSection;
 use Carbon\Carbon;
 use Exception;
@@ -243,6 +244,103 @@ class hs4Controller extends Controller
         {
                 $message = $e->getMessage();
                 return back()->with('error',$message);
+        }
+    }
+
+
+    // BLOG DETAILS
+    public function serviceDetails(Request $request, string $enId)
+    {
+        $id = decrypt($enId);
+        $details = ServiceDetail::where('service_id',$id)->first();
+        return  view('dashboard.pages.home.section4.details.edit',compact(['details','id']));
+    }
+    public function serviceDetailsUpdate(Request $request)
+    {
+        $request->validate([
+            'photo1'=>'nullable|image|mimes:jpg,jpeg',//|dimensions:width=900,height=450
+            'photo2'=>'nullable|image|mimes:jpg,jpeg',//|dimensions:width=390,height=290
+            'photo3'=>'nullable|image|mimes:jpg,jpeg',//|dimensions:width=390,height=290
+            'content1'=>'required',
+            'content2'=>'nullable',
+        ]);
+        $service_id       = $request->service_id;
+        if (!$service_id) {
+            return back()->with('error','Something Went wrong');
+        }
+
+        $blog_details   = ServiceDetail::where('service_id',$service_id)->first();
+
+        try
+        {
+            if ($blog_details)
+            {//UPDATE
+
+                $msg_str    = uploadImage('public/assets/images/services/details/',$request,'photo1'); //Custom Helpers
+                $msgArr     = explode('*',$msg_str);
+                if ($msgArr[1]!= 0) //IF uploaded image found
+                {
+                    $path = base_path('public/assets/images/services/details/' . $blog_details->photo1);
+                    // unlink($path);
+                    $blog_details->photo1 = $msgArr[1];
+                }
+                $msg_str2   = uploadImage('public/assets/images/services/details/',$request,'photo2'); //Custom Helpers
+                $msgArr2    = explode('*',$msg_str2);
+                if ($msgArr2[1]!= 0) //IF uploaded image found
+                {
+                    $path2 = base_path('public/assets/images/services/details/' . $blog_details->photo2);
+                    unlink($path2);
+                    $blog_details->photo2 = $msgArr2[1];
+                }
+
+                $msg_str3   = uploadImage('public/assets/images/services/details/',$request,'photo3'); //Custom Helpers
+                $msgArr3    = explode('*',$msg_str3);
+                if ($msgArr3[1]!= 0) //IF uploaded image found
+                {
+                    $path3 = base_path('public/assets/images/services/details/' . $blog_details->photo3);
+                    unlink($path3);
+                    $blog_details->photo3 = $msgArr3[1];
+                }
+
+                $blog_details->content1 = $request->content1;
+                $blog_details->content2 = $request->content2;
+                $blog_details->updated_by = auth()->id();
+                $blog_details->save();
+                return back()->with('success','Updated successfully');
+
+            }
+            else    //INSERT
+            {
+
+                $msg_str    = uploadImage('public/assets/images/services/details/',$request,'photo1'); //Custom Helpers
+                $msgArr     = explode('*',$msg_str);
+                $photo1     = $msgArr[1];
+
+                $msg_str2   = uploadImage('public/assets/images/services/details/',$request,'photo2'); //Custom Helpers
+                $msgArr2    = explode('*',$msg_str2);
+                $photo2     = $msgArr2[1];
+
+                $msg_str3   = uploadImage('public/assets/images/services/details/',$request,'photo3'); //Custom Helpers
+                $msgArr3    = explode('*',$msg_str3);
+                $photo3     = $msgArr3[1];
+
+                ServiceDetail::insert([
+                    'photo1'=>  $photo1,
+                    'photo2'=>  $photo2,
+                    'photo3'=>  $photo3,
+                    'service_id'=>  $service_id,
+                    'content1'=>$request->content1,
+                    'content2'=>$request->content2,
+                    'created_by'=>auth()->id(),
+                    'created_at'=>Carbon::now(),
+                ]);
+                return back()->with('success','Added successfully');
+            }
+
+        }
+        catch(Exception $e)
+        {
+            return back()->with('error',$e->getMessage());
         }
     }
 }

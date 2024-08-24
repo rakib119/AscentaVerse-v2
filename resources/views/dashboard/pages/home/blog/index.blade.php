@@ -249,6 +249,7 @@
                                                     @endphp
                                                     <ul class="dropdown-menu">
                                                        <li><a class="dropdown-item" href="{{route('blog.edit',$update_id)}}">Edit</a>
+                                                       <li><a class="dropdown-item" href="{{route('blog.details.edit',$update_id)}}">Details</a>
                                                        <li>
                                                             <form id="deleteData{{$update_id}}" action="{{ route('blog.destroy', $update_id) }}"
                                                                 method="post">
