@@ -1,35 +1,6 @@
 
 @extends('dashboard.layout.dashboard')
-@section('css')
-<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-<style type="text/css">
-    .ck-editor__editable_inline {
-        height: 500px;
-    }
-    .cke_editable img {
-    max-width: 100vh;
-    height: auto;
-    }
 
-    .cke_editable img.align-left {
-        float: left;
-        margin-right: 10px;
-    }
-
-    .cke_editable img.align-right {
-        float: right;
-        margin-left: 10px;
-    }
-
-    .cke_editable img.align-center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-
-
-@endsection
 @section('content')
 <div class="main-content">
     <div class="page-content">
@@ -316,38 +287,5 @@
     </div>
 </div>
 @endsection
-@section('javacript')
-<script>
 
-    ClassicEditor
-
-        .create(document.querySelector('#short_description'), {
-
-            ckfinder: {
-
-                uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-
-            },
-
-            image: {
-                toolbar: ['imageTextAlternative', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
-                styles: [
-                    'full',
-                    'alignLeft',
-                    'alignCenter',
-                    'alignRight'
-                ]
-            }
-
-        })
-
-        .catch(error => {
-
-            console.error(error);
-
-        });
-
-</script>
-
-@endsection
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\DashboardControllers\BlogCategoryController;
 use App\Http\Controllers\DashboardControllers\home\BlogController;
+use App\Http\Controllers\DashboardControllers\home\DynamicContentController;
 use App\Http\Controllers\DashboardControllers\home\FaqController;
 use App\Http\Controllers\DashboardControllers\home\hs1LeftController;
 use App\Http\Controllers\DashboardControllers\home\hs1RightController;
@@ -31,6 +32,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/blogs', 'blogs')->name('blog');
     Route::get('/blog/details/{slug}', 'blogs_details')->name('blog-details');
     Route::get('/blogs/category/{slug}', 'category_wise_blogs')->name('blog.category');
+    Route::get('/policies', 'policies')->name('policies');
+    Route::get('/terms-and-conditions', 'terms_and_conditions')->name('t&c');
+    Route::get('/return-and-refund-policy', 'return_and_refund_policy')->name('refund_policy');
     Route::get('/kyc', 'kyc')->name('kyc');
 
 });
@@ -101,6 +105,9 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::put('info-setup/photo/update/{id}',[InfoController::class, 'image_update'])->name('info-setup.photo-update');
     Route::post('info-setup/published',[InfoController::class, 'published'])->name('info-setup.publish');
     Route::post('ckeditor/upload', [InfoController::class, 'uploadCkFile'])->name('ckeditor.upload');
+
+    //DynamicContentController
+    Route::resource('content', DynamicContentController::class);
 
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogCategories;
+use App\Models\DynamicContent;
 use App\Models\GenarelInfo;
 use App\Models\SocialIcon;
 use App\Models\Team;
@@ -101,7 +102,6 @@ class HomeController extends Controller
         return view('fontend.detailsPages.service_details',compact('data','details'));
     }
 
-
     public function team_member_dtls($slug)
     {
         $data = Team::where('slug',$slug)->first();
@@ -113,5 +113,24 @@ class HomeController extends Controller
         }
         $img = GenarelInfo::select('value')->where('field_name','blog_background')->first();
         return view('fontend.detailsPages.team_details',compact('data','img','iconArray'));
+    }
+
+    public function policies()
+    {
+        $data       = DynamicContent::find(1);
+        $content    = $data->content;
+        return view('fontend.mainPages.pageContainer',compact('content'));
+    }
+    public function terms_and_conditions()
+    {
+        $data       = DynamicContent::find(2);
+        $content    = $data->content;
+        return view('fontend.mainPages.pageContainer',compact('content'));
+    }
+    public function return_and_refund_policy()
+    {
+        $data       = DynamicContent::find(3);
+        $content    = $data->content;
+        return view('fontend.mainPages.pageContainer',compact('content'));
     }
 }
