@@ -80,6 +80,62 @@
         <div class="page-content">
             <div class="container-fluid">
                 <div class="page-content-wrapper">
+                    {{-- CHANGE ROLE --}}
+                    {{-- CHANGE ROLE --}}
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h2 class=" mt-4">Change Role</h2>
+                                        </div>
+                                    </div>
+                                    <div class="form py-3">
+                                        <form action="{{ route('role.update')  }}"  method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="user_id">User Name
+                                                            <span class="text-danger">*</span></label>
+                                                            <select id="user_id" class="form-select" aria-label="Default select example" name="user_id">
+                                                                <option value="">--Select User--</option>
+                                                                @foreach ($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('user')
+                                                                <h6 class="text-danger"> {{ $message }}</h6>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="role">Role
+                                                            <span class="text-danger">*</span></label>
+                                                            <select disabled id="role" class="form-select" aria-label="Default select example" name="role" >
+                                                                <option value="">--Select Role--</option>
+                                                            </select>
+                                                            @error('role')
+                                                                <h6 class="text-danger"> {{ $message }}</h6>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 mt-3">
+                                                    <div class="mb-3">
+                                                        <button type="submit" class="btn btn-success">Save </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
@@ -100,6 +156,11 @@
                                                             <select id="user" class="form-select" aria-label="Default select example" name="user">
                                                                 <option value="">--Select User--</option>
                                                                 @foreach ($users as $user)
+                                                                    @php
+                                                                        if($user->role_id != 2){
+                                                                            continue;
+                                                                        }
+                                                                    @endphp
                                                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                                                 @endforeach
                                                             </select>
@@ -159,6 +220,10 @@
     <script>
         $(document).ready(function() {
             $('#permission').select2();
+            $('#user').select2();
+            $('#menu').select2();
+            $('#role').select2();
+            $('#user_id').select2();
         });
         $('#user').change(function(){
 
@@ -184,7 +249,7 @@
             }
             else
             {
-                $('#permission').val('');
+                $('#permission').html('');
                 $('#permission').prop('disabled', true);
                 return;
             }
@@ -205,6 +270,38 @@
                     $('#permission').html(data);
                     // Initialize or re-initialize Select2 if needed
                     $('#permission').select2();
+                },
+            });
+        });
+
+
+        $('#user_id').change(function(){
+            let user_id = $('#user_id').val();
+            if(user_id !=''){
+                $('#role').prop('disabled', false);
+            }
+            else
+            {
+                $('#role').html('');
+                $('#role').prop('disabled', true);
+                return;
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('permission.getRole') }}",
+                data: {
+                    user_id  : user_id
+                },
+                success: function(data) {
+                    $('#role').html(data);
+                    // Initialize or re-initialize Select2 if needed
+                    $('#role').select2();
                 },
             });
         });

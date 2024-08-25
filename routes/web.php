@@ -115,4 +115,6 @@ Route::middleware(['auth'])->group(function ()
 {
     Route::resource('permission', PermissionController::class)->only('index','store','edit','update');
     Route::post('select-options', [PermissionController::class, 'get_options'])->name('permission.getOptions');
+    Route::post('get-role', [PermissionController::class, 'get_role'])->name('permission.getRole');
+    Route::post('update-role', [PermissionController::class, 'update_role'])->name('role.update');
 });

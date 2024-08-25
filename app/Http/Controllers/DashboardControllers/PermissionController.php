@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\DB;
 class PermissionController extends Controller
 {
 
+    public $roleArray = array(1=>'Admin',2=>'Team Member',3=>'User');
     public function index()
     {
         // return storeMenuIntoSession();
         // return  session('permission_route');
         $main_menu_array=$menu_name_array=array();
         $menues = MainMenu::select('id','route_name','root_menu_id','menu_name')->orderBy('route_name','asc')->get();
-        $users  = User::select('id','name')->where('role_id',2)->get();
+        $users  = User::select('id','name','role_id')->get();
         foreach ($menues as $v)
         {
             $root_menu_id = $v->root_menu_id ?? $v->id;
@@ -32,7 +33,8 @@ class PermissionController extends Controller
         return view('dashboard.admin.tools.permission.index',[
             'menues' =>$main_menu_array,
             'menu_name_array' =>$menu_name_array,
-            'users' =>$users
+            'users' =>$users,
+            'roles' =>$this->roleArray
         ]);
     }
 
@@ -75,7 +77,7 @@ class PermissionController extends Controller
 
         $permission = Permission::select('permission_string')->where([ 'user_id'=>$user_id, 'menu_id'=>$menu_id])->first();
         $permissionArr = explode(',',$permission?->permission_string);
-        $html = '';
+        $html = '<option value="">-- Select Permissions --</option>';
         foreach (routeType() as $id=> $type)
         {
             $select_status  = in_array($id,$permissionArr) ? 'selected' : '';
@@ -84,6 +86,7 @@ class PermissionController extends Controller
 
         return $html;
     }
+
     public function edit($enId){
         $id = decrypt($enId);
         $menu   =  MainMenu::find($id);
@@ -97,6 +100,30 @@ class PermissionController extends Controller
        $menu->menu_name     = $request->menu_name;
        $menu->updated_by    = auth()->id();
        $menu->save();
+       return redirect()->route('permission.index')->with('success','update successfully');
+    }
+
+
+    public function get_role(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user = User::select('role_id')->where('id',$user_id)->first();
+
+        $html = '<option value="">--Select Role--</option>';
+        foreach ($this->roleArray as $id => $role)
+        {
+            $select_status  = ( $user->role_id == $id ) ? 'selected' : '';
+            $html .= "<option $select_status value=\"$id\">$role</option>";
+        }
+
+        return $html;
+    }
+    public function update_role(Request $request){
+
+       $user                =  User::find($request->user_id);
+       $user->role_id       =  $request->role;
+    //    $user->updated_by    =  auth()->id();
+       $user->save();
        return redirect()->route('permission.index')->with('success','update successfully');
     }
 
