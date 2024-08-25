@@ -254,11 +254,11 @@
                                                     <ul class="dropdown-menu">
                                                        <li><a class="dropdown-item" href="{{route('testimonial.edit',$update_id)}}">Edit</a>
                                                        <li>
-                                                            <form id="deleteData{{$update_id}}" action="{{ route('testimonial.destroy', $update_id) }}"
+                                                            <form id="deleteData{{$v->id}}" action="{{ route('testimonial.destroy', $update_id) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a style="cursor: pointer;"  class="dropdown-item" onclick="deleteData({{$update_id}})">Delete</a>
+                                                                <a style="cursor: pointer;"  class="dropdown-item" onclick="deleteData({{$v->id}})">Delete</a>
                                                             </form>
                                                        </li>
                                                     </ul>
