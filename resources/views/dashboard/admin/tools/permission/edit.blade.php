@@ -28,6 +28,9 @@
                                     <div>
                                         <h2 class=" mb-4">Edit Menu</h2>
                                     </div>
+                                    <div>
+                                        <a href="{{ url()->previous() }}" class="btn btn-success">Back</a>
+                                    </div>
                                 </div>
                                 <div class="form py-3">
                                     <form action="{{ route('permission.update',$menu->id) }}" method="post">
@@ -62,5 +65,5 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endsection
