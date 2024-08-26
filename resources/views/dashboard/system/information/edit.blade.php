@@ -28,6 +28,9 @@
                                     <div>
                                         <h2 class=" mb-4">Edit Information</h2>
                                     </div>
+                                    <div>
+                                        <a href="{{ url()->previous() }}" class="btn btn-warning">Back</a>
+                                    </div>
                                 </div>
                                 <div class="form py-3">
                                     @php

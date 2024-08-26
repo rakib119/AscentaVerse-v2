@@ -43,7 +43,7 @@
                                                         <i class="mdi mdi-account-multiple-outline text-primary font-size-20"></i>
                                                 </span>
                                             </div>
-                                            <h5 class="font-size-22">{{--$users->count()--}}</h5>
+                                            <h5 class="font-size-22">{{ $users->count() }}</h5>
 
                                         </div>
                                     </div>
@@ -101,15 +101,15 @@
                             </thead>
                             <tbody>
                                 {{-- @foreach ($messages as $message)
-                                <tr>
-                                    <td>{{$loop->index+1}}</td>
-                                    <td>{{ $message->name}}</td>
-                                    <td>{{ $message->subject}}</td>
-                                    <td>{{ $message->message}}</td>
-                                    <td>
-                                        <a class="btn btn-success" href="{{route('contact.show', $message->id)}}">Details</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{$loop->index+1}}</td>
+                                        <td>{{ $message->name}}</td>
+                                        <td>{{ $message->subject}}</td>
+                                        <td>{{ $message->message}}</td>
+                                        <td>
+                                            <a class="btn btn-success" href="{{route('contact.show', $message->id)}}">Details</a>
+                                        </td>
+                                    </tr>
                                 @endforeach --}}
                             </tbody>
                         </table>
@@ -134,21 +134,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ( $users->where('is_admin','!=','1') as $user)
-                                <tr>
-                                    <td>{{$loop->index+1}}</td>
-                                    <td>{{ $user->name}}</td>
-                                    <td>{{ $user->email}}</td>
-                                    <td>{{ $user->phone}}</td>
-                                    <td>
-                                        @if ($user->personalInfo && $user->fatherInfo && $user->motherInfo)
-                                            <a class="btn btn-success" href="{{route('user_details',$user->id)}}">Details</a>
-                                        @else
-                                            <span class="badge bg-warning">Not Available</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach --}}
+                                @foreach ( $users->where('role_id','!=','1') as $user)
+                                    <tr>
+                                        <td>{{$loop->index+1}}</td>
+                                        <td>{{ $user->name}}</td>
+                                        <td>{{ $user->email}}</td>
+                                        <td>{{ $user->phone}}</td>
+                                        <td>
+                                            @if ($user?->personalInfo && $user?->fatherInfo && $user?->motherInfo)
+                                                <a class="btn btn-success" href="{{route('user_details',$user?->id)}}">Details</a>
+                                            @else
+                                                <span class="badge bg-warning">Not Available</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BackendController extends Controller
@@ -12,7 +13,17 @@ class BackendController extends Controller
     }
     public function dashboard()
     {
-        return view('dashboard.dashboard');
+        $users      = User::orderBy('id', 'DESC')->get();
+        $messages   = array();
+        // $messages   = Contact::where('status', 0)->orderBy('id', 'DESC')->get();
+        return view('dashboard.dashboard', compact('users','messages'));
+    }
+    public function index()
+    {
+        $users      = User::orderBy('id', 'DESC')->get();
+        $messages   = array();
+        // $messages   = Contact::where('status', 0)->orderBy('id', 'DESC')->get();
+        return view('dashboard.dashboard', compact('users','messages'));
     }
 
 }
