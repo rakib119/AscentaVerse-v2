@@ -9,6 +9,9 @@
 	/* md saiful islam rafel */
 	h5.card-title {
 		font-size: 18px;
+        white-space: nowrap;        /* Prevent text from wrapping to a new line */
+        overflow: hidden;           /* Hide text that overflows */
+        text-overflow: ellipsis;    /* Display an ellipsis ('...') to indicate overflow */
 	}
 
 }

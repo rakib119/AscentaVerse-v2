@@ -29,7 +29,7 @@
                             <div class="item--holder-inner">
                                 <div class="item--desc"> {{ Str::substr($v->short_description,0, 40) }}...</div>
                                 <h4 class="item--title"><a
-                                        href="{{ route('team_details',$v->slug)}}">V{{ $v->name }}</a></h4>
+                                        href="{{ route('team_details',$v->slug)}}">{{ $v->name }}</a></h4>
                                 <div class="item--position">{{ $v->designation }}</div>
                                 <div class="item--social">
                                     <a href="{{$v->link1}}" target="_blank">{!! $iconArray[$v->icon1] !!}</a>
@@ -37,8 +37,7 @@
                                     <a href="{{$v->link3}}" target="_blank">{!! $iconArray[$v->icon3] !!}</a>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary"
-                                        style="background-color: #fff; color: black;">{{$v->button_name}} +</button>
+                                    <a href="{{ route('team_details',$v->slug)}}" class="btn btn-primary" style="background-color: #fff;font-weight: 600;color: #666;"> {{$v->button_name}} +</a>
                                 </div>
                             </div>
                         </div>
