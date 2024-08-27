@@ -21,7 +21,7 @@
                         </picture>
                         <div class="card-body">
                                                             <div class="card-icon">
-                                    <i class="fas fa-database fa-2x text-primary"></i>
+                                    <img src="http://127.0.0.1:8000/assets/images/services/icon/TJT5IEpO0evXVAt5gYGKSKxHK.png">
                                 </div>
                             
                             <div class="card-center">
@@ -43,7 +43,7 @@
                         </picture>
                         <div class="card-body">
                                                             <div class="card-icon">
-                                    <i class="fas fa-phone fa-2x text-primary"></i>
+                                    <img src="http://127.0.0.1:8000/assets/images/services/icon/fa-phone fa-2x text-primary">
                                 </div>
                             
                             <div class="card-center">
@@ -65,7 +65,7 @@
                         </picture>
                         <div class="card-body">
                                                             <div class="card-icon">
-                                    <i class="fas fa-chart-line fa-2x text-primary"></i>
+                                    <img src="http://127.0.0.1:8000/assets/images/services/icon/fa-chart-line fa-2x text-primary">
                                 </div>
                             
                             <div class="card-center">
@@ -87,7 +87,7 @@
                         </picture>
                         <div class="card-body">
                                                             <div class="card-icon">
-                                    <i class="fas fa-cloud fa-2x text-primary"></i>
+                                    <img src="http://127.0.0.1:8000/assets/images/services/icon/fa-cloud fa-2x text-primary">
                                 </div>
                             
                             <div class="card-center">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                            
+            
         </div>
         <div class="text-center service-btn">
             <a href="http://127.0.0.1:8000/services" class="btn btn-primary">More Services <i

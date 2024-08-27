@@ -35,7 +35,7 @@ class hs4Controller extends Controller
             'title'=>'required|max:50|unique:services,title',
             'thumbnail'=>'required|image|mimes:jpg,jpeg',
             'button_name'=>'required|max:25',
-            'icon'=>'required|max:150',
+            'icon'=>'required|image|mimes:png|dimensions:width=30,height=30',
             'short_description'=>'required|max:350',
         ]);
 
@@ -43,7 +43,9 @@ class hs4Controller extends Controller
         {
             $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail_hidden',1); //Custom Helpers
             $msgArr = explode('*',$msg_str);
-            if($msgArr[0] == 1){
+            $msg_str2 = uploadImage('public/assets/images/services/icon/',$request,'icon'); //Custom Helpers
+            $msgArr2 = explode('*',$msg_str2);
+            if($msgArr[0] == 1 && $msgArr2[0] == 1){
                 $is_displayed = '0' ;
                 if(isset($request->is_displayed_in_home))  $is_displayed='1';
                 Service::insert([
@@ -52,7 +54,7 @@ class hs4Controller extends Controller
                     'slug'=> Str::slug($request->title),
                     'thumbnail'=>$msgArr[1],
                     'button_name'=>$request->button_name,
-                    'icon'=>$request->icon,
+                    'icon'=>$msgArr2[1],
                     'is_displayed_in_home'=> $is_displayed,
                     'short_description'=>$request->short_description,
                     'created_by'=>auth()->id(),
@@ -135,7 +137,7 @@ class hs4Controller extends Controller
             'title'=>'required|max:50|unique:services,title,'.$id.',id',
             'thumbnail'=>'nullable|image|mimes:jpg,jpeg',
             'button_name'=>'required|max:25',
-            'icon'=>'required|max:150',
+            'icon'=>'nullable|image|mimes:png|dimensions:width=30,height=30',
             'short_description'=>'required|max:350',
         ]);
         try
@@ -143,7 +145,10 @@ class hs4Controller extends Controller
             $service = Service::findOrFail($id);
             $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail_hidden',1); //Custom Helpers
             $msgArr = explode('*',$msg_str);
-            if($msgArr[0] == 1){
+            $msg_str2 = uploadImage('public/assets/images/services/icon/',$request,'icon'); //Custom Helpers
+            $msgArr2 = explode('*',$msg_str2);
+
+            // if($msgArr[0] == 1){
 
 
                 if ($msgArr[1]!= 0) //IF uploaded image found
@@ -157,12 +162,22 @@ class hs4Controller extends Controller
                     }
                     $service->thumbnail = $image_name;
                 }
+                if ($msgArr2[1]!= 0) //IF uploaded image found
+                {
+                    $icon_name = $msgArr2[1];
+                    $path = base_path('public/assets/images/services/icon/' . $service->icon);
+                    $msg = insertDeleteLink($path,6); // Custom Function
+                    if ($msg!=1)
+                    {
+                        return back()->with('error',$msg);
+                    }
+                    $service->icon = $icon_name;
+                }
                 $is_displayed = '0';
                 if(isset($request->is_displayed_in_home))  $is_displayed='1';
 
                 $service->title = $request->title;
                 $service->button_name = $request->button_name;
-                $service->icon = $request->icon;
                 $service->slug = Str::slug($request->title) ;
                 $service->is_displayed_in_home = $is_displayed;
                 $service->short_description = $request->short_description;
@@ -170,9 +185,9 @@ class hs4Controller extends Controller
                 $service->save();
 
                 return redirect()->route('homeS4.index')->with('success','Updated successfully');
-            }else{
+            /* }else{
                 return back()->with('error',$msg_str);
-            }
+            } */
         }
         catch(Exception $e)
         {

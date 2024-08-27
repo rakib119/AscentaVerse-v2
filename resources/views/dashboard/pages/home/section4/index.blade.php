@@ -165,13 +165,18 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="icon">Icon <span class="text-danger">*</span></label>
-                                                    <input id="icon" type="text" class="form-control" value="{{ old('icon') }}" name="icon" >
+                                                    <label class="form-label" for="icon">Icon <span class="text-danger">*(w=30px, h:30px)</span></label>
+                                                    <input id="icon" type="file" class="form-control" value="{{ old('icon') }}" name="icon" onchange="loadFile(event,'imgOutput2')" accept="png">
                                                     @error('icon')
                                                         <h6 class="text-danger"> {{ $message }}</h6>
                                                     @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="mb-3">
+                                                        <img id="imgOutput2" height="80">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">

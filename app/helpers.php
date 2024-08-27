@@ -66,12 +66,16 @@ if (!function_exists('insertDeleteLink')) {
     function insertDeleteLink($file_location,$section_id)
     {
         try {
-            DeletePhotoLink::insert([
-                'link'=> $file_location,
-                'section_id'=> $section_id,
-                'created_by'=> auth()->id(),
-                'created_at'=> Carbon::now(),
-            ]);
+           if( file_exists($file_location))
+            {
+                DeletePhotoLink::insert([
+                    'link'=> $file_location,
+                    'section_id'=> $section_id,
+                    'created_by'=> auth()->id(),
+                    'created_at'=> Carbon::now(),
+                ]);
+            }
+
             return 1;
         } catch (Exception $e)
         {

@@ -26,7 +26,7 @@
                         <div class="card-body">
                             @if ($v->icon)
                                 <div class="card-icon">
-                                    <i class="fas {{$v->icon}}"></i>
+                                    <img src="{{asset('assets/images/services/icon/'.$v->icon)}}">
                                 </div>
                             @endif
 
