@@ -29,12 +29,12 @@
                                     <div>
                                         <h2 class=" mb-4">Information List</h2>
                                     </div>
-                                    <div class="float-end d-none d-sm-block">
+                                    {{-- <div class="float-end d-none d-sm-block">
                                         <form action="{{route('info-setup.publish')}}" method="post">
                                             @csrf
                                             <button class="btn btn-warning" type="submit">Publish</button>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 @if (session('error'))
                                         <h4 class="text-danger">Error: {{ session('error') }} ** </h4>
