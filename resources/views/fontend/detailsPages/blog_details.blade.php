@@ -75,7 +75,7 @@
                 	<aside class="sidebar sticky-top">
 
 						<!--Blog Category Widget-->
-                        {{-- <div class="sidebar-widget sidebar-blog-category">
+                        <div class="sidebar-widget sidebar-blog-category">
                             <div class="sidebar-title">
                                 <h4>Categories</h4>
                             </div>
@@ -84,7 +84,7 @@
                                     <li><a href="{{route('blog.category',$v['cat_name'])}}">{{ $v['cat_name'] }} <span>{{$v['total_blogs']}}</span></a></li>
                                 @endforeach
                             </ul>
-                        </div> --}}
+                        </div>
 
 						<!-- Popular Post Widget-->
                         <div class="sidebar-widget popular-posts">
@@ -93,8 +93,8 @@
                             </div>
                             @foreach ($blogs as $blog_id=>$v)
                                 @php
-                                    if($loop->index ==7)  { break;}
-                                    if($blog_id == $details->blog_id )      { continue;}
+                                    if($loop?->index ==7)  { break;}
+                                    if($blog_id == $details?->blog_id )      { continue;}
                                     $dtls_link = route('blog-details',$v['slug']);
                                 @endphp
                                 <article class="post">

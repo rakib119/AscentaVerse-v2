@@ -44,6 +44,18 @@ class HomeController extends Controller
         $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
         return view('fontend.mainPages.blogs',compact('data'));
     }
+    public function category_wise_blogs(Request $request,$category)
+    {
+        $blogs=DB::table('blog_categories','a')
+        ->join('blogs as b', 'a.id', '=', 'b.category_id')
+        ->select('b.*')
+        ->where('a.name',$category)
+        ->orderBy('b.created_at','desc')
+        ->get();
+
+        $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
+        return view('fontend.mainPages.cat_blogs',compact('data','blogs'));
+    }
     public function teams()
     {
         $data = GenarelInfo::select('value')->where('field_name','about_background')->first();
@@ -64,20 +76,20 @@ class HomeController extends Controller
         foreach ($blogRes as  $v)
         {
             //CATEGORIES ARRAY
-            if (!isset($categories[$v->cat_id]['total_blogs']))
+            if (!isset($categories[$v?->cat_id]['total_blogs']))
             {
-                $categories[$v->cat_id]['total_blogs'] = 0;
+                $categories[$v?->cat_id]['total_blogs'] = 0;
             }
 
-            $categories[$v->cat_id]['cat_name']   = $v->cat_name;
-            $categories[$v->cat_id]['total_blogs']++;
+            $categories[$v?->cat_id]['cat_name']   = $v?->cat_name;
+            $categories[$v?->cat_id]['total_blogs']++;
 
             //BLOG ARRAY
-            $blogs[$v->blog_id]['title']        = $v->title;
-            $blogs[$v->blog_id]['title']        = $v->title;
-            $blogs[$v->blog_id]['created_at']   = $v->created_at;
-            $blogs[$v->blog_id]['thumbnail']    = asset('assets/images/blogs/'.$v->thumbnail) ;
-            $blogs[$v->blog_id]['slug']         = $v->slug;
+            $blogs[$v?->blog_id]['title']        = $v?->title;
+            $blogs[$v?->blog_id]['title']        = $v?->title;
+            $blogs[$v?->blog_id]['created_at']   = $v?->created_at;
+            $blogs[$v?->blog_id]['thumbnail']    = asset('assets/images/blogs/'.$v->thumbnail) ;
+            $blogs[$v?->blog_id]['slug']         = $v?->slug;
         }
         $details = DB::table('blog_details','a')
             ->join('blogs as b', 'a.blog_id', '=', 'b.id')
