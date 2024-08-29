@@ -89,10 +89,8 @@ $home_link =  route('dashboard');
                             <a class="dropdown-item" target="_blank" href="{{route('home')}}"><i
                                     class="mdi mdi-web font-size-16 align-middle me-1"></i> Website</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
-                                <i
-                                    class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i>{{ __('Logout') }}
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i>{{ __('Logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 class="d-none">
