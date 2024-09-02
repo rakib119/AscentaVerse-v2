@@ -27,6 +27,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
     Route::get('/teams', 'teams')->name('teams');
+    Route::get('/contact-us', 'contact_us')->name('contact_us');
     Route::get('/service/details/{slug}', 'services_details')->name('service.details');
     Route::get('/team/member/{slug}', 'team_member_dtls')->name('team_details');
     Route::get('/blogs', 'blogs')->name('blog');

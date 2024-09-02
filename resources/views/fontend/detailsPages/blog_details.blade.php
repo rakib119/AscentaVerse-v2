@@ -32,6 +32,7 @@
                                     @if ($details?->content1)
                                         {!! $details?->content1 !!}
                                     @endif
+
                                     <div class="two-column">
                                         <div class="row clearfix">
                                             <!-- Column -->
@@ -41,6 +42,9 @@
                                                         <picture>
                                                             <img src="{{ asset('assets/images/blogs/details/'.$details?->photo2) }}" alt="not Found" />
                                                         </picture>
+                                                        @if ($details?->video_link)
+                                                            <a target="_blank" href="{{$details?->video_link}}" class="btn-video" savefrom_lm_index="0" savefrom_lm="1"><i class="fa fa-play"></i></a>
+                                                        @endif
                                                     </div>
                                                 @endif
                                             </div>

@@ -250,8 +250,9 @@ class BlogController extends Controller
     {
         $request->validate([
             'photo1'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=900,height=450',//
-            'photo2'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=390,height=290',//
-            'photo3'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=390,height=290',//
+            'photo2'=>'nullable|image|mimes:jpg,jpeg',//
+            'photo3'=>'nullable|image|mimes:jpg,jpeg',//
+            'video_link'=>'nullable',//
             'content1'=>'required',
             'content2'=>'nullable',
         ]);
@@ -293,9 +294,10 @@ class BlogController extends Controller
                     $blog_details->photo3 = $msgArr3[1];
                 }
 
-                $blog_details->content1 = $request->content1;
-                $blog_details->content2 = $request->content2;
-                $blog_details->updated_by = auth()->id();
+                $blog_details->video_link   = $request->video_link;
+                $blog_details->content1     = $request->content1;
+                $blog_details->content2     = $request->content2;
+                $blog_details->updated_by   = auth()->id();
                 $blog_details->save();
                 return back()->with('success','Updated successfully');
 
@@ -322,6 +324,7 @@ class BlogController extends Controller
                     'blog_id'=>  $blog_id,
                     'content1'=>$request->content1,
                     'content2'=>$request->content2,
+                    'video_link'=>$request->video_link,
                     'created_by'=>auth()->id(),
                     'created_at'=>Carbon::now(),
                 ]);

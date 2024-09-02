@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card-header-section mx-auto">
                     <div class="py-5">
-                        <div class="sub-title ">{{$data->lebel}}</div>
+                        <div class="sub-title">{{$data->lebel}}</div>
                         @php
                             $title = preg_replace('/\*\*(.*?)\*\*/', "<span class='highlight'>$1</span>", $data->title);
                         @endphp
@@ -24,7 +24,7 @@
                         break;
                     }
                 @endphp
-                <div class="col-12 col-sm-6 col-md-3">
+                <div class="col-6 col-md-4 col-lg-3 mb-md-5">
                     <div class="card card-custom h-100">
                         <picture>
                             <img src="{{asset('assets/images/services/'.$v->thumbnail)}}" class="card-img-top mx-auto" alt="{{$v->title}}">
@@ -35,10 +35,9 @@
                                     <img src="{{asset('assets/images/services/icon/'.$v->icon)}}">
                                 </div>
                             @endif
-
                             <div class="card-center">
                                 <h5 class="card-title">{{$v->title}}</h5>
-                                <p class="card-text">{{ Str::substr($v->short_description,0, 50) }}...</p>
+                                <p class="card-text">{{ Str::substr($v->short_description,0, 40) }}...</p>
                                 <a class="btn-style-tean theme-btn btn-item" href="{{ route( 'service.details',$v->slug )}}">
                                     <div class="btn-wrap">
                                         <span class="text-one">{{$v->button_name}} <i class="fas fa-plus"></i></span>
@@ -49,11 +48,9 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
         <div class="text-center service-btn">
-            <a href="{{route('services')}}" class="btn btn-primary">{{$data->btn1}} <i
-                    class="fas fa-plus"></i></a>
+            <a href="{{route('services')}}" class="btn btn-primary">{{$data->btn1}} <i class="fas fa-plus"></i></a>
         </div>
     </div>
 </section>

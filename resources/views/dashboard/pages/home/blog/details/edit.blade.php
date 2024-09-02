@@ -85,7 +85,11 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="photo2"> Photo 2 <span class="text-info">*(w=390px, h:290px)</span> </label>
                                                     <input id="photo2" type="file"  class="form-control" name="photo2" onchange="loadFile(event,'imgOutput2')">
+                                                    <input id="video_link" type="text" value="{{$details?->video_link}}" placeholder="Video link: https://www.youtube.com/watch?v=ekQKl4JyFEQ" class="form-control" name="video_link">
                                                     @error('photo2')
+                                                        <h6 class="text-danger"> {{ $message }}</h6>
+                                                    @enderror
+                                                    @error('video_link')
                                                         <h6 class="text-danger"> {{ $message }}</h6>
                                                     @enderror
                                                 </div>

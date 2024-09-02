@@ -8289,7 +8289,7 @@
 }
 
 .blog-single .inner-box p span {
-	border-bottom: 1px solid #a2a2a2;
+	/* border-bottom: 1px solid #a2a2a2; */
 }
 
 .blog-single .inner-box h4 {
@@ -9131,16 +9131,23 @@
 	margin: 0 auto;
 	text-align: center;
 }
-
+/* update */
 .tem .row {
-	display: flex;
-	flex-wrap: nowrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+    max-width: 100%;
 	overflow-x: auto;
 }
+/* update */
 
 .tem .card {
 	position: relative;
-	padding: 20px;
+	padding-top: 20px;
+	padding-right: 5px;
+	padding-bottom: 20px;
+	padding-left: 5px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -9328,9 +9335,9 @@
 	transform: translateX(-50%) translateY(0);
 }
 
-
 /* Custom CSS for team section end */
 
+/* update */
 /* Custom CSS for services and card-header-section start */
 .services-card-section {
 	/* width: 80%; */
@@ -9479,6 +9486,8 @@
 
 /* Custom CSS for services and card-header-section end */
 
+/* update */
+
 
 
 
@@ -9597,3 +9606,68 @@ button.accordion-button {
 button.accordion-button.collapsed, button.accordion-button {
 	font-size: 18px;
 }
+.image-image{
+    position:relative;
+}
+.image-image .btn-video::after {
+    display: block;
+    content: '';
+    background-color: inherit;
+    background-image: inherit;
+    -webkit-border-radius: inherit;
+    -khtml-border-radius: inherit;
+    -moz-border-radius: inherit;
+    -ms-border-radius: inherit;
+    -o-border-radius: inherit;
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  .image-image .btn-video::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color:#0d66f7;
+    border-radius: 50%;
+    animation: pulse-border2 1500ms ease-out infinite;
+    -webkit-animation: pulse-border2 1500ms ease-out infinite;
+    z-index: -2;
+  }
+  .image-image .btn-video {
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    position: absolute;
+    background-color: #0d66f7;;
+    color: #fff;
+    -webkit-border-radius: 60px;
+    -khtml-border-radius: 60px;
+    -moz-border-radius: 60px;
+    -ms-border-radius: 60px;
+    -o-border-radius: 60px;
+    border-radius: 60px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -khtml-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 99;
+    font-size: 13px;
+  }
+
+  /* Define the pulse-border2 animation */
+  @keyframes pulse-border2{0%{transform:scale(1);opacity:.67}100%{transform:scale(2.2);opacity:0}}
+  @-webkit-keyframes pulse-border2{0%{transform:scale(1);opacity:.67}100%{transform:scale(2.2);opacity:0}}

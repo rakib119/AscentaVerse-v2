@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('blog_id');
             $table->string('photo1')->nullable();
             $table->string('photo2')->nullable();
+            $table->text('video_link')->nullable();
             $table->string('photo3')->nullable();
             $table->longText('content1')->nullable();
             $table->longText('content2')->nullable();

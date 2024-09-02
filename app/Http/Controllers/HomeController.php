@@ -44,6 +44,11 @@ class HomeController extends Controller
         $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
         return view('fontend.mainPages.blogs',compact('data'));
     }
+    public function contact_us()
+    {
+        $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
+        return view('fontend.mainPages.contact',compact('data'));
+    }
     public function category_wise_blogs(Request $request,$category)
     {
         $blogs=DB::table('blog_categories','a')
@@ -93,7 +98,7 @@ class HomeController extends Controller
         }
         $details = DB::table('blog_details','a')
             ->join('blogs as b', 'a.blog_id', '=', 'b.id')
-            ->select('b.category_id','a.photo1','a.blog_id','a.photo2','a.photo3','a.content1','a.content2','b.slug')
+            ->select('b.category_id','a.photo1','a.blog_id','a.photo2','a.video_link','a.photo3','a.content1','a.content2','b.slug')
             ->where('b.slug',$slug)
             ->first();
         // return $blogs;
