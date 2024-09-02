@@ -12,24 +12,29 @@ use Illuminate\Support\Facades\View;
 class InfoController extends Controller
 {
     public $dimentions = array(
-        1=>[ 'h'=> 61, 'w'=> 150 ],
-        2=>[ 'h'=> 61, 'w'=> 150 ],
-        3=>[ 'h'=> 30, 'w'=> 30 ],
-        4=>[ 'h'=> 1920, 'w'=> 1290 ],
-        5=>[ 'h'=> 1920, 'w'=> 1290 ],
-        6=>[ 'h'=> 1920, 'w'=> 1290 ],
+        'logo'              =>[ 'h'=> 61, 'w'=> 150 ],
+        'logo_white'        =>[ 'h'=> 61, 'w'=> 150 ],
+        'favicon'           =>[ 'h'=> 30, 'w'=> 30 ],
+        'about_background'  =>[ 'h'=> 1920, 'w'=> 1290 ],
+        'service_background'=>[ 'h'=> 1920, 'w'=> 1290 ],
+        'blog_background'   =>[ 'h'=> 1920, 'w'=> 1290 ],
+        'call_icon_img'     =>[ 'h'=> 50, 'w'=> 55],
+        'message_icon_img'  =>[ 'h'=> 50, 'w'=> 55],
+        'address_icon_img'  =>[ 'h'=> 50, 'w'=> 55],
     );
     public function index()
     {
         return view('dashboard.system.information.index',[
-            'informations' => GenarelInfo::all()
+            'informations' => GenarelInfo::all(),
+            'dimentions' => $this->dimentions
         ]);
     }
     public function edit($enId){
         $id = decrypt($enId);
+        $info = GenarelInfo::find($id);
         return view('dashboard.system.information.edit',[
-            'information' => GenarelInfo::find($id),
-            'dimentions' => $this->dimentions[$id] ?? 0
+            'information' => $info,
+            'dimentions' => $this->dimentions[$info?->field_name] ?? 0
         ]);
     }
 
@@ -44,8 +49,10 @@ class InfoController extends Controller
 
 
     public function image_update(Request $request,$id){
-        $w = $this->dimentions[$id]['w'];
-        $h = $this->dimentions[$id]['h'];
+        $info       = GenarelInfo::findOrFail($id);
+
+        $w = $this->dimentions[$info?->field_name]['w'];
+        $h = $this->dimentions[$info?->field_name]['h'];
         // return "dimensions:width=$w,height=$h";
        $request->validate([
             'photo'=>"required|image|mimes:jpg,jpeg,png|dimensions:width=$w,height=$h"
@@ -53,7 +60,7 @@ class InfoController extends Controller
         try
         {
 
-            $info       = GenarelInfo::findOrFail($id);
+
             $msg_str    = uploadImage('public/assets/images/info/',$request,'photo'); //Custom Helpers
             $msgArr     = explode('*',$msg_str);
             if($msgArr[0] == 1){

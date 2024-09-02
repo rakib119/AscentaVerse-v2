@@ -1,7 +1,10 @@
+@php
+    extract($photoArr);
+@endphp
 @extends('fontend.layout.layout')
 @section('mainContent')
     <!-- Page Title -->
-    <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$img->value)}})">
+    <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$blog_background)}})">
         <div class="auto-container">
 			<h2>Team Member Details</h2>
 			<ul class="bread-crumb clearfix">
@@ -39,7 +42,7 @@
 								<div class="about-two_block2 col-lg-12 col-md-12 col-sm-12">
 									<div class="about-two_block-inner2">
 										<span class="about-two_block-icon2">
-											<img src="{{asset('assets/images/icons/contact-2.png')}}" alt="" />
+											<img src="{{asset('assets/images/info/'.$call_icon_img)}}" alt="" />
 										</span>
 										<h6 class="about-two_block-heading">{!!$data->phone;!!}</h6>
 									</div>
@@ -51,7 +54,7 @@
 								<div class="about-two_block2 col-lg-12 col-md-12 col-sm-12">
 									<div class="about-two_block-inner2">
 										<div class="about-two_block-icon2">
-											<img src="{{asset('assets/images/icons/contact-3.png')}}" alt="" />
+											<img src="{{asset('assets/images/info/'.$message_icon_img)}}" alt="" />
 										</div>
                                         <div class=" d-flex align-items-center">
                                             <h6 class="about-two_block-heading">{!!$data->email;!!} <br>&nbsp;</h6>
@@ -65,7 +68,7 @@
 								<div class="about-two_block2 col-lg-12 col-md-12 col-sm-12">
 									<div class="about-two_block-inner2">
 										<div class="about-two_block-icon2">
-											<img src="{{asset('assets/images/icons/contact-1.png')}}" alt="" />
+											<img src="{{asset('assets/images/info/'.$address_icon_img)}}" alt="" />
 										</div>
                                         <div class=" d-flex align-items-center">
                                             <h6 class="about-two_block-heading">{!!$data->address;!!} </h6>

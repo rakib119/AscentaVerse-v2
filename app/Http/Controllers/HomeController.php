@@ -128,8 +128,13 @@ class HomeController extends Controller
         {
             $iconArray [$v->id] =  $v->icon;
         }
-        $img = GenarelInfo::select('value')->where('field_name','blog_background')->first();
-        return view('fontend.detailsPages.team_details',compact('data','img','iconArray'));
+        $GenarelInfo = GenarelInfo::WhereIn('field_name',['blog_background','call_icon_img','message_icon_img' ,'address_icon_img'] )->get();
+        $photoArr = array();
+        foreach ($GenarelInfo as  $v) {
+            $photoArr [$v?->field_name]= $v?->value	;
+        }
+        // return  $photoArr;
+        return view('fontend.detailsPages.team_details',compact('data','photoArr','iconArray'));
     }
 
     public function policies()

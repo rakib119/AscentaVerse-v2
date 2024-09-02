@@ -17,8 +17,8 @@
                  </div>
              </div>
             </div>
-         </div>
-         <div class="container-fluid">
+        </div>
+        <div class="container-fluid">
             <div class="page-content-wrapper">
                 <div class="row">
                     <div class="col-xl-12">
@@ -36,7 +36,8 @@
                                     @php
                                         $id = $information->id;
                                     @endphp
-                                    @if ($id==1||$id==2||$id==3||$id==4||$id==5||$id==6)
+
+                                    @if ($dimentions != 0)   {{-- Only Images --}}
                                         <form action="{{ route('info-setup.photo-update',$id) }}" enctype="multipart/form-data" method="post">
                                             @csrf
                                             @method('PUT')

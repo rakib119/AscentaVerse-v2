@@ -1,3 +1,14 @@
+@section('css')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+@endsection
+@section('javacript')
+    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
+    <script>
+        $(document).ready( function () {
+           $('#myTable').DataTable();
+        } );
+    </script>
+@endsection
 @extends('dashboard.layout.dashboard')
 @section('content')
 <div class="main-content">
@@ -54,13 +65,10 @@
                                                 <td>{{$loop->index+1}}</td>
                                                 <td>{{ Str::substr($v->field_name, 0, 50)}}</td>
                                                 <td>
-                                                    @php
-                                                        $img = [1,2,3,4,5,6];
-                                                    @endphp
-                                                    @if ($img[$loop->index]??0)
+                                                    @if (isset($dimentions[$v?->field_name]) )
                                                         <img src="{{ asset('assets/images/info/'.$v->value) }}" alt="{{$v->value}}" height="30">
                                                     @else
-                                                        {!! Str::substr($v->value, 0, 60) !!}
+                                                        {!! Str::substr($v->value, 0, 30) !!}
                                                     @endif
                                                 </td>
 
