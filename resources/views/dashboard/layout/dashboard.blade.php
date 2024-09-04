@@ -135,11 +135,10 @@ $home_link =  route('dashboard');
     <script src="{{ asset('dashboard/assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}">
-    </script>
-    <script src="{{ asset('dashboard/assets/js/pages/dashboard.init.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard/assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('dashboard/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('dashboard/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"> </script>--}}
+    {{-- <script src="{{ asset('dashboard/assets/js/pages/dashboard.init.js') }}"></script> --}}
     <script src="{{ asset('dashboard/assets/js/app.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/cropper-1.5.6.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/sweetalert2@11.js') }}"></script>
