@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\DashboardControllers\BlogCategoryController;
 use App\Http\Controllers\DashboardControllers\home\BlogController;
+use App\Http\Controllers\DashboardControllers\home\ContactController;
 use App\Http\Controllers\DashboardControllers\home\DynamicContentController;
 use App\Http\Controllers\DashboardControllers\home\FaqController;
 use App\Http\Controllers\DashboardControllers\home\hs1LeftController;
@@ -39,7 +40,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/kyc', 'kyc')->name('kyc');
 
 });
-
+Route::post('send/message',[ContactController::class, 'send_message'])->name('send_message');
 
 // HOME PAGE MANAGEMENT ROUTES
 Route::middleware(['auth','RoutePermission'])->group(function () {
@@ -59,8 +60,7 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::post('homeS2/published',[hs2Controller::class, 'published'])->name('homeS2.publish');
 
     //ABOUT
-    Route::resource('contact', hs1RightController::class)->only(['index','store','update']);
-    Route::post('contact/published',[hs1RightController::class, 'published'])->name('contact.publish');
+    Route::resource('contact', ContactController::class);
 
     //PARTNERS
     Route::resource('homeS3Left', hs3LeftController::class)->only(['index','store','edit','update','destroy']);

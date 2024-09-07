@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\BlogCategories;
 use App\Models\DynamicContent;
 use App\Models\GenarelInfo;
+use App\Models\SingleSection;
 use App\Models\SocialIcon;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -46,8 +48,23 @@ class HomeController extends Controller
     }
     public function contact_us()
     {
-        $data = GenarelInfo::select('value')->where('field_name','blog_background')->first();
-        return view('fontend.mainPages.contact',compact('data'));
+        $dataArray = Session::get('contactData', []);
+
+        if (count($dataArray)==0)
+        {
+            $data = SingleSection::select('lebel','title','short_description','description1','btn1','link1','link2')->where('section_id',12)->first();
+            $dataArray= $data->toArray();
+
+            $GenarelInfo = GenarelInfo::WhereIn('field_name',['blog_background','call_icon_img','message_icon_img' ,'address_icon_img'] )->get();
+            foreach ($GenarelInfo as  $v)
+            {
+                $dataArray [$v?->field_name]= $v?->value	;
+            }
+            // return  $dataArray;
+            Session::put('contactData', $dataArray);
+        }
+
+        return view('fontend.mainPages.contact',compact('dataArray'));
     }
     public function category_wise_blogs(Request $request,$category)
     {

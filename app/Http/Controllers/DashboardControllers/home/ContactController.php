@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\DashboardControllers\home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
+use App\Models\Contact;
 use App\Models\SingleSection;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class ContactController extends Controller
 {
@@ -19,7 +18,7 @@ class ContactController extends Controller
     {
         $SingleSection = SingleSection::where('section_id',12)->first();
         $data = ['data'=> $SingleSection];
-        return view('dashboard.pages.home.section1.left.index',$data);
+        return view('dashboard.pages.contact.index',$data);
     }
     /**
      * Store a newly created resource in storage.
@@ -30,66 +29,82 @@ class ContactController extends Controller
             'lebel'=>'required|max:40',
             'title'=>'required|max:150',
             'short_description'=>'required|max:600',
-            'btn1'=>'nullable|max:150',
-            'link1'=>'nullable|max:255',
-            'btn2'=>'nullable|max:150',
-            'link2'=>'nullable|max:255',
+            'office_address'=>'required|max:255',
+            'telephone_number'=>'required|max:255',
+            'mail_address'=>'required|max:255',
+            'map_link'=>'required|max:600',
         ]);
+
+
         SingleSection::insert([
             'lebel'=>$request->lebel,
             'section_id'=>12,
             'title'=>$request->title,
             'short_description'=>$request->short_description,
-            'btn1'=>$request->btn1,
-            'link1'=>$request->link1,
-            'link2'=>$request->link2,
-            'btn2'=>$request->btn2,
+            'btn1'=>$request->office_address,
+            'link1'=>$request->telephone_number,
+            'link2'=>$request->mail_address,
+            'description1'=>$request->map_link,
+            'created_by'=> auth()->id(),
             'created_at'=>Carbon::now(),
         ]);
         return back()->with('success','Added successfully');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function published()
+    public function send_message(Request $request)
     {
-       try
-        {
-            $SingleSection = SingleSection::where('section_id',12)->first();
-            $data = ['data'=> $SingleSection];
-            // return  $data;
-            $content = View::make('fontend.section.contact.contact_template',$data)->render();
+        $uid = auth()?->id() ?? 0;
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'nullable|max:255',
+            'mobile'=>'nullable|max:255',
+            'subject'=>'required|max:255',
+            'message'=>'required',
+        ]);
 
-            // Path to the new static Blade view file
-            $path = resource_path('views/fontend/section/contact/contact.blade.php');
-
-            // Write the rendered content to the Blade view file
-            file_put_contents($path, $content);
-            return back()->with('success','Published Successfully');
-        }
-        catch(Exception $e)
-        {
-            $message = $e->getMessage();
-            return back()->with('error',$message);
-        }
+        Contact::insert([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'phone'=> $request->phone,
+            'subject'=> $request->subject,
+            'message'=> $request->message,
+            'created_by'=> $uid,
+            'created_at'=> Carbon::now()
+        ]);
+        return back()->with('success','Message sent successfully');
     }
 
+    public function show(Contact $contact)
+    {
+        if (  $contact->status == 0) {
+            $contact->status = 1;
+            $contact->updated_by = auth()->id();
+            $contact->save();
+        }
+
+        return view('dashboard.contact.show',['message'=>$contact]);
+    }
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'lebel'=>'required|max:40',
             'title'=>'required|max:150',
             'short_description'=>'required|max:600',
-            'btn1'=>'nullable|max:150',
-            'link1'=>'nullable|max:255',
-            'btn2'=>'nullable|max:150',
-            'link2'=>'nullable|max:255',
+            'office_address'=>'required|max:255',
+            'telephone_number'=>'required|max:255',
+            'mail_address'=>'required|max:255',
+            'map_link'=>'required|max:600',
         ]);
-
         try {
-            $SingleSection = SingleSection::findOrFail($id);
-            $SingleSection->fill($validatedData)->save();
+            $data = SingleSection::findOrFail($id);
+            $data->lebel = $request->lebel;
+            $data->title = $request->title;
+            $data->short_description = $request->short_description;
+            $data->btn1 = $request->office_address;
+            $data->link1 = $request->telephone_number;
+            $data->link2 = $request->mail_address;
+            $data->description1 = $request->map_link;
+            $data->updated_by = auth()->id();
+            $data->save();
 
             return back()->with('success','Updated successfully');
         }
@@ -98,5 +113,7 @@ class ContactController extends Controller
             return back()->with('error',$e->getMessage());
         }
     }
+
+
 
 }

@@ -79,13 +79,14 @@
                                     <li><a href="{{ route('about') }}">About Us</a></li>
                                     <li><a href="{{ route('services') }}">Services</a></li>
                                     <li><a href="{{ route('blog') }}">Blog</a></li>
+                                    <li><a href="{{ route('contact_us') }}">Contact</a></li>
                                     @guest
                                         <li><a href="{{route('register')}}">Register</a></li>
                                     @endguest
 
                                     <li>
                                         @auth
-                                            <a class="d-block d-sm-none" href="#">{{auth()->user()->name}}</a>
+                                            <a class="d-block d-sm-none" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                         @else
                                             <a class="d-block d-sm-none" href="{{ route('login') }}">Login</a>
                                         @endauth
@@ -316,7 +317,7 @@
 <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
 <script src="{{ asset('assets/js/parallax-scroll.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/tilt.jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/tilt.jquery.min.js') }}"></script> --}}
 <script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
 

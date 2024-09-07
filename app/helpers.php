@@ -260,4 +260,19 @@ if (!function_exists('routeType')) {
         return $route_type_array = [1=>'Menu',2=>'Save',3=>'Update',4=>'Delete',5=>'Details',6=>'Published'];
     }
 }
+if (!function_exists('asteriskSeparate')) {
+    function asteriskSeparate($inputText='',$tag='strong')
+    {
+        $position = strpos($inputText, '**');
+        if ($position !== false) {
+            $beforeAsterisk = substr($inputText, 0, $position);
+            $afterAsterisk = substr($inputText, $position + 2);
+            $formattedAfterAsterisk = str_replace('**', '**', $afterAsterisk, $count);
+            $outputText = "<$tag>" . $beforeAsterisk . "</$tag>" . $formattedAfterAsterisk;
+        } else {
+            $outputText = $inputText;
+        }
+        return $outputText;
+    }
+}
 ?>
