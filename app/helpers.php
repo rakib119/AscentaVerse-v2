@@ -249,9 +249,11 @@ if (!function_exists('storeMenuIntoSession')) {
                 }
             }
         }
+        $web_info = DB::table('genarel_infos')->select('field_name','value')->get();
         // return $permission_route;
         Session::put('main_menu_array', $main_menu_array);
         Session::put('permission_route', $permission_route);
+        Session::put('web_info', $web_info);
     }
 }
 if (!function_exists('routeType')) {

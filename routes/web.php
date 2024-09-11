@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\socialMedia\SocialMediaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -122,4 +123,10 @@ Route::middleware(['auth'])->group(function ()
     Route::post('select-options', [PermissionController::class, 'get_options'])->name('permission.getOptions');
     Route::post('get-role', [PermissionController::class, 'get_role'])->name('permission.getRole');
     Route::post('update-role', [PermissionController::class, 'update_role'])->name('role.update');
+});
+
+
+// Social Media ROute
+Route::middleware(['auth'])->prefix('social-media')->group(function () {
+    Route::get('/home',[SocialMediaController::class, 'social_home'])->name('social.home');
 });

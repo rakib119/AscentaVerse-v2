@@ -1,7 +1,11 @@
 @php
-    $data = DB::table('genarel_infos')->select('field_name','value')->get();
+    $web_info = session()->get('web_info');
+    if (!$web_info) {
+        $web_info = DB::table('genarel_infos')->select('field_name','value')->get();
+        session()->put('web_info', $web_info);
+    }
     $dataArray = array();
-    foreach ($data as $v)
+    foreach ($web_info as $v)
     {
         $dataArray[$v->field_name] = $v->value;
     }
