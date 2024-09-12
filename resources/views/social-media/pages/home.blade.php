@@ -9,17 +9,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
-    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="icon" href="{{ asset('social-media/assets/images/favicon.png')}}">
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/night-mode.css">
-    <link rel="stylesheet" href="assets/css/framework.css">
+    <link rel="stylesheet" href="{{ asset('social-media/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('social-media/assets/css/night-mode.css')}}">
+    <link rel="stylesheet" href="{{ asset('social-media/assets/css/framework.css')}}">
 
     <!-- icons
     ================================================== -->
-    <link rel="stylesheet" href="assets/css/icons.css">
+    <link rel="stylesheet" href="{{ asset('social-media/assets/css/icons.css')}}">
 
     <!-- Google font
     ================================================== -->
@@ -50,71 +50,71 @@
                     <div class="sections">
                         <ul>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets//images/icons/home.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets//images/icons/home.png')}}" alt="">
                                     <span> Feed </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/chat.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/chat.png')}}" alt="">
                                     <span> Chats </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/flag.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/flag.png')}}" alt="">
                                     <span> Pages </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/video.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/video.png')}}" alt="">
                                     <span> Videos </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/group.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/group.png')}}" alt="">
                                     <span> Groups </span> </a>
                             </li>
                             <li class="active">
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/pen.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/pen.png')}}" alt="">
                                     <span> Courses </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/info.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/info.png')}}" alt="">
                                     <span> Questions </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/bag.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/bag.png')}}" alt="">
                                     <span> jobs </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/book.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/book.png')}}" alt="">
                                     <span> Books </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/friends.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/friends.png')}}" alt="">
                                     <span> Friends </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/document.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/document.png')}}" alt="">
                                     <span> Blogs </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/market.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/market.png')}}" alt="">
                                     <span> Marketplace </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/photo.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/photo.png')}}" alt="">
                                     <span> Gallery </span>
                                 </a>
                             </li>
                             <li id="more-veiw" hidden>
-                                <a href="{{ route('social.home')}}"> <img src="assets/images/icons/events.png" alt="">
+                                <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/icons/events.png')}}" alt="">
                                     <span> Events </span>
                                 </a>
                             </li>
@@ -132,29 +132,29 @@
                     <div class="sections">
                         <h3> Shortcut </h3>
                         <ul>
-                            <li> <a href="{{ route('social.home')}}"> <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                            <li> <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                     <span> Stella Johnson </span> <span class="dot-notiv"></span></a></li>
-                            <li> <a href="{{ route('social.home')}}"> <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                            <li> <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     <span> Alex Dolgove </span> <span class="dot-notiv"></span></a></li>
-                            <li> <a href="{{ route('social.home')}}"> <img src="assets/images/avatars/avatar-7.jpg" alt="">
+                            <li> <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/avatars/avatar-7.jpg')}}" alt="">
                                     <span> Adrian Mohani </span> </a>
                             </li>
                             <li id="more-veiw-2" hidden> <a href="{{ route('social.home')}}">
-                                    <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                     <span> Erica Jones </span> <span class="dot-notiv"></span></a>
                             </li>
-                            <li> <a href="group-{{ route('social.home')}}"> <img src="assets/images/group/group-3.jpg" alt="">
+                            <li> <a href="group-{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/group/group-3.jpg')}}" alt="">
                                     <span> Graphic Design </span> </a>
                             </li>
-                            <li> <a href="group-{{ route('social.home')}}"> <img src="assets/images/group/group-4.jpg" alt="">
+                            <li> <a href="group-{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/group/group-4.jpg')}}" alt="">
                                     <span> Mountain Riders </span> </a>
                             </li>
                             <li id="more-veiw-2" hidden> <a href="{{ route('social.home')}}"> <img
-                                        src="assets/images/avatars/avatar-5.jpg" alt="">
+                                        src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                     <span> Alex Dolgove </span> <span class="dot-notiv"></span></a>
                             </li>
                             <li id="more-veiw-2" hidden> <a href="{{ route('social.home')}}"> <img
-                                        src="assets/images/avatars/avatar-7.jpg" alt="">
+                                        src="{{ asset('social-media/assets/images/avatars/avatar-7.jpg')}}" alt="">
                                     <span> Adrian Mohani </span> </a>
                             </li>
                         </ul>
@@ -206,8 +206,8 @@
 
                     <!-- Logo-->
                     <div id="logo">
-                        <a href="{{ route('social.home')}}"> <img src="assets/images/logo.png" alt=""></a>
-                        <a href="{{ route('social.home')}}"> <img src="assets/images/logo-light.png" class="logo-inverse"
+                        <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/logo.png')}}" alt=""></a>
+                        <a href="{{ route('social.home')}}"> <img src="{{ asset('social-media/assets/images/logo-light.png')}}" class="logo-inverse"
                                 alt=""></a>
                     </div>
 
@@ -227,13 +227,13 @@
 
                                 <ul class="dropdown-search-list">
                                     <li class="list-title"> Recent Searches </li>
-                                    <li> <a href="#"> <img src="assets/images/avatars/avatar-2.jpg" alt=""> Erica Jones
+                                    <li> <a href="#"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt=""> Erica Jones
                                         </a> </li>
-                                    <li> <a href="#"> <img src="assets/images/group/group-2.jpg" alt=""> Coffee
+                                    <li> <a href="#"> <img src="{{ asset('social-media/assets/images/group/group-2.jpg')}}" alt=""> Coffee
                                             Addicts</a> </li>
-                                    <li> <a href="#"> <img src="assets/images/group/group-4.jpg" alt=""> Mountain Riders
+                                    <li> <a href="#"> <img src="{{ asset('social-media/assets/images/group/group-4.jpg')}}" alt=""> Mountain Riders
                                         </a> </li>
-                                    <li> <a href="#"> <img src="assets/images/group/group-5.jpg" alt=""> Property Rent
+                                    <li> <a href="#"> <img src="{{ asset('social-media/assets/images/group/group-5.jpg')}}" alt=""> Property Rent
                                             And Sale </a> </li>
                                     <li class="menu-divider"></li>
                                     <li class="list-footer"> <a href="{{ route('social.home')}}"> Searches History </a>
@@ -256,7 +256,7 @@
 
                         <!-- browse apps  -->
                         <a href="#" class="opts_icon uk-visible@s" uk-tooltip="title: Apps ; pos: bottom ;offset:7">
-                            <img src="assets/images/icons/apps.svg" alt="">
+                            <img src="{{ asset('social-media/assets/images/icons/apps.svg')}}" alt="">
                         </a>
 
                         <!-- browse apps dropdown -->
@@ -277,7 +277,7 @@
 
                         <!-- Message  notificiation dropdown -->
                         <a href="#" class="opts_icon" uk-tooltip="title: Messages ; pos: bottom ;offset:7">
-                            <img src="assets/images/icons/chat.svg" alt=""> <span>4</span>
+                            <img src="{{ asset('social-media/assets/images/icons/chat.svg')}}" alt=""> <span>4</span>
                         </a>
 
                         <!-- Message  notificiation dropdown -->
@@ -303,7 +303,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar status-online">
-                                                <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Jonathan Madano</strong>
@@ -315,7 +315,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Stella Johnson</strong>
@@ -327,7 +327,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar status-online">
-                                                <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Alex Dolgove</strong>
@@ -338,7 +338,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar status-online">
-                                                <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Adrian Mohani</strong>
@@ -349,7 +349,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Jonathan Madano</strong>
@@ -361,7 +361,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Stella Johnson</strong>
@@ -373,7 +373,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Alex Dolgove</strong>
@@ -384,7 +384,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                             </span>
                                             <div class="notification-text notification-msg-text">
                                                 <strong>Adrian Mohani</strong>
@@ -405,7 +405,7 @@
 
                         <!-- notificiation icon  -->
                         <a href="#" class="opts_icon" uk-tooltip="title: Notifications ; pos: bottom ;offset:7">
-                            <img src="assets/images/icons/bell.svg" alt=""> <span>3</span>
+                            <img src="{{ asset('social-media/assets/images/icons/bell.svg')}}" alt=""> <span>3</span>
                         </a>
 
 
@@ -430,7 +430,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-primary">
                                                 <i class="icon-feather-thumbs-up"></i></span>
@@ -444,7 +444,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-danger">
                                                 <i class="icon-feather-star"></i></span>
@@ -458,7 +458,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-success">
                                                 <i class="icon-feather-message-circle"></i></span>
@@ -472,7 +472,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-primary">
                                                 <i class="icon-feather-thumbs-up"></i></span>
@@ -486,7 +486,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-warning">
                                                 <i class="icon-feather-star"></i></span>
@@ -500,7 +500,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="notification-avatar">
-                                                <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                                <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                             </span>
                                             <span class="notification-icon bg-gradient-success">
                                                 <i class="icon-feather-message-circle"></i></span>
@@ -520,7 +520,7 @@
 
 
                         <!-- profile -image -->
-                        <a class="opts_account" href="#"> <img src="assets/images/avatars/avatar-2.jpg" alt=""></a>
+                        <a class="opts_account" href="#"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt=""></a>
 
                         <!-- profile dropdown-->
                         <div uk-dropdown="mode:click ; animation: uk-animation-slide-bottom-small"
@@ -531,7 +531,7 @@
 
                                 <div class="dropdown-user-details">
                                     <div class="dropdown-user-avatar">
-                                        <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                     </div>
                                     <div class="dropdown-user-name"> Dennis Han </div>
                                 </div>
@@ -591,7 +591,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5> Stella Johnson </h5>
@@ -615,7 +615,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5>  Dennis Han   </h5>
@@ -628,7 +628,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5> Stella Johnson </h5>
@@ -641,7 +641,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5>  Erica Jones  </h5>
@@ -654,7 +654,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-7.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-7.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5> Adrian Mohani </h5>
@@ -667,7 +667,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5>   Alex Dolgove   </h5>
@@ -680,7 +680,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-1.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5> Stella Johnson </h5>
@@ -693,7 +693,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5>  Erica Jones </h5>
@@ -706,7 +706,7 @@
                         <li>
                             <a href="#">
                                 <div class="story-user-media">
-                                    <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                 </div>
                                 <div class="story-user-innr">
                                     <h5>  Alex Dolgove  </h5>
@@ -749,13 +749,13 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/post/img-1.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/post/img-1.jpg')}}" alt="">
                                         </div>
                                     </li>
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-1.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-1.jpg')}}" alt="">
                                         </div>
                                     </li>
                                 </ul>
@@ -784,17 +784,17 @@
                                 <ul class="uk-slider-items uk-child-width-1-1 story-slider">
                                     <li>
                                         <div class="story-slider-image">
-                                            <img src="assets/images/post/img-3.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/post/img-3.jpg')}}" alt="">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="story-slider-image">
-                                            <img src="assets/images/avatars/avatar-lg-3.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-3.jpg')}}" alt="">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="story-slider-image">
-                                            <img src="assets/images/avatars/avatar-lg-2.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-2.jpg')}}" alt="">
                                         </div>
                                     </li>
                                 </ul>
@@ -821,7 +821,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -848,7 +848,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -875,7 +875,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -902,7 +902,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -929,7 +929,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -956,7 +956,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -983,7 +983,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -1010,7 +1010,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -1037,7 +1037,7 @@
                                     <li>
                                         <div
                                             class="story-slider-image uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                            <img src="assets/images/avatars/avatar-lg-4.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                         </div>
 
                                     </li>
@@ -1080,7 +1080,7 @@
                                         class="uk-slider-items uk-child-width-1-5@m uk-child-width-1-3@s uk-child-width-1-3 story-slider uk-grid">
                                         <li>
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/avatars/avatar-lg-1.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/avatars/avatar-lg-1.jpg')}}"
                                                     uk-img>
                                                     <i class="uil-plus"></i>
                                                     <div class="story-card-content">
@@ -1092,9 +1092,9 @@
                                         </li>
                                         <li>
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/events/listing-5.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/events/listing-5.jpg')}}"
                                                     uk-img>
-                                                    <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                                     <div class="story-card-content">
                                                         <h4> Jonathan </h4>
                                                     </div>
@@ -1104,9 +1104,9 @@
                                         </li>
                                         <li>
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/avatars/avatar-lg-3.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/avatars/avatar-lg-3.jpg')}}"
                                                     uk-img>
-                                                    <img src="assets/images/avatars/avatar-6.jpg" alt="">
+                                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-6.jpg')}}" alt="">
                                                     <div class="story-card-content">
                                                         <h4> Stella </h4>
                                                     </div>
@@ -1117,9 +1117,9 @@
                                         <li>
 
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/avatars/avatar-lg-4.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/avatars/avatar-lg-4.jpg')}}"
                                                     uk-img>
-                                                    <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                                     <div class="story-card-content">
                                                         <h4> Alex </h4>
                                                     </div>
@@ -1130,9 +1130,9 @@
                                         <li>
 
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/avatars/avatar-lg-2.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/avatars/avatar-lg-2.jpg')}}"
                                                     uk-img>
-                                                    <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                                     <div class="story-card-content">
                                                         <h4> Adrian </h4>
                                                     </div>
@@ -1143,9 +1143,9 @@
                                         <li>
 
                                             <a href="#" uk-toggle="target: body ; cls: is-open">
-                                                <div class="story-card" data-src="assets/images/avatars/avatar-lg-5.jpg"
+                                                <div class="story-card" data-src="{{ asset('social-media/assets/images/avatars/avatar-lg-5.jpg')}}"
                                                     uk-img>
-                                                    <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                                     <div class="story-card-content">
                                                         <h4> Dennis </h4>
                                                     </div>
@@ -1178,7 +1178,7 @@
                             <div class="post-new" uk-toggle="target: body ; cls: post-focus">
                                 <div class="post-new-media">
                                     <div class="post-new-media-user">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-new-media-input">
                                         <input type="text" class="uk-input" placeholder="What's Your Mind ? Hamse!">
@@ -1188,16 +1188,16 @@
                                 <div class="post-new-type">
 
                                     <a href="#">
-                                        <img src="assets/images/icons/photo.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/photo.png')}}" alt="">
                                         Photo/Video
                                     </a>
 
                                     <a href="#" class="uk-visible@s">
-                                        <img src="assets/images/icons/tag-friend.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/tag-friend.png')}}" alt="">
                                         Tag Friend
                                     </a>
 
-                                    <a href="#"><img src="assets/images/icons/reactions_wow.png" alt="">
+                                    <a href="#"><img src="{{ asset('social-media/assets/images/icons/reactions_wow.png')}}" alt="">
                                         Fealing /Activity
                                     </a>
 
@@ -1223,7 +1223,7 @@
 
                                     <div class="post-new-media">
                                         <div class="post-new-media-user">
-                                            <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                         </div>
                                         <div class="post-new-media-input">
                                             <input type="text" class="uk-input"
@@ -1268,7 +1268,7 @@
                         <div class="post">
                             <div class="post-heading">
                                 <div class="post-avature">
-                                    <img src="assets/images/avatars/avatar-6.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-6.jpg')}}" alt="">
                                 </div>
                                 <div class="post-title">
                                     <h4> Mariah Ali </h4>
@@ -1291,13 +1291,13 @@
                             </div>
                             <div class="post-description">
                                 <div class="fullsizeimg">
-                                    <img src="assets/images/post/img-1.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/post/img-1.jpg')}}" alt="">
                                 </div>
 
                                 <div class="post-state-details">
                                     <div>
-                                        <img src="assets/images/icons/reactions_like.png" alt="">
-                                        <img src="assets/images/icons/reactions_love.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_like.png')}}" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_love.png')}}" alt="">
                                         <p> 13 </p>
                                     </div>
                                     <p> 24 Comments</p>
@@ -1321,7 +1321,7 @@
                                 <a href="#" class="view-more-comment"> Veiw 8 more Comments</a>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1338,7 +1338,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1356,7 +1356,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1379,7 +1379,7 @@
 
                                 <div class="post-add-comment">
                                     <div class="post-add-comment-avature">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-add-comment-text-area">
                                         <input type="text" placeholder="Write your comment...">
@@ -1401,7 +1401,7 @@
                         <div class="post">
                             <div class="post-heading">
                                 <div class="post-avature">
-                                    <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                 </div>
                                 <div class="post-title">
                                     <h4> Erica Jones </h4>
@@ -1425,13 +1425,13 @@
                             <div class="post-description">
                                 <div class="uk-grid-small" uk-grid>
                                     <div class="uk-width-1-1@m">
-                                        <img src="assets/images/post/img-4.jpg" class="rounded" alt="">
+                                        <img src="{{ asset('social-media/assets/images/post/img-4.jpg')}}" class="rounded" alt="">
                                     </div>
                                     <div class="uk-width-1-2@m uk-width-1-2">
-                                        <img src="assets/images/post/img-2.jpg" class="rounded" alt="">
+                                        <img src="{{ asset('social-media/assets/images/post/img-2.jpg')}}" class="rounded" alt="">
                                     </div>
                                     <div class="uk-width-1-2@m uk-width-1-2 uk-position-relative">
-                                        <img src="assets/images/post/img-3.jpg" class="rounded" alt="">
+                                        <img src="{{ asset('social-media/assets/images/post/img-3.jpg')}}" class="rounded" alt="">
                                         <div class="uk-position-center uk-light">
                                             <a href="#">
                                                 <h3> + 15 more </h3>
@@ -1441,8 +1441,8 @@
 
                                 <div class="post-state-details">
                                     <div>
-                                        <img src="assets/images/icons/reactions_like.png" alt="">
-                                        <img src="assets/images/icons/reactions_love.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_like.png')}}" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_love.png')}}" alt="">
                                         <p> 13 </p>
                                     </div>
                                     <p> <span class="mr-2"> <i class="uil-eye"></i> Veiws </span> 212 Comments </p>
@@ -1467,7 +1467,7 @@
                                 <a href="#" class="view-more-comment"> Veiw 8 more Comments</a>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1484,7 +1484,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1502,7 +1502,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1525,7 +1525,7 @@
 
                                 <div class="post-add-comment">
                                     <div class="post-add-comment-avature">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-add-comment-text-area">
                                         <input type="text" placeholder="Write your comment...">
@@ -1548,7 +1548,7 @@
                         <div class="post">
                             <div class="post-heading">
                                 <div class="post-avature">
-                                    <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}" alt="">
                                 </div>
                                 <div class="post-title">
                                     <h4> Stella Johnson </h4>
@@ -1576,8 +1576,8 @@
                                     Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat</p>
                                 <div class="post-state-details">
                                     <div>
-                                        <img src="assets/images/icons/reactions_like.png" alt="">
-                                        <img src="assets/images/icons/reactions_love.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_like.png')}}" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_love.png')}}" alt="">
                                         <p> 13 </p>
                                     </div>
                                     <p> 24 Comments</p>
@@ -1601,7 +1601,7 @@
                                 <a href="#" class="view-more-comment"> Veiw 8 more Comments</a>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1618,7 +1618,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1637,7 +1637,7 @@
 
                                 <div class="post-add-comment">
                                     <div class="post-add-comment-avature">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-add-comment-text-area">
                                         <input type="text" placeholder="Write your comment...">
@@ -1658,7 +1658,7 @@
                         <div class="post">
                             <div class="post-heading">
                                 <div class="post-avature">
-                                    <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                    <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                 </div>
                                 <div class="post-title">
                                     <h4> Dennis Han </h4>
@@ -1690,8 +1690,8 @@
 
                                 <div class="post-state-details">
                                     <div>
-                                        <img src="assets/images/icons/reactions_like.png" alt="">
-                                        <img src="assets/images/icons/reactions_love.png" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_like.png')}}" alt="">
+                                        <img src="{{ asset('social-media/assets/images/icons/reactions_love.png')}}" alt="">
                                         <p> 13 </p>
                                     </div>
                                     <p> <span class="mr-2"> <i class="uil-eye"></i> 38 Veiws </span> 212 Comments </p>
@@ -1716,7 +1716,7 @@
                                 <a href="#" class="view-more-comment"> Veiw 8 more Comments</a>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1733,7 +1733,7 @@
                                 </div>
                                 <div class="post-comments-single">
                                     <div class="post-comment-avatar">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-comment-text">
                                         <div class="post-comment-text-inner">
@@ -1752,7 +1752,7 @@
 
                                 <div class="post-add-comment">
                                     <div class="post-add-comment-avature">
-                                        <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                     </div>
                                     <div class="post-add-comment-text-area">
                                         <input type="text" placeholder="Write your comment...">
@@ -1783,7 +1783,7 @@
 
                         <a href="#" class="uk-link-reset">
                             <div class="uk-flex uk-flex-top py-2 pb-0 pl-2 mb-2 bg-secondary-hover rounded">
-                                <img src="assets/images/icons/gift-icon.png" width="35px" class="mr-3" alt="">
+                                <img src="{{ asset('social-media/assets/images/icons/gift-icon.png')}}" width="35px" class="mr-3" alt="">
                                 <p> <strong> Jessica Erica </strong> and <strong> two others </strong>
                                     have a birthdays to day .</p>
                             </div>
@@ -1792,7 +1792,7 @@
 
                         <div class="p-5 mb-3 rounded uk-background-cover uk-light"
                             style="background-blend-mode: color-burn; background-color:rgba(0, 126, 255, 0.06)"
-                            data-src="assets/images/events/img-2.jpg" uk-img>
+                            data-src="{{ asset('social-media/assets/images/events/img-2.jpg')}}" uk-img>
                             <div class="uk-width-4-5">
                                 <h3 class="mb-2">
                                     <i class="uil-users-alt p-1 text-dark bg-white circle icon-small"></i>
@@ -1816,7 +1816,7 @@
 
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-2.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Dennis Han</h5>
@@ -1825,7 +1825,7 @@
                                 <div uk-drop="pos: left-center ;animation: uk-animation-slide-left-small">
                                     <div class="contact-list-box">
                                         <div class="contact-list-box-media">
-                                            <img src="assets/images/avatars/avatar-2.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}" alt="">
                                             <span class="online-dot"></span>
                                         </div>
                                         <h4> Dennis Han</h4>
@@ -1845,7 +1845,7 @@
 
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-1.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-1.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Erica Jones </h5>
@@ -1854,7 +1854,7 @@
                                 <div uk-drop="pos: left-center ;animation: uk-animation-slide-left-small">
                                     <div class="contact-list-box">
                                         <div class="contact-list-box-media">
-                                            <img src="assets/images/avatars/avatar-3.jpg" alt="">
+                                            <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}" alt="">
                                             <span class="online-dot"></span>
                                         </div>
                                         <h4> Erica Jones </h4>
@@ -1877,7 +1877,7 @@
 
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-7.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-7.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Stella Johnson </h5>
@@ -1886,7 +1886,7 @@
 
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-5.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Alex Dolgove </h5>
@@ -1894,7 +1894,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-2.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Dennis Han</h5>
@@ -1902,7 +1902,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-4.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Erica Jones </h5>
@@ -1910,7 +1910,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-3.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Stella Johnson </h5>
@@ -1918,7 +1918,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-5.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Alex Dolgove </h5>
@@ -1926,7 +1926,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-2.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-2.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Dennis Han</h5>
@@ -1934,7 +1934,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-4.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-4.jpg')}}"
                                                 alt="">
                                             <span class="online-dot"></span> </div>
                                         <h5> Erica Jones </h5>
@@ -1942,7 +1942,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-3.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-3.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Stella Johnson </h5>
@@ -1950,7 +1950,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="contact-list">
-                                        <div class="contact-list-media"> <img src="assets/images/avatars/avatar-5.jpg"
+                                        <div class="contact-list-media"> <img src="{{ asset('social-media/assets/images/avatars/avatar-5.jpg')}}"
                                                 alt="">
                                             <span class="offline-dot"></span> </div>
                                         <h5> Alex Dolgove </h5>
@@ -2014,11 +2014,11 @@
 
     <!-- javaScripts
                 ================================================== -->
-    <script src="assets/js/framework.js"></script>
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/bootstrap-select.min.js"></script>
-    <script src="assets/js/simplebar.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('social-media/assets/js/framework.js')}}"></script>
+    <script src="{{ asset('social-media/assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('social-media/assets/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{ asset('social-media/assets/js/simplebar.js')}}"></script>
+    <script src="{{ asset('social-media/assets/js/main.js')}}"></script>
 
 </body>
 </html>
