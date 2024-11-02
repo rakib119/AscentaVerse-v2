@@ -18,6 +18,8 @@ class InfoController extends Controller
         'about_background'  =>[ 'h'=> 1920, 'w'=> 1290 ],
         'service_background'=>[ 'h'=> 1920, 'w'=> 1290 ],
         'blog_background'   =>[ 'h'=> 1920, 'w'=> 1290 ],
+        'contact_background'=>[ 'h'=> 1920, 'w'=> 1290 ],
+        'team_background'   =>[ 'h'=> 1920, 'w'=> 1290 ],
         'call_icon_img'     =>[ 'h'=> 50, 'w'=> 55],
         'message_icon_img'  =>[ 'h'=> 50, 'w'=> 55],
         'address_icon_img'  =>[ 'h'=> 50, 'w'=> 55],

@@ -53,21 +53,21 @@
                                     <div class="two-column">
                                         <div class="row clearfix">
                                             <!-- Column -->
-                                            <div class="column col-lg-6 col-md-6 col-sm-12">
+                                            <div class="column col-lg-6 col-md-6 col-sm-12  mt-3">
                                                 @if ($details?->photo2)
                                                     <div class="image-image">
                                                         <picture>
-                                                            <img src="{{ asset('assets/images/blogs/details/'.$details?->photo2) }}" alt="not Found" />
+                                                            <img  style="border-radius: 5px;" src="{{ asset('assets/images/blogs/details/'.$details?->photo2) }}" alt="not Found" />
                                                         </picture>
                                                     </div>
                                                 @endif
                                             </div>
                                             <!-- Column -->
-                                            <div class="column col-lg-6 col-md-6 col-sm-12">
+                                            <div class="column col-lg-6 col-md-6 col-sm-12  mt-3">
                                                 @if ($details?->photo3)
                                                     <div class="image-image">
                                                         <picture>
-                                                            <img src="{{ asset('assets/images/blogs/details/'.$details?->photo3) }}" alt="not Found" />
+                                                            <img  style="border-radius: 5px;" src="{{ asset('assets/images/blogs/details/'.$details?->photo3) }}" alt="not Found" />
                                                         </picture>
                                                     </div>
                                                 @endif

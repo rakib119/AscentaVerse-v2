@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\socialMedia\SocialMediaController;
+use App\Http\Controllers\socialMedia\UserInfoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/terms-and-conditions', 'terms_and_conditions')->name('t&c');
     Route::get('/return-and-refund-policy', 'return_and_refund_policy')->name('refund_policy');
     Route::get('/kyc', 'kyc')->name('kyc');
+    Route::get('/notice', 'notice')->name('notice');
 
 });
 Route::post('send/message',[ContactController::class, 'send_message'])->name('send_message');
@@ -129,4 +131,16 @@ Route::middleware(['auth'])->group(function ()
 // Social Media ROute
 Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/home',[SocialMediaController::class, 'social_home'])->name('social.home');
+    Route::get('/my-account',[SocialMediaController::class, 'my_account'])->name('social.myAccount');
+    Route::get('/upgrade-to-premium',[SocialMediaController::class, 'upgrade_to_premium'])->name('social.upgrade');
+    Route::get('/profile/{slug?}',[SocialMediaController::class, 'social_profile'])->name('social.profile');
+    Route::post('/upload-photo',[SocialMediaController::class, 'upload_photo'])->name('social.upload_photo');
+    Route::post('/submit-step/{step}', [UserInfoController::class, 'submitStep'])->name('submitStep');
+    Route::get('/load-step/{step}', [UserInfoController::class, 'loadStep'])->name('loadStep');
+
+    Route::get('/my-info',[UserInfoController::class, 'myInfo'])->name('social.myInfo');
+    Route::get('/load-division', [UserInfoController::class, 'loadDivision'])->name('loadDivision');
+    Route::get('/load-district', [UserInfoController::class, 'loadDistrict'])->name('loadDistrict');
+    Route::get('/load-upazila', [UserInfoController::class, 'loadUpazila'])->name('loadUpazila');
+
 });

@@ -250,10 +250,17 @@ if (!function_exists('storeMenuIntoSession')) {
             }
         }
         $web_info = DB::table('genarel_infos')->select('field_name','value')->get();
+        $dataArray = array();
+        foreach ($web_info as $v)
+        {
+            $dataArray[$v?->field_name] = $v?->value;
+        }
+        store_social_media_info();
         // return $permission_route;
         Session::put('main_menu_array', $main_menu_array);
         Session::put('permission_route', $permission_route);
         Session::put('web_info', $web_info);
+        Session::put('web_field_info', $dataArray);
     }
 }
 if (!function_exists('routeType')) {
@@ -275,6 +282,121 @@ if (!function_exists('asteriskSeparate')) {
             $outputText = $inputText;
         }
         return $outputText;
+    }
+}
+
+if (!function_exists('store_social_media_info')) {
+    function store_social_media_info()
+    {
+        $social_info = DB::table('social_photos')->select('thumbnail','original_photo','photo_gallery')
+        ->where([
+            'user_id'    =>  auth()->id(),
+            'is_current' => 1,
+        ])
+        ->whereIn('photo_gallery',[1,2])
+        ->get();
+
+        $social_data_array = array();
+        $social_data_array ['original_profile']     = 'default_profile.jpg';
+        $social_data_array ['thumbnail_profile']    = 'avatar.jpg';
+        $social_data_array ['original_cover']       = 'profile-cover.jpg';
+        $social_data_array ['thumbnail_cover']      = 'profile-cover.jpg';
+
+        foreach ($social_info as $v)
+        {
+            if ($v->photo_gallery==1) {
+                $social_data_array ['original_profile'] = $v->original_photo;
+                $social_data_array ['thumbnail_profile'] = $v->thumbnail;
+            }
+            if ($v->photo_gallery==2) {
+                $social_data_array ['original_cover'] = $v->original_photo;
+                $social_data_array ['thumbnail_cover'] = $v->thumbnail;
+            }
+        }
+        Session::put('social_media_user_data', $social_data_array);
+    }
+}
+if (!function_exists('createDropDownUiKit')) {
+
+    function createDropDownUiKit($fieldId, $fieldWidth, $query, $fieldList, $showSelect = true, $selectTextMsg = "", $selectedIndex = [], $onChangeFunc = "", $isDisabled = false, $multiSelect = false, $arrayIndex = "", $fixedOptions = "", $fixedValues = "", $notShowArrayIndex = "", $tabIndex = "", $fieldName = "", $additionalClass = "", $additionalAttributes = "")
+    {
+        $isDisabledAttr = $isDisabled ? 'disabled' : '';
+        $multiSelectAttr = $multiSelect ? 'multiple' : '';
+        $tabIndexAttr = $tabIndex ? 'tabindex="' . $tabIndex . '"' : '';
+        $fieldList = explode(",", $fieldList);
+        $addAttr = explode(",", $additionalAttributes);
+        $selectedIndex = is_array($selectedIndex) ? $selectedIndex : [$selectedIndex]; // Handle array for multiple selections
+
+        // Begin dropdown select tag
+        $style = $fieldWidth ? 'style="width:' . $fieldWidth . 'px"' : '';
+        $dropDown = '<select ' . $tabIndexAttr . ' name="' . ($fieldName ?: $fieldId) . ($multiSelect ? '[]' : '') . '" id="' . $fieldId . '" class="uk-select ' . $additionalClass . '" ' . $isDisabledAttr . ' ' . $multiSelectAttr . ' onchange="' . $onChangeFunc . '"'. $style.'>';
+
+        // "Select" option
+        if ($showSelect && !$multiSelect) {
+            $dropDown .= '<option value="0">' . $selectTextMsg . '</option>';
+        }
+
+        // Fixed options
+        if ($fixedOptions) {
+            $fixedOptionsArray = explode("*", $fixedOptions);
+            $fixedValuesArray = explode("*", $fixedValues);
+
+            foreach ($fixedOptionsArray as $index => $option) {
+                $value = $fixedValuesArray[$index] ?? $option;
+                $isSelected = in_array($value, $selectedIndex) ? 'selected' : '';
+                $dropDown .= '<option value="' . $value . '" ' . $isSelected . '>' . $option . '</option>';
+            }
+        }
+
+        // Database-driven options
+        if (is_string($query)) {
+            $results = DB::select($query);
+
+            foreach ($results as $result) {
+                $attData = [];
+                foreach ($addAttr as $attr) {
+                    if ($attr!='')
+                    {
+                        $attData[] = $result->{$fieldList[$attr] ?? ''};
+                    }
+                }
+
+                $value = $result->{$fieldList[0]} ?? '';
+                $label = $result->{$fieldList[1]} ?? '';
+                $isSelected = in_array($value, $selectedIndex) ? 'selected' : '';
+
+                $dropDown .= '<option value="' . $value . '" ' . $isSelected . ' data-attr="' . implode("**", $attData) . '">' . $label . '</option>';
+            }
+        } else {
+            // Array-driven options
+            $arrayIndex = $arrayIndex ? explode(",", $arrayIndex) : [];
+            $notShowArrayIndex = $notShowArrayIndex ? explode(",", $notShowArrayIndex) : [];
+
+            foreach ($query as $key => $value) {
+                if ((!$arrayIndex || in_array($key, $arrayIndex)) && (!$notShowArrayIndex || !in_array($key, $notShowArrayIndex))) {
+                    $isSelected = in_array($key, $selectedIndex) ? 'selected' : '';
+                    $dropDown .= '<option value="' . $key . '" ' . $isSelected . '>' . $value . '</option>';
+                }
+            }
+        }
+
+        // Close select tag
+        $dropDown .= '</select>';
+
+        return $dropDown;
+    }
+
+}
+if (!function_exists('return_library_array')) {
+
+    function return_library_array($query, $id_fld_name, $data_fld_name)
+    {
+        $nameArray =  DB::select($query);
+        $new_array = array();
+        foreach ($nameArray as $v) {
+            $new_array[$v?->$id_fld_name] = $v->$data_fld_name;
+        }
+        return $new_array;
     }
 }
 ?>

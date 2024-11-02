@@ -8,8 +8,8 @@
             <div class="auto-container">
                 <div class="inner-container d-flex justify-content-between align-items-center flex-wrap">
                     <!-- Logo Box -->
-                    <div class="logo"><a href="http://127.0.0.1:8000">
-                        <picture><img src="http://127.0.0.1:8000/assets/images/info/BJWvG6QRwB28ivd.png"></picture>
+                    <div class="logo"><a href="https://ascentaverse.com">
+                        <picture><img src="https://ascentaverse.com/assets/images/info/BJWvG6QRwB28ivd.png"></picture>
                     </a></div>
 
 
@@ -27,11 +27,11 @@
 
                             <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li><a href="http://127.0.0.1:8000">Home</a> </li>
-                                    <li><a href="http://127.0.0.1:8000/about">About Us</a></li>
-                                    <li><a href="http://127.0.0.1:8000/services">Services</a></li>
-                                    <li><a href="http://127.0.0.1:8000/blogs">Blog</a></li>
-
+                                    <li><a href="https://ascentaverse.com">Home</a> </li>
+                                    <li><a href="https://ascentaverse.com/about">About Us</a></li>
+                                    <li><a href="https://ascentaverse.com/services">Services</a></li>
+                                    <li><a href="https://ascentaverse.com/blogs">Blog</a></li>
+                                    
                                     <li>
                                                                                     <a class="d-block d-sm-none" href="#">Kay Burt</a>
                                                                             </li>
@@ -44,16 +44,16 @@
                         <div class="outer-box d-flex align-items-center">
                             <!-- Button Box -->
                             <div class="button-box">
-                                                                    <a class="btn-style-two theme-btn btn-item"  href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                                    <a class="btn-style-two theme-btn btn-item"  href="https://ascentaverse.com/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         <div class="btn-wrap">
                                             <span class="text-one">Logout<i class="fas fa-sign-in-alt"></i></span>
                                             <span class="text-two">Logout<i class="fas fa-sign-in-alt"></i></span>
                                         </div>
                                     </a>
-                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
+                                    <form id="logout-form" action="https://ascentaverse.com/logout" method="POST"
                                         class="d-none">
-                                        <input type="hidden" name="_token" value="mNqMGsdh1f90GrvE9BjfoCkRmDfPnv7AygmfinnJ" autocomplete="off">                                    </form>
-
+                                        <input type="hidden" name="_token" value="oVnjInNwHQ0LdBbgHTnV2YY13JJHjtWlO01PvoJv" autocomplete="off">                                    </form>
+                                    
                                                             </div>
 
                             <!-- Mobile Navigation Toggler -->
@@ -73,7 +73,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="http://127.0.0.1:8000" title=""><picture><img src="http://127.0.0.1:8000/assets/images/info/BJWvG6QRwB28ivd.png"></picture></a>
+                        <a href="https://ascentaverse.com" title=""><picture><img src="https://ascentaverse.com/assets/images/info/BJWvG6QRwB28ivd.png"></picture></a>
                     </div>
 
                     <!-- Right Col -->
@@ -88,15 +88,15 @@
                             <!-- Button Box -->
 
                             <div class="button-box">
-                                                                    <a class="btn-style-two theme-btn btn-item"  href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                                    <a class="btn-style-two theme-btn btn-item"  href="https://ascentaverse.com/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         <div class="btn-wrap">
                                             <span class="text-one">Logout<i class="fas fa-sign-in-alt"></i></span>
                                             <span class="text-two">Logout<i class="fas fa-sign-in-alt"></i></span>
                                         </div>
                                     </a>
-                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
+                                    <form id="logout-form" action="https://ascentaverse.com/logout" method="POST"
                                         class="d-none">
-                                        <input type="hidden" name="_token" value="mNqMGsdh1f90GrvE9BjfoCkRmDfPnv7AygmfinnJ" autocomplete="off">                                    </form>
+                                        <input type="hidden" name="_token" value="oVnjInNwHQ0LdBbgHTnV2YY13JJHjtWlO01PvoJv" autocomplete="off">                                    </form>
                                                             </div>
 
                             <!-- Mobile Navigation Toggler -->
@@ -116,7 +116,7 @@
             <div class="menu-backdrop"></div>
             <div class="close-btn"><span class="icon flaticon-020-x-mark"></span></div>
             <nav class="menu-box">
-                <div class="nav-logo"><a href="http://127.0.0.1:8000"> <picture><img src="http://127.0.0.1:8000/assets/images/info/BJWvG6QRwB28ivd.png"></picture></a></div>
+                <div class="nav-logo"><a href="https://ascentaverse.com"> <picture><img src="https://ascentaverse.com/assets/images/info/BJWvG6QRwB28ivd.png"></picture></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
             </nav>
 

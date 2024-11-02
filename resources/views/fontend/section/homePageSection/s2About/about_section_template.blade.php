@@ -22,7 +22,7 @@
                             <ul class="tab-btns tab-buttons clearfix">
                                 <li data-tab="#prod-mission" class="tab-btn active-btn">{{$data->btn1}}</li>
                                 <li data-tab="#prod-vision" class="tab-btn">{{$data->btn2}}</li>
-                                <li data-tab="#prod-value" class="tab-btn">{{$data->btn1}}</li>
+                                <li data-tab="#prod-value" class="tab-btn">{{$data->btn3}}</li>
                             </ul>
 
                             <!-- Tabs Container -->

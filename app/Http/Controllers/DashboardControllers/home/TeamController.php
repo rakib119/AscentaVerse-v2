@@ -34,6 +34,7 @@ class TeamController extends Controller
         $request->validate([
             'name'=>'required|max:50',
             'photo'=>'required|image|mimes:jpg,jpeg|dimensions:width=270,height=374',
+            'dtls_img'=>'required|image|mimes:jpg,jpeg|dimensions:width=440,height=530',
             'designation'=>'required|max:35',
             'button_name'=>'required|max:25',
             'icon1'=>'required',
@@ -52,18 +53,21 @@ class TeamController extends Controller
 
         try
         {
-            $msg_str    = uploadImage('public/assets/images/teams/',$request,'photo'); //Custom Helpers
-            $thumb_str  = uploadImage('public/assets/images/teams/',$request,'thumbnail',1); //Custom Helpers
-            $msgArr     = explode('*',$msg_str);
-            $thumbArr   = explode('*',$thumb_str);
+            $msg_str        = uploadImage('public/assets/images/teams/',$request,'photo'); //Custom Helpers
+            $dtls_img_str   = uploadImage('public/assets/images/teams/',$request,'dtls_img'); //Custom Helpers
+            $thumb_str      = uploadImage('public/assets/images/teams/',$request,'thumbnail',1); //Custom Helpers
+            $msgArr         = explode('*',$msg_str);
+            $thumbArr       = explode('*',$thumb_str);
+            $dtlsImgArr     = explode('*',$dtls_img_str);
 
-            if($msgArr[0] == 1 && $thumbArr[0] == 1){
+            if($msgArr[0] == 1 && $thumbArr[0] == 1 && $dtlsImgArr[0] == 1){
                 $is_displayed = '0' ;
                 if(isset($request->is_displayed_in_home))  $is_displayed='1';
                 Team::insert([
                     'name'                  =>  $request->name,
                     'slug'                  =>  Str::slug($request->name)."-".strtotime(Carbon::now()),
                     'photo'                 =>  $msgArr[1],
+                    'dtls_img'              =>  $dtlsImgArr[1],
                     'thumbnail'             =>  $thumbArr[1],
                     'designation'           =>  $request->designation,
                     'button_name'           =>  $request->button_name,
@@ -180,12 +184,20 @@ class TeamController extends Controller
         {
             $service = Team::findOrFail($id);
 
+            if ($request->hasFile('dtls_img'))
+            {
+                $request->validate([
+                    'dtls_img'=>'required|image|mimes:jpg,jpeg|dimensions:width=440,height=530',
+                ]);
+            }
             $msg_str    = uploadImage('public/assets/images/teams/',$request,'photo'); //Custom Helpers
+            $dtls_str   = uploadImage('public/assets/images/teams/',$request,'dtls_img'); //Custom Helpers
             $thumb_str  = uploadImage('public/assets/images/teams/',$request,'thumbnail',1); //Custom Helpers
             $msgArr     = explode('*',$msg_str);
             $thumbArr   = explode('*',$thumb_str);
+            $dtlsImgArr = explode('*',$dtls_str);
 
-            if($msgArr[0] == 1 && $thumbArr[0] == 1){ 
+            if($msgArr[0] == 1 && $thumbArr[0] == 1){
                 if ($msgArr[1]!= 0) //IF uploaded image found
                 {
                     $image_name = $msgArr[1];
@@ -199,6 +211,21 @@ class TeamController extends Controller
                     if ($msg2!=1)   {return back()->with('error',$msg2);}
                     $service->photo     = $image_name;
                     $service->thumbnail = $thumbnail;
+                }
+
+                if ($dtlsImgArr[1]!= 0) //IF uploaded image found
+                {
+                    $msg3=1;
+                    $dtls_img_name  = $dtlsImgArr[1];
+                    if ($service->dtls_img_name)
+                    {
+                        $path3          = base_path('public/assets/images/teams/' . $service->dtls_img_name);
+                        $msg3           = insertDeleteLink($path3,8); // Custom Function
+                    }
+
+
+                    if ($msg3!=1)   {return back()->with('error',$msg3);}
+                    $service->dtls_img     = $dtls_img_name;
                 }
                 $is_displayed = '0';
                 if(isset($request->is_displayed_in_home))  $is_displayed='1';

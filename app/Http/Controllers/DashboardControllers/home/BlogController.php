@@ -125,7 +125,7 @@ class BlogController extends Controller
         // return $request;
         $request->validate([
             'title'=>'required|max:50|unique:blogs,title,'.$id.',id',
-            'thumbnail'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=270,height=303',
+            'thumbnail'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=365,height=255',
             'button_name'=>'required|max:25',
             'category'=>'required',
             'short_description'=>'required|max:350',

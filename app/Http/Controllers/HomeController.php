@@ -8,6 +8,7 @@ use App\Models\GenarelInfo;
 use App\Models\SingleSection;
 use App\Models\SocialIcon;
 use App\Models\Team;
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -27,8 +28,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        // return storeMenuIntoSession();
-        return view('fontend.mainPages.index');
+
+        if (auth()->user()) {
+            return redirect(route('social.home'));
+        }
+        else{
+            return view('fontend.mainPages.index');
+        }
     }
 
     public function about()
@@ -55,7 +61,7 @@ class HomeController extends Controller
             $data = SingleSection::select('lebel','title','short_description','description1','btn1','link1','link2')->where('section_id',12)->first();
             $dataArray= $data->toArray();
 
-            $GenarelInfo = GenarelInfo::WhereIn('field_name',['blog_background','call_icon_img','message_icon_img' ,'address_icon_img'] )->get();
+            $GenarelInfo = GenarelInfo::WhereIn('field_name',['contact_background','call_icon_img','message_icon_img' ,'address_icon_img'] )->get();
             foreach ($GenarelInfo as  $v)
             {
                 $dataArray [$v?->field_name]= $v?->value	;
@@ -80,7 +86,7 @@ class HomeController extends Controller
     }
     public function teams()
     {
-        $data = GenarelInfo::select('value')->where('field_name','about_background')->first();
+        $data = GenarelInfo::select('value')->where('field_name','team_background')->first();
         return view('fontend.mainPages.teams',compact('data'));
     }
     public function kyc()
@@ -169,6 +175,12 @@ class HomeController extends Controller
     public function return_and_refund_policy()
     {
         $data       = DynamicContent::find(3);
+        $content    = $data->content;
+        return view('fontend.mainPages.pageContainer',compact('content'));
+    }
+    public function notice()
+    {
+        $data       = DynamicContent::find(4);
         $content    = $data->content;
         return view('fontend.mainPages.pageContainer',compact('content'));
     }

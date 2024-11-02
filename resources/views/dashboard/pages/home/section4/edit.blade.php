@@ -53,7 +53,7 @@
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="thumbnail"> Thumbnail <span class="text-danger">*(w=220px, h:220px)</span> </label>
-                                                    <input id="thumbnail" type="file"  class="form-control" name="thumbnail" onchange="cropImage(this,'thumbnail_hidden',220,220,'imgOutput')">
+                                                    <input id="thumbnail" type="file"  class="form-control" name="thumbnail" onchange="loadFile(event,'imgOutput')">
                                                     <input id="thumbnail_hidden" type="hidden"  class="form-control" name="thumbnail_hidden">
                                                     @error('thumbnail')
                                                         <h6 class="text-danger"> {{ $message }}</h6>

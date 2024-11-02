@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="thumbnail"> Thumbnail <span class="text-danger">*(w=270px, h:303px)</span> </label>
+                                                    <label class="form-label" for="thumbnail"> Thumbnail <span class="text-danger">*(w=365px, h:255px)</span> </label>
                                                     <input id="thumbnail" type="file"  class="form-control" name="thumbnail" onchange="loadFile(event,'imgOutput')">
                                                     @error('thumbnail')
                                                         <h6 class="text-danger"> {{ $message }}</h6>

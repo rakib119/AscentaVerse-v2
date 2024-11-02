@@ -33,7 +33,7 @@ class hs4Controller extends Controller
 
         $request->validate([
             'title'=>'required|max:50|unique:services,title',
-            'thumbnail'=>'required|image|mimes:jpg,jpeg',
+            'thumbnail'=>'required|image|mimes:jpg,jpeg|dimensions:width=220,height=220',
             'button_name'=>'required|max:25',
             'icon'=>'required|image|mimes:png|dimensions:width=30,height=30',
             'short_description'=>'required|max:350',
@@ -41,7 +41,7 @@ class hs4Controller extends Controller
 
         try
         {
-            $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail_hidden',1); //Custom Helpers
+            $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail'); //Custom Helpers
             $msgArr = explode('*',$msg_str);
             $msg_str2 = uploadImage('public/assets/images/services/icon/',$request,'icon'); //Custom Helpers
             $msgArr2 = explode('*',$msg_str2);
@@ -135,7 +135,7 @@ class hs4Controller extends Controller
         // return $request;
         $request->validate([
             'title'=>'required|max:50|unique:services,title,'.$id.',id',
-            'thumbnail'=>'nullable|image|mimes:jpg,jpeg',
+            'thumbnail'=>'nullable|image|mimes:jpg,jpeg|dimensions:width=220,height=220',
             'button_name'=>'required|max:25',
             'icon'=>'nullable|image|mimes:png|dimensions:width=30,height=30',
             'short_description'=>'required|max:350',
@@ -143,7 +143,7 @@ class hs4Controller extends Controller
         try
         {
             $service = Service::findOrFail($id);
-            $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail_hidden',1); //Custom Helpers
+            $msg_str = uploadImage('public/assets/images/services/',$request,'thumbnail'); //Custom Helpers
             $msgArr = explode('*',$msg_str);
             $msg_str2 = uploadImage('public/assets/images/services/icon/',$request,'icon'); //Custom Helpers
             $msgArr2 = explode('*',$msg_str2);

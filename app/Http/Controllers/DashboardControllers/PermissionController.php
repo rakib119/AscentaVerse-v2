@@ -47,7 +47,12 @@ class PermissionController extends Controller
             'permission'=>'nullable'
         ]);
         $permission = $request->permission;
-        $permission_string = implode(',',$permission);
+
+        $permission_string = "";
+        if ($permission)
+        {
+            $permission_string = implode(',',$permission);
+        }
 
         $permission = Permission::where([ 'user_id'=>$request->user, 'menu_id'=>$request->menu])->first();
         if ($permission?->id)

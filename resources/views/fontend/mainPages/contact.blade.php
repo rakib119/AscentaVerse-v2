@@ -8,7 +8,7 @@
 @endphp
 @section('mainContent')
     <!-- Page Title -->
-    <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$blog_background)}})">
+    <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$contact_background)}})">
         <div class="auto-container">
             <h2>Contact-us</h2>
             <ul class="bread-crumb clearfix">

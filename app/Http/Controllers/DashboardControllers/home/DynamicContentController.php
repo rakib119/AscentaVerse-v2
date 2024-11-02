@@ -12,7 +12,7 @@ class DynamicContentController extends Controller
     public function __construct()
     {
     }
-    public $page_list = array(1=>'Privecy',2=>'Terms And Conditions',3=>'Return Privecy');
+    public $page_list = array(1=>'Privecy',2=>'Terms And Conditions',3=>'Return Privecy',4=>'Notice');
     public function index()
     {
         return  view('dashboard.pages.home.dynamicContent.index',[

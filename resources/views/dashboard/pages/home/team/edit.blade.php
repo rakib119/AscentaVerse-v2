@@ -29,7 +29,7 @@
                                         <h2 class=" mb-4">Update Team</h2>
                                     </div>
                                     <div>
-                                        <a href="{{ url()->previous() }}" class="btn btn-warning">Back</a>
+                                        <a href="{{ route('team.index') }}" class="btn btn-warning">Back</a>
                                     </div>
                                 </div>
                                 <div class="form py-3">
@@ -41,7 +41,7 @@
                                         @method('put')
                                             <input type="hidden" name="section_id" value="8">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="name"> Name <span class="text-danger">*</span></label>
                                                     <input id="name" type="text" class="form-control" value="{{ old('name') ?? $team->name  }}" name="name" placeholder="Enter name" autofocus>
@@ -63,6 +63,20 @@
                                             <div class="col-lg-2">
                                                 <div class="mb-3">
                                                         <img id="imgOutput" src="{{asset('assets/images/teams/'. $team->photo)}}" height="80">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="dtls_img"> Dtls Img <span class="text-danger">*(w=440px, h:530px)</span> </label>
+                                                    <input id="dtls_img" type="file"  class="form-control" name="dtls_img" onchange="loadFile(event,'dtlsImgOutput')">
+                                                    @error('dtls_img')
+                                                        <h6 class="text-danger"> {{ $message }}</h6>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="mb-3">
+                                                    <img id="dtlsImgOutput" src="{{asset('assets/images/teams/'. $team->dtls_img)}}" height="80">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">

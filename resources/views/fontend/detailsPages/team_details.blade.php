@@ -24,7 +24,7 @@
 				<div class="about-two_image-column col-lg-5 col-md-12 col-sm-12">
 					<div class="about-two_pattern-one" style="background-image:url({{asset('assets/images/background/pattern-12.png')}})"></div>
 					<div class="about-two_image2">
-						<img src="{{asset('assets/images/teams/'.$data->photo)}}" alt="" />
+						<img src="{{asset('assets/images/teams/'.$data->dtls_img)}}" alt="" />
 					</div>
 				</div>
 

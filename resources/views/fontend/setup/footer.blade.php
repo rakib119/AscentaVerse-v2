@@ -12,7 +12,7 @@
                         <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                             <div class="footer-widget logo-widget">
                                 <div class="logo">
-                                    <a href="http://127.0.0.1:8000"> <picture><img src="http://127.0.0.1:8000/assets/images/info/Y1AnSkIY6TnEoIO.png" /></picture></a>
+                                    <a href="https://ascentaverse.com"> <picture><img src="https://ascentaverse.com/assets/images/info/Y1AnSkIY6TnEoIO.png" /></picture></a>
                                 </div>
                                 <div class="text">We work with a passion of taking challenges and creating new ones in advertising sector.</div>
                             </div>
@@ -52,7 +52,7 @@
                                     <li> <span class="icon fa fa-envelope"></span> info@ascentaverse.com</li>
                                 </ul>
                                 <div class="timing">
-                                     <strong>Open Hours:</strong> Sun - Wed : 9 am - 9 pm, <br>Thursday : 9 am - 6 pm, <br> Fri - Sat : CLOSED
+                                    
                                 </div>
                             </div>
                         </div>
@@ -62,9 +62,9 @@
                             <div class="footer-widget contact-widget">
                                 <h4>Links</h4>
                                 <ul class="contact-list">
-                                                                                                                                                                                                                                    <li> <span class="icon fa fa-link"></span> <a href=" www.ascentaverse.com/about "> About </a> </li>
-                                                                                                                                                                                                                                                                                <li> <span class="icon fa fa-link"></span> <a href=" www.ascentaverse.com/about "> Terms&amp;Conditions </a> </li>
-                                                                                                                                                                                                                                                                                <li> <span class="icon fa fa-link"></span> <a href=" www.ascentaverse.com/about "> Certificate </a> </li>
+                                                                                                                                                                                                                                    <li> <span class="icon fa fa-link"></span> <a href=" https://www.ascentaverse.com/policies "> Privacy Policy </a> </li>
+                                                                                                                                                                                                                                                                                <li> <span class="icon fa fa-link"></span> <a href=" https://www.ascentaverse.com/terms-and-conditions "> Terms and Conditions  </a> </li>
+                                                                                                                                                                                                                                                                                <li> <span class="icon fa fa-link"></span> <a href=" https://www.ascentaverse.com/return-and-refund-policy "> Return and Refund Policy </a> </li>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                                 </ul>
                             </div>
