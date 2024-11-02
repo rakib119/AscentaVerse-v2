@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/assets/images
+/public/social-media/assets/images/
 /storage/*.key
 /vendor
 .env
@@ -21,6 +22,9 @@ yarn-error.log
 /.vscode
 *.zip
 *.rar
+*.jpg
+*.png
+*.svg
 /.env2
 all_team.blade.php
 all_blogs.blade.php
