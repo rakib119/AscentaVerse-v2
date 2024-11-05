@@ -15,7 +15,7 @@
    <div class="main_content">
         <div class="main_content_inner p-sm-0 ml-sm-4">
 
-            <h1 c> Upgrade To Premium </h1>
+            <h1 c> Informations </h1>
 
             <div class="uk-position-relative" uk-grid>
                 @include('socialMedia.commonFile.settings.rightPannel')
