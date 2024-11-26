@@ -35,12 +35,7 @@ class SocialMediaController extends Controller
         $user       = auth()->id();
         return view('socialMedia.pages.myAccount', compact('user','web_info'));
     }
-    public function upgrade_to_premium()
-    {
-        $web_info   = Session::get('web_field_info', []);
-        $user       = auth()->id();
-        return view('socialMedia.pages.upgradeToPremium', compact('user','web_info'));
-    }
+
     public function social_profile()
     {
         $web_info   = Session::get('web_field_info', []);

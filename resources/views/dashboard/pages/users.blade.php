@@ -51,10 +51,11 @@
                                                 <td>{{ $loop->index+1}}</td>
                                                 <td>{{ $user->name}}</td>
                                                 <td>{{ $user->email}}</td>
-                                                <td>{{ $user->phone}}</td>
+                                                <td>{{ $user->mobile}}</td>
                                                 <td>
-                                                    @if ($user->personalInfo && $user->fatherInfo && $user->motherInfo)
-                                                        <a class="btn btn-success" href="{{route('user_details',$user->id)}}">Details</a>
+                                                    @if ($user->user_id )
+                                                        <a class="btn btn-success" href="{{route('user.details',
+                                                        Crypt::encrypt($user->id))}}">Details</a>
                                                     @else
                                                         <span class="badge bg-warning">Not Available</span>
                                                     @endif

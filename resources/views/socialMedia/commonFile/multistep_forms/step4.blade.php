@@ -12,7 +12,13 @@
 @endphp
 <div class="p-3">
     <div class="p-4">
-        <h2>Review & Submit</h2>
+        <div style="display:flex; justify-content:space-between">
+            <h2>Review & Submit</h2>
+            @if ($is_final_submited==1)
+                <a class="button secondary" href="{{ route('user.details',Crypt::encrypt(auth()->id())) }}">Download <i class="icon-feather-download-cloud"></i> </a>
+            @endif
+        </div>
+
     </div>
     <hr class="m-0">
     <p> Verification type <i class="icon-material-outline-arrow-forward"></i> Personal Information  <i class="icon-material-outline-arrow-forward"></i> Documents <i class="icon-material-outline-arrow-forward"></i> Guardian Information <i class="icon-material-outline-arrow-forward"></i> Review & Submit </p>
@@ -361,8 +367,11 @@
 
         {{-- button --}}
         <div class="uk-flex uk-flex-between p-4">
-            <a class="button soft-primary" id="back-button" onclick="preventDefault();">Previous</a>
-            <button class="button primary" type="submit" type="submit">Submit</button>
+            @if ($is_final_submited!=1)
+                <a class="button soft-primary" id="back-button" onclick="preventDefault();">Previous</a>
+                <button class="button primary" type="submit" type="submit">Submit</button>
+            @endif
+
         </div>
     </form>
 </div>

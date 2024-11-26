@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BackendController extends Controller
 {
@@ -15,6 +17,7 @@ class BackendController extends Controller
     }
     public function dashboard()
     {
+        // return session('permission_route');
         $users = User::orderBy('id', 'DESC')->get();
         $teams =  Team::all();
         $messages =  Contact::where('status', 0)->orderBy('id', 'DESC')->get();
@@ -27,6 +30,21 @@ class BackendController extends Controller
         $messages   = array();
         // $messages   = Contact::where('status', 0)->orderBy('id', 'DESC')->get();
         return view('dashboard.dashboard', compact('users','messages'));
+    }
+    public function user_list()
+    {
+        $users = DB::table('users','a')
+            ->select('a.id','a.name','a.email','b.is_final_submited','b.mobile','b.user_id')
+            ->leftJoin('user_infos as b', 'a.id', '=', 'b.user_id')
+            ->get();
+
+        return view('dashboard.pages.users', compact('users'));
+    }
+    public function user_details($encrypt_id)
+    {
+        $id = decrypt($encrypt_id);
+        $user = UserInfo::where('user_id', $id)->first();
+        return view('dashboard.pages.userdetails', compact('user'));
     }
 
 }

@@ -21,7 +21,7 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="father_full_name" id="father_full_name" class="uk-input" placeholder="Full Name" readonly value="{{ $father_full_name ?? ''}}"  >
+                <input type="text" name="father_full_name" id="father_full_name" class="uk-input" readonly value="{{ $father_full_name ?? ''}}"  >
                 <div class="uk-text-danger" id="full_name_error"></div>
             </div>
             <div>
@@ -80,7 +80,7 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="mother_full_name" id="mother_full_name" class="uk-input" placeholder="Full Name" readonly value="{{ $mother_full_name ?? ''}}">
+                <input type="text" name="mother_full_name" id="mother_full_name" class="uk-input" readonly value="{{ $mother_full_name ?? ''}}">
                 <div class="uk-text-danger" id="mother_full_name_error"></div>
             </div>
             <div>
@@ -139,7 +139,7 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="emergency_full_name" id="emergency_full_name" class="uk-input" placeholder="Full Name" readonly value="{{ $emergency_full_name ?? ''}}" >
+                <input type="text" name="emergency_full_name" id="emergency_full_name" class="uk-input" readonly value="{{ $emergency_full_name ?? ''}}" >
                 <div class="uk-text-danger" id="emergency_full_name_error"></div>
             </div>
             <div>

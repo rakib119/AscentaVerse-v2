@@ -25,7 +25,7 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="full_name" class="uk-input" id="full_name" value="{{ $full_name ?? ''}}"  placeholder="First Name" readonly>
+                <input type="text" name="full_name" class="uk-input" id="full_name" value="{{ $full_name ?? ''}}"  readonly>
                 <div class="uk-text-danger" id="full_name_error"></div>
             </div>
             <div>

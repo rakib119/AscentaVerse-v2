@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\socialMedia\PackagePurchaseController;
 use App\Http\Controllers\socialMedia\SocialMediaController;
 use App\Http\Controllers\socialMedia\UserInfoController;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::controller(BackendController::class)->prefix('admin')->group(function(){
         Route::get('/', 'dashboard')->name('dashboard');
     });
+    Route::get('user/list',[BackendController::class, 'user_list'])->name('user.list');
+    Route::get('user/details/{id}',[BackendController::class, 'user_details'])->name('user.details');
 
     // BANNER
     Route::resource('homeS1Left', hs1LeftController::class)->only(['index','store','update']);
@@ -128,11 +131,10 @@ Route::middleware(['auth'])->group(function ()
 });
 
 
-// Social Media ROute
+// Social Media Route
 Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/home',[SocialMediaController::class, 'social_home'])->name('social.home');
     Route::get('/my-account',[SocialMediaController::class, 'my_account'])->name('social.myAccount');
-    Route::get('/upgrade-to-premium',[SocialMediaController::class, 'upgrade_to_premium'])->name('social.upgrade');
     Route::get('/profile/{slug?}',[SocialMediaController::class, 'social_profile'])->name('social.profile');
     Route::post('/upload-photo',[SocialMediaController::class, 'upload_photo'])->name('social.upload_photo');
     Route::post('/submit-step/{step}', [UserInfoController::class, 'submitStep'])->name('submitStep');
@@ -142,5 +144,8 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/load-division', [UserInfoController::class, 'loadDivision'])->name('loadDivision');
     Route::get('/load-district', [UserInfoController::class, 'loadDistrict'])->name('loadDistrict');
     Route::get('/load-upazila', [UserInfoController::class, 'loadUpazila'])->name('loadUpazila');
+
+    Route::get('/upgrade-to-premium',[PackagePurchaseController::class, 'upgrade_to_premium'])->name('social.upgrade');
+    Route::get('/choose-plan/{slug}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
 
 });

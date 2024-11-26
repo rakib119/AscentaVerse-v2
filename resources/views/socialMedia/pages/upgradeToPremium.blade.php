@@ -18,83 +18,79 @@
             <h1 c> Upgrade To Premium </h1>
 
             <div class="uk-position-relative" uk-grid>
-                @include('socialMedia.commonFile.settings.rightPannel')
+                {{-- @include('socialMedia.commonFile.settings.rightPannel') --}}
                 <div class="uk-width-2-3@m mt-sm-3 pl-sm-0 p-sm-4">
                         <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
                             <div>
                                 <div class="uk-card uk-card-default  uk-card-body rounded">
-                                    <h4 class="uk-card-title">PREMIUM PACKAGE</h4>
-                                    <p>Get our premium package with exclusive savings and flexible payment options.</p>
+                                    <!-- Card Title -->
+                                    <h3 class="uk-card-title uk-text-bold uk-margin-remove">Premium</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top">Everything you need to create your website.</p>
 
-                                    <!-- Package Information Section -->
+                                    <!-- Pricing Section -->
                                     <div class="uk-margin">
-                                        <p><strong>Original Price:</strong> <span class="uk-text-danger">15,000 TAKA</span></p>
-                                        <p><strong>Discount:</strong> 14%</p>
-                                        <p><strong>Total Payable:</strong> <span class="uk-text-primary">12,900 TAKA</span></p>
-                                        <p><strong>Your Savings:</strong> <span class="uk-text-success">2,100 TAKA</span></p>
+                                        <span class="uk-text-meta" style="text-decoration: line-through;">৳ {{number_format(15000,0)}} </span>
+                                        <span style="background-color: #f0506e!important;color: #fff!important;" class="uk-label uk-margin-small-left" style="font-size: 0.8rem;">14% OFF</span>
+                                    </div>
+                                    <div>
+                                        <div class="uk-text-large uk-text-bold" style="font-size: 2.5rem;">৳ {{number_format(12900,0)}}<span style="font-size: 1rem;">(One Time)
+                                        </span></div>
                                     </div>
 
-                                    <!-- Payment Options Section -->
+                                    <!-- Choose Plan Button -->
                                     <div class="uk-margin">
-                                        <h4 class="uk-heading-line"><span>Payment Options</span></h4>
-                                        <p>Select a partial payment option if needed:</p>
-
-                                        <ul class="uk-list uk-list-divider">
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="10000"> 10,000 TAKA</li>
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="6000"> 6,000 TAKA</li>
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="3000"> 3,000 TAKA</li>
-                                        </ul>
+                                        <a class="uk-button uk-button-default uk-border-rounded uk-width-1-1" style="border: 2px solid #6a00ff; color: #6a00ff;" href="{{route('social.choose_plane',Crypt::encrypt(1))}}">Choose plan</a>
+                                        <div class="uk-text-meta uk-margin-small-top">৳ 600/mo when you renew</div>
                                     </div>
 
-                                    <!-- Confirmation and Payment Buttons -->
-                                    <div class="uk-margin">
-                                        <label>
-                                            <input class="uk-checkbox" type="checkbox" id="confirm-checkbox"> I have reviewed the terms and agree.
-                                        </label>
-                                    </div>
-
-                                    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
-                                        <button class="button primary transition-3d-hover" type="button" id="manual-payment-button" disabled>Manual</button>
-                                        <button class="button primary transition-3d-hover" type="button" id="online-payment-button" disabled>Online</button>
-                                    </div>
+                                    <!-- Features List with Tooltips -->
+                                    <ul class="uk-list uk-list-bullet uk-margin-top uk-text-small">
+                                        <li>
+                                            <span uk-tooltip="The maximum amount of websites allowed per account." class="uk-text-bold">20 to 1.5 Luk Taka Income </span>
+                                        </li>
+                                        <li>
+                                            <span uk-tooltip="Optimized hosting for WordPress-based websites.">Lifetime Support</span>
+                                        </li>
+                                        <li>
+                                            <span uk-tooltip="Fast and reliable storage for your files." class="uk-text-bold">6 Hours Live Class Support</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div>
                                 <div class="uk-card uk-card-default  uk-card-body rounded">
-                                    <h4 class="uk-card-title">PREMIUM PACKAGE</h4>
-                                    <p>Get our premium package with exclusive savings and flexible payment options.</p>
+                                    <!-- Card Title -->
+                                    <h3 class="uk-card-title uk-text-bold uk-margin-remove">Premium</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top">Everything you need to create your website.</p>
 
-                                    <!-- Package Information Section -->
+                                    <!-- Pricing Section -->
                                     <div class="uk-margin">
-                                        <p><strong>Original Price:</strong> <span class="uk-text-danger">15,000 TAKA</span></p>
-                                        <p><strong>Discount:</strong> 14%</p>
-                                        <p><strong>Total Payable:</strong> <span class="uk-text-primary">12,900 TAKA</span></p>
-                                        <p><strong>Your Savings:</strong> <span class="uk-text-success">2,100 TAKA</span></p>
+                                        <span class="uk-text-meta" style="text-decoration: line-through;">৳ {{number_format(15000,0)}} </span>
+                                        <span style="background-color: #f0506e!important;color: #fff!important;" class="uk-label uk-margin-small-left" style="font-size: 0.8rem;">14% OFF</span>
+                                    </div>
+                                    <div>
+                                        <div class="uk-text-large uk-text-bold" style="font-size: 2.5rem;">৳ {{number_format(12900,0)}}<span style="font-size: 1rem;">(One Time)
+                                        </span></div>
                                     </div>
 
-                                    <!-- Payment Options Section -->
+                                    <!-- Choose Plan Button -->
                                     <div class="uk-margin">
-                                        <h4 class="uk-heading-line"><span>Payment Options</span></h4>
-                                        <p>Select a partial payment option if needed:</p>
-
-                                        <ul class="uk-list uk-list-divider">
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="10000"> 10,000 TAKA</li>
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="6000"> 6,000 TAKA</li>
-                                            <li><input class="uk-radio" type="radio" name="payment-option" value="3000"> 3,000 TAKA</li>
-                                        </ul>
+                                        <a class="uk-button uk-button-default uk-border-rounded uk-width-1-1" style="border: 2px solid #6a00ff; color: #6a00ff;" href="{{route('social.choose_plane',Crypt::encrypt(2))}}">Choose plan</a>
+                                        <div class="uk-text-meta uk-margin-small-top">৳ 600/mo when you renew</div>
                                     </div>
 
-                                    <!-- Confirmation and Payment Buttons -->
-                                    <div class="uk-margin">
-                                        <label>
-                                            <input class="uk-checkbox" type="checkbox" id="confirm-checkbox"> I have reviewed the terms and agree.
-                                        </label>
-                                    </div>
-
-                                    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
-                                        <button class="button primary transition-3d-hover" type="button" id="manual-payment-button" disabled>Manual</button>
-                                        <button class="button primary transition-3d-hover" type="button" id="online-payment-button" disabled>Online</button>
-                                    </div>
+                                    <!-- Features List with Tooltips -->
+                                    <ul class="uk-list uk-list-bullet uk-margin-top uk-text-small">
+                                        <li>
+                                            <span uk-tooltip="The maximum amount of websites allowed per account." class="uk-text-bold">20 to 1.5 Luk Taka Income </span>
+                                        </li>
+                                        <li>
+                                            <span uk-tooltip="Optimized hosting for WordPress-based websites.">Lifetime Support</span>
+                                        </li>
+                                        <li>
+                                            <span uk-tooltip="Fast and reliable storage for your files." class="uk-text-bold">6 Hours Live Class Support</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

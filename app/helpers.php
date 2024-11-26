@@ -387,6 +387,77 @@ if (!function_exists('createDropDownUiKit')) {
     }
 
 }
+
+if (!function_exists('createDropDownBootstrap'))
+{
+    function createDropDownBootstrap($fieldId, $fieldWidth, $query, $fieldList, $showSelect = true, $selectTextMsg = "", $selectedIndex = [], $onChangeFunc = "", $isDisabled = false, $multiSelect = false, $arrayIndex = "", $fixedOptions = "", $fixedValues = "", $notShowArrayIndex = "", $tabIndex = "", $fieldName = "", $additionalClass = "", $additionalAttributes = "")
+    {
+        $isDisabledAttr = $isDisabled ? 'disabled' : '';
+        $multiSelectAttr = $multiSelect ? 'multiple' : '';
+        $tabIndexAttr = $tabIndex ? 'tabindex="' . $tabIndex . '"' : '';
+        $fieldList = explode(",", $fieldList);
+        $addAttr = explode(",", $additionalAttributes);
+        $selectedIndex = is_array($selectedIndex) ? $selectedIndex : [$selectedIndex]; // Handle array for multiple selections
+
+        // Begin dropdown select tag
+        $style = $fieldWidth ? 'style="width:' . $fieldWidth . 'px"' : '';
+        $dropDown = '<select ' . $tabIndexAttr . ' name="' . ($fieldName ?: $fieldId) . ($multiSelect ? '[]' : '') . '" id="' . $fieldId . '" class="form-select ' . $additionalClass . '" ' . $isDisabledAttr . ' ' . $multiSelectAttr . ' onchange="' . $onChangeFunc . '" ' . $style . '>';
+
+        // "Select" option
+        if ($showSelect && !$multiSelect) {
+            $dropDown .= '<option value="0">' . $selectTextMsg . '</option>';
+        }
+
+        // Fixed options
+        if ($fixedOptions) {
+            $fixedOptionsArray = explode("*", $fixedOptions);
+            $fixedValuesArray = explode("*", $fixedValues);
+
+            foreach ($fixedOptionsArray as $index => $option) {
+                $value = $fixedValuesArray[$index] ?? $option;
+                $isSelected = in_array($value, $selectedIndex) ? 'selected' : '';
+                $dropDown .= '<option value="' . $value . '" ' . $isSelected . '>' . $option . '</option>';
+            }
+        }
+
+        // Database-driven options
+        if (is_string($query)) {
+            $results = DB::select($query);
+
+            foreach ($results as $result) {
+                $attData = [];
+                foreach ($addAttr as $attr) {
+                    if ($attr != '') {
+                        $attData[] = $result->{$fieldList[$attr] ?? ''};
+                    }
+                }
+
+                $value = $result->{$fieldList[0]} ?? '';
+                $label = $result->{$fieldList[1]} ?? '';
+                $isSelected = in_array($value, $selectedIndex) ? 'selected' : '';
+
+                $dropDown .= '<option value="' . $value . '" ' . $isSelected . ' data-attr="' . implode("**", $attData) . '">' . $label . '</option>';
+            }
+        } else {
+            // Array-driven options
+            $arrayIndex = $arrayIndex ? explode(",", $arrayIndex) : [];
+            $notShowArrayIndex = $notShowArrayIndex ? explode(",", $notShowArrayIndex) : [];
+
+            foreach ($query as $key => $value) {
+                if ((!$arrayIndex || in_array($key, $arrayIndex)) && (!$notShowArrayIndex || !in_array($key, $notShowArrayIndex))) {
+                    $isSelected = in_array($key, $selectedIndex) ? 'selected' : '';
+                    $dropDown .= '<option value="' . $key . '" ' . $isSelected . '>' . $value . '</option>';
+                }
+            }
+        }
+
+        // Close select tag
+        $dropDown .= '</select>';
+
+        return $dropDown;
+    }
+
+}
 if (!function_exists('return_library_array')) {
 
     function return_library_array($query, $id_fld_name, $data_fld_name)
