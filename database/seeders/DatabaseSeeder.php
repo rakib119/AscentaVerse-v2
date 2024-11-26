@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DistrictSeeder::class);
         $this->call(UpazilaSeeder::class);
         $this->call(UnionSeeder::class);
+        $this->call(SocialPackageMstSeeder::class);
+        $this->call(SocialPackageFeatureDtlsSeeder::class);
+        $this->call(SocialPackageMstSeeder::class);
     }
 }
