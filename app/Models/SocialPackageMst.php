@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SocialPackageMst extends Model
 {
+    protected $table = 'social_package_mst';
     use HasFactory;
 }
