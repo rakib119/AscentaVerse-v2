@@ -1,6 +1,8 @@
 @php
-    $userinfo = DB::table('user_infos')->select('is_final_submited')->where('user_id',auth()?->id())->first();
-    $is_final_submited     = $userinfo?->is_final_submited;
+    $selected_package_info = session('package_info')??array();
+    extract($selected_package_info);
+    $package_data_array = array();
+    Session::put('package_info',$package_data_array);
 @endphp
 @extends('socialMedia.commonFile.socialLayouts1')
 @section('topBar')
@@ -14,63 +16,69 @@
    <!-- contents -->
    <div class="main_content">
         <div class="main_content_inner p-sm-0 ml-sm-4">
+            <h1> Upgrade To Premium </h1>
 
-            <h1 c> Upgrade To Premium </h1>
+            <div id="main_payment_container">
 
-            <div class="uk-position-relative" uk-grid>
-                <div class="uk-width-1-3@m uk-flex-last@m pl-sm-0">
-                    <div class="uk-card uk-card-default uk-card-body uk-border-rounded uk-text-center">
-                        <div class="uk-margin">
-                            <p class="uk-text-meta">Subtotal <span class="uk-text-muted"><del>US$ 717.60</del></span></p>
-                            <p class="uk-text-lead uk-text-bold">US$ 141.60</p>
+            </div>
+            <div id="package_container">
+                <div class="uk-position-relative" uk-grid>
+                    <div class="uk-width-1-2@m mt-sm-3 pl-sm-0 p-sm-4">
+                        <div class="uk-container uk-margin-top">
+                            <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                            <!-- Hosting Plan Header -->
+                            <h2 class="uk-text-bold">{{$package->package_name}}</h2>
+
+                            <!-- Period Selection -->
+                            <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-top">
+                                <label for="period" class="uk-text-bold">Package</label>
+                                @php
+                                    $data ="'".route('social.load_subtotal')."',this.value,'subtotal_container'";
+                                @endphp
+                                <select id="period" onChange="loadHtmlElement({{$data}})" class="uk-select uk-width-small" style="width:200px;">
+                                    <option value="0"> --Select Package--</option>
+                                    @foreach ($package_break_down as $row)
+                                        <option value="{{$row->id}}" {{ isset($selected_package_id) ? ($selected_package_id==$row->id ?'selected':''):"" }} > {{$row->sub_package_name." (৳".$row->discounted_amount.")"}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
                         </div>
-                        <p class="uk-text-success">Plan discount -80% <span class="uk-text-danger">-US$ 576.00</span></p>
-                        {{-- <button class="uk-button uk-button-text uk-margin-small-bottom">Have a coupon code?</button> --}}
-                        <button class="uk-button uk-button-primary uk-border-rounded uk-margin-small-top">Continue</button>
+                    </div>
+                    <div class="uk-width-1-2@m mt-sm-3 pl-sm-0 p-sm-4">
+                        <div id="subtotal_container">
+                            {{-- DATA COME FROM AJAX REQUEST --}}
+                        </div>
                     </div>
                 </div>
-                <div class="uk-width-2-3@m mt-sm-3 pl-sm-0 p-sm-4">
-                    <div class="uk-container uk-margin-top">
-                        <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
-                          <!-- Hosting Plan Header -->
-                          <h2 class="uk-text-bold">Business Web Hosting</h2>
-
-                          <!-- Period Selection -->
-                          <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-top">
-                            <label for="period" class="uk-text-bold">Period</label>
-                            <select id="period" class="uk-select uk-width-small" style="width:200px;">
-                              <option value="48">48 months</option>
-                              <option value="24">24 months</option>
-                              <option value="12">12 months</option>
-                            </select>
-                          </div>
-
-                          <!-- Price Details -->
-                          <div class="uk-margin">
-                            <div class="uk-flex uk-flex-between uk-flex-middle">
-                              <p class="uk-text-danger uk-text-bold uk-margin-remove">SAVE US$ 576.00</p>
-                              <div class="uk-text-right">
-                                <p class="uk-text-lead uk-text-bold uk-margin-remove">US$ 2.95 / month</p>
-                                <p class="uk-text-meta uk-margin-remove"><del>US$ 14.95 / month</del></p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- Renewal Note -->
-                          {{-- <p class="uk-text-meta uk-margin-remove">Renews at US$ 8.99/month on 23/11/2028. Cancel anytime!</p> --}}
-
-                          <!-- Free Benefits -->
-                         {{--  <p class="uk-text-bold uk-margin-top">
-                            Great news! Your <span class="uk-text-primary">FREE domain</span> + <span class="uk-text-success">3 months FREE</span> are included with this order.
-                          </p> --}}
-                        </div>
-                      </div>
-                </div>
             </div>
+
         </div>
    </div>
 @endsection
 
 @section('javaScript')
+    @if (count($selected_package_info))
+        @if (isset($payment_method) && $payment_method)
+            <script>
+                package_id  = {{isset($selected_package_id)?$selected_package_id:""}};
+                route       = '{{route('social.load_payment_method')}}';
+                method_id   = {{$payment_method}};
+
+                $( document ).ready(function() {
+                    $('#package_container').css('display', 'none');
+                    getPaymentComponent(method_id,route,package_id,'main_payment_container');
+                });
+            </script>
+        @else
+            <script>
+                    route = '{{route('social.load_subtotal')}}';
+                    package_id = {{isset($selected_package_id)?$selected_package_id:""}};
+                    $( document ).ready(function() {
+                        loadHtmlElement(route,package_id,'subtotal_container');
+                    });
+            </script>
+        @endif
+    @endif
 
 @endsection

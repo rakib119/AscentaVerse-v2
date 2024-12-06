@@ -431,3 +431,58 @@ function loadDropDown(routeUrl, data, containerId) {
         }
     });
 }
+
+function loadHtmlElement(routeUrl, data, containerId) {
+    $.ajax({
+        url: routeUrl,
+        method: 'GET',
+        data: "data="+data,
+        success: function(response) {
+            console.log(response);
+            $('#' + containerId).html(response);
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors here
+            console.error("There was an error loading:", error);
+        }
+    });
+}
+
+function handleCheckboxClick(input)
+{
+    inputdescriptionLink = input.dataset.descriptionLink;
+    if (input.checked) {
+        $('#checkboxError').html('');
+        window.open(inputdescriptionLink, 'blank');
+    }
+}
+function getPaymentComponent(method,routeUrl, data, containerId)
+{
+    // $('#checkboxError').html('');
+    console.log(method,routeUrl, data, containerId,$('#cbox').prop('checked'));
+    if ($('#cbox').prop('checked'))
+    {
+        if(method==1)
+        {
+            $('#checkboxError').html('Online Payment not available');
+            return;
+        }
+        else if(method==2)
+        {
+            data1 = "'"+data+"*"+method+"'";
+            console.log(routeUrl, data1, containerId);
+            loadHtmlElement(routeUrl, data1, containerId);
+            $('#package_container').css('display', 'none');
+
+        }
+        else
+        {
+            $('#checkboxError').html('Payment method not available');
+            return;
+        }
+    }
+    else
+    {
+        $('#checkboxError').html('Please checked first');
+    }
+}

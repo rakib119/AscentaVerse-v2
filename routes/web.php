@@ -146,6 +146,8 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/load-upazila', [UserInfoController::class, 'loadUpazila'])->name('loadUpazila');
 
     Route::get('/upgrade-to-premium',[PackagePurchaseController::class, 'upgrade_to_premium'])->name('social.upgrade');
-    Route::get('/choose-plan/{slug}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
+    Route::get('/choose-plan/{id}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
+    Route::get('/load-package-subtotal',[PackagePurchaseController::class, 'load_package_subtotal'])->name('social.load_subtotal');
+    Route::get('/load-payment-method',[PackagePurchaseController::class, 'load_payment_method'])->name('social.load_payment_method');
 
 });
