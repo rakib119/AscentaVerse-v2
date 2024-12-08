@@ -149,5 +149,6 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/choose-plan/{id}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
     Route::get('/load-package-subtotal',[PackagePurchaseController::class, 'load_package_subtotal'])->name('social.load_subtotal');
     Route::get('/load-payment-method',[PackagePurchaseController::class, 'load_payment_method'])->name('social.load_payment_method');
+    Route::get('/load-bank-name', [PackagePurchaseController::class, 'loadBankName'])->name('loadBankName');
 
 });

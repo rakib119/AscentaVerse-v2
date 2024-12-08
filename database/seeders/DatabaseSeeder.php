@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SocialPackageMstSeeder::class);
         $this->call(SocialPackageFeatureDtlsSeeder::class);
         $this->call(SocialPackageMstSeeder::class);
+        $this->call(BankSeeder::class);
     }
 }

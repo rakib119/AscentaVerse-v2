@@ -422,6 +422,8 @@ function loadDropDown(routeUrl, data, containerId) {
         method: 'GET',
         data: "data="+data,
         success: function(response) {
+            console.log(containerId);
+
             $('#' + containerId).html(response);
             // set_all_onclick();
         },
@@ -438,7 +440,7 @@ function loadHtmlElement(routeUrl, data, containerId) {
         method: 'GET',
         data: "data="+data,
         success: function(response) {
-            console.log(response);
+            // console.log(response);
             $('#' + containerId).html(response);
         },
         error: function(xhr, status, error) {
@@ -456,11 +458,12 @@ function handleCheckboxClick(input)
         window.open(inputdescriptionLink, 'blank');
     }
 }
-function getPaymentComponent(method,routeUrl, data, containerId)
+function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
 {
     // $('#checkboxError').html('');
-    console.log(method,routeUrl, data, containerId,$('#cbox').prop('checked'));
-    if ($('#cbox').prop('checked'))
+    // console.log(method,routeUrl, data, containerId,$('#cbox').prop('checked'));
+    checked_status = checked ?? $('#cbox').prop('checked');
+    if (1==1)
     {
         if(method==1)
         {
@@ -470,7 +473,7 @@ function getPaymentComponent(method,routeUrl, data, containerId)
         else if(method==2)
         {
             data1 = "'"+data+"*"+method+"'";
-            console.log(routeUrl, data1, containerId);
+            // console.log(routeUrl, data1, containerId);
             loadHtmlElement(routeUrl, data1, containerId);
             $('#package_container').css('display', 'none');
 
@@ -486,3 +489,34 @@ function getPaymentComponent(method,routeUrl, data, containerId)
         $('#checkboxError').html('Please checked first');
     }
 }
+
+$('#submit-payment').click(function () {
+    // Create a FormData object to handle file uploads
+    let formData = new FormData($('#payment-form')[0]);
+
+    $.ajax({
+        url: $('#payment-form').attr('action'),
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response.success) {
+                alert(response.message);
+                $('#payment-form')[0].reset(); // Reset form after success
+            }
+        },
+        error: function (xhr) {
+            // Clear previous errors
+            $('.uk-text-danger').text('');
+
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                // Display errors
+                $.each(xhr.responseJSON.errors, function (key, value) {
+                    $('#' + key + '-error').text(value[0]);
+                });
+            }
+        }
+    });
+});
+

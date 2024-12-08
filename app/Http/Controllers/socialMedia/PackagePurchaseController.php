@@ -62,6 +62,12 @@ class PackagePurchaseController extends Controller
                     </label>
 
                 </div>
+                <div class="uk-margin uk-child-width-auto">
+                    <label><input id="cbox" data-description-link="'.$desc_link.'" class="uk-checkbox" onclick="handleCheckboxClick(this)" type="checkbox">
+                    Click here to read details
+                    </label>
+
+                </div>
                 <div>
                     <h6 class="uk-text-danger uk-text-center" id="checkboxError"> </h6>
                     <button class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" onclick=" getPaymentComponent(1,'.$method_route.', '.$id.', '.$html_container.')">Online Payment</button>
@@ -86,7 +92,12 @@ class PackagePurchaseController extends Controller
     public function load_payment_method(Request $request)
     {
 
-        $data = explode("*", $request->data);
+        $payment_type_array = array(
+            1=>"Bank",
+            2=>"Mobile Banking"
+        );
+        $data = explode("*", str_replace("'","",$request->data));
+
         if ($data[1])
         {
             $package_info = session('package_info')??array();
@@ -96,105 +107,84 @@ class PackagePurchaseController extends Controller
             );
             $package_data_array = array_merge($package_info,$payment_info);
             Session::put('package_info',$package_data_array);
-            return $html = `
+            $banks = array();
+            $bank_type_drop_down  = createDropDownUiKit( "payment-type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');",0,0 );
+            $bank_list  = createDropDownUiKit( "bank-name","", $banks,"", 1, "-- Select --","", "",0,0 );
+            $load_img_onchange = 'onchange="loadFile(event,'."'imgOutput'".')"';
+            return $html = '
             <div class="uk-container uk-margin-large-top">
+                <div id="bank-details">
+                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                        <h3 class="uk-card-title">Bank Details</h3>
+                        <p style="color:red;"> Bank :brack Bank; Acc No: 6t6756757u8,6t6756757u8, Branch:TTt, Card Holder:XXXX </>
+                    </div>
+                </div>
                 <form class="uk-form-stacked">
+                    ' . csrf_field() . '
                     <div class="uk-grid-small uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s" uk-grid>
-                        <!-- Name Field -->
                         <div>
-                            <label class="uk-form-label" for="name">Name</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="name" type="text" placeholder="Enter your name">
+                            <label class="uk-form-label" for="payment-type">Payment Type</label>
+                            <div id="payment-type-container" class="uk-form-controls">
+                                '. $bank_type_drop_down.'
                             </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="nameError" style="display: none;">
-                                Please enter a valid name.
+                                <div class="uk-text-danger" id="payment-type-error"></div>
+                        </div>
+
+                        <div>
+                            <label class="uk-form-label" for="bank-name">Bank Name</label>
+                            <div id="bank-name-container" class="uk-form-controls">
+                                '. $bank_list.'
+                            </div>
+                            <div class="uk-text-danger" id="bank-name-error"></div>
+                        </div>
+
+                        <div>
+                            <label class="uk-form-label" for="account_holder">Account Holder</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="account_holder" type="text" placeholder="Enter Account Holder Name">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="account-holder-error"></div>
+                        </div>
+                        <div>
+                            <label class="uk-form-label" for="account_no">Account No</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="account_no" type="text" placeholder="Enter Account No">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="account-error"></div>
+                        </div>
+                        <div>
+                            <label class="uk-form-label" for="branch">Branch</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="branch" type="text" placeholder="Enter branch Name">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="branch-error"></div>
+                        </div>
+                        <div>
+                            <label class="uk-form-label" for="transaction-id">Transaction ID</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="transaction-id" type="text" placeholder="Enter Transaction ID Name">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="Transaction ID-error"></div>
+                        </div>
+                        <div>
+                            <label class="uk-form-label" for="image">Image or Screen Shot</label>
+                            <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
+                                <input id="image" type="file" name="image" '.$load_img_onchange.'>
+                                <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
+                                <div class="uk-text-danger" id="image-error"></div>
                             </div>
                         </div>
 
-                        <!-- Email Field -->
                         <div>
-                            <label class="uk-form-label" for="email">Email</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="email" type="email" placeholder="Enter your email">
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="emailError" style="display: none;">
-                                Please enter a valid email address.
-                            </div>
+                            <img id="imgOutput" style="height:80px;" src="">
                         </div>
-
-                        <!-- Gender Field (Select Dropdown) -->
-                        <div>
-                            <label class="uk-form-label" for="gender">Gender</label>
-                            <div class="uk-form-controls">
-                                <select class="uk-select" id="gender">
-                                    <option value="">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="genderError" style="display: none;">
-                                Please select a gender.
-                            </div>
-                        </div>
-
-                        <!-- Phone Field -->
-                        <div>
-                            <label class="uk-form-label" for="phone">Phone</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="phone" type="text" placeholder="Enter your phone number">
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="phoneError" style="display: none;">
-                                Please enter a valid phone number.
-                            </div>
-                        </div>
-
-                        <!-- Country Field (Select Dropdown) -->
-                        <div>
-                            <label class="uk-form-label" for="country">Country</label>
-                            <div class="uk-form-controls">
-                                <select class="uk-select" id="country">
-                                    <option value="">Select Country</option>
-                                    <option value="us">United States</option>
-                                    <option value="uk">United Kingdom</option>
-                                    <option value="bd">Bangladesh</option>
-                                </select>
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="countryError" style="display: none;">
-                                Please select a country.
-                            </div>
-                        </div>
-
-                        <!-- Message Field -->
-                        <div>
-                            <label class="uk-form-label" for="message">Message</label>
-                            <div class="uk-form-controls">
-                                <textarea class="uk-textarea" id="message" rows="3" placeholder="Enter your message"></textarea>
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="messageError" style="display: none;">
-                                The message field cannot be empty.
-                            </div>
-                        </div>
-
-                        <!-- Address Field -->
-                        <div>
-                            <label class="uk-form-label" for="address">Address</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="address" type="text" placeholder="Enter your address">
-                            </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="addressError" style="display: none;">
-                                Please enter a valid address.
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div>
-                            <button class="uk-button uk-button-primary uk-width-1-1" type="button" onclick="validateForm()">Submit</button>
-                        </div>
+                    </div>
+                    <div class="uk-text-center ">
+                        <button class="button primary" type="button" id="submit-payment">Submit</button>
                     </div>
                 </form>
             </div>
-            `;
+            ';
 
         }
         /* else
@@ -210,4 +200,28 @@ class PackagePurchaseController extends Controller
 
 
     }
+
+    public function loadBankName(Request $request)
+    {
+        return createDropDownUiKit( "bank-name","", "SELECT id,name from banks where bank_type=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
+    }
+
+    public function submitPayment(Request $request)
+    {
+        // Validation rules
+        $request->validate([
+            'payment-type' => 'required|in:1,2',
+            'bank-name' => 'required_if:payment-type,1',
+            'account_holder' => 'required|string|max:255',
+            'account_no' => 'required|numeric',
+            'branch' => 'nullable|string|max:255',
+            'transaction-id' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Logic to save the data or perform actions
+
+        return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
+    }
+
 }
