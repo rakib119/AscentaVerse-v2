@@ -490,48 +490,6 @@ function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
     }
 }
 
-/* function submitPayment()
-{
-    // Create a FormData object to handle file uploads
-    let formData = new FormData($('#payment-form')[0]);
-    console.log(formData);
-    var payment_type = $('#payment_type').var();
-    var bank_name = $('#bank_name').var();
-    var account_holder = $('#account_holder').var();
-    var account_no = $('#account_no').var();
-    var branch = $('#branch').var();
-    var transaction_id = $('#transaction_id').var();
-    var image = $('#image').var();
-    $.ajax({
-        url: $('#payment-form').attr('action'),
-
-
-        type: 'POST',
-        data: "",
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if (response.success) {
-                alert(response.message);
-                $('#payment-form')[0].reset(); // Reset form after success
-            }
-        },
-        error: function (xhr) {
-            // Clear previous errors
-            $('.uk-text-danger').text('');
-
-            if (xhr.responseJSON && xhr.responseJSON.errors) {
-                // Display errors
-                $.each(xhr.responseJSON.errors, function (key, value) {
-                    $('#' + key + '_error').text(value[0]);
-                });
-            }
-        }
-    });
-}; */
-
-
-
 function submitPayment() {
     // Create a FormData object to handle file uploads
     let formData = new FormData($('#payment-form')[0]);

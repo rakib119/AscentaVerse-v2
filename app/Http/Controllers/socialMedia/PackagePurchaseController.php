@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\socialMedia;
 
 use App\Http\Controllers\Controller;
+use App\Models\PackagePurchaseMst;
 use App\Models\SocialPackageBreakDown;
 use App\Models\SocialPackageFeatureDtls;
 use App\Models\SocialPackageMst;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -35,6 +37,7 @@ class PackagePurchaseController extends Controller
             $package_break_down = SocialPackageBreakDown::select('id','mst_id','sub_package_name','desc_link','price','discount_per','discounted_amount')->where('status_active',1)->where('is_deleted',0)->where('id',$id)->first();
 
             // return session()->all();
+            $mst_id             = $package_break_down?->mst_id;
             $price              = $package_break_down?->price;
             $discounted_amount  = $package_break_down?->discounted_amount;
             $discount           = $price-$discounted_amount;
@@ -44,8 +47,12 @@ class PackagePurchaseController extends Controller
             $dist_per_msg       = $discount_per>0 ? ' <p class="uk-text-success">Plan discount -'.$discount_per.'% <span class="uk-text-danger">-৳ '.$price.'</span></p>' :  "<p class='uk-text-success'>Plan discount $discount_per%";
 
             $package_data_array = array(
-                'selected_package_id'=>$id,
-                'description_link'=>$desc_link,
+                'package_id'            => $mst_id,
+                'selected_package_id'   => $id,
+                'description_link'      => $desc_link,
+                'package_value'         => $price,
+                'discount_per'          => $discount_per,
+                'payable_amount'        => $discounted_amount,
             );
             Session::put('package_info',$package_data_array);
             $method_route ="'".route('social.load_payment_method')."'";
@@ -211,6 +218,7 @@ class PackagePurchaseController extends Controller
 
     public function submitPayment(Request $request)
     {
+
         // Validation rules
         $request->validate([
             'payment_type'      => 'required|in:1,2',
@@ -225,6 +233,35 @@ class PackagePurchaseController extends Controller
             'branch.required_if'         => 'The branch name is required.',
             'account_holder.required_if' => 'The account holder field is required.',
             'bank_name.numeric'          => 'Invalid bank name.'
+        ]);
+
+        if (Session::get('package_info') == null || empty(Session::get('package_info'))) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong, please try again after some time.'
+            ], 500);
+        }
+        $package_info = session('package_info');
+
+        $msg_str = uploadImage( 'public/social-media/assets/images/package_purchase_img',$request,'image'); //Custom Helpers
+        $msgArr  = explode('*',$msg_str);
+        PackagePurchaseMst::insert([
+            'package_mst_id'        => $package_info['package_id'],
+            'package_break_down_id' => $package_info['selected_package_id'],
+            'user_id'               => auth()->id(),
+            'package_value'         => $package_info['package_value'],
+            'discount_per'          => $package_info['discount_per'],
+            'payment_amount'        => $package_info['payable_amount'],
+            'payment_method'        => $package_info['payment_method'],
+            'payment_type'          => $request->payment_type,
+            'bank_name'             => $request->bank_name,
+            'account_holder'        => $request->account_holder,
+            'account_no'            => $request->account_no,
+            'branch'                => $request->branch,
+            'transaction_id'        => $request->transaction_id,
+            'image'                 => $msgArr[1],
+            'created_by'            => auth()->id(),
+            'created_at'            => Carbon::now(),
         ]);
 
         // Logic to save the data or perform actions
