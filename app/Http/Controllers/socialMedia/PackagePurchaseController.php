@@ -101,16 +101,19 @@ class PackagePurchaseController extends Controller
         if ($data[1])
         {
             $package_info = session('package_info')??array();
-
             $payment_info = array(
                 'payment_method'=>$data[1]
             );
-            $package_data_array = array_merge($package_info,$payment_info);
+
+            $banks                  = array();
+            $bank_type_drop_down    = createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');",0,0 );
+            $bank_list              = createDropDownUiKit( "bank_name","", $banks,"", 1, "-- Select --","", "",0,0 );
+            $load_img_onchange      = 'onchange="loadFile(event,'."'imgOutput'".')"';
+            $url                    = route('submitManualPayment');
+            $package_data_array     = array_merge($package_info,$payment_info);
             Session::put('package_info',$package_data_array);
-            $banks = array();
-            $bank_type_drop_down  = createDropDownUiKit( "payment-type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');",0,0 );
-            $bank_list  = createDropDownUiKit( "bank-name","", $banks,"", 1, "-- Select --","", "",0,0 );
-            $load_img_onchange = 'onchange="loadFile(event,'."'imgOutput'".')"';
+
+
             return $html = '
             <div class="uk-container uk-margin-large-top">
                 <div id="bank-details">
@@ -119,15 +122,15 @@ class PackagePurchaseController extends Controller
                         <p style="color:red;"> Bank :brack Bank; Acc No: 6t6756757u8,6t6756757u8, Branch:TTt, Card Holder:XXXX </>
                     </div>
                 </div>
-                <form class="uk-form-stacked">
+                <form class="uk-form-stacked" id="payment-form" action="'.$url.'">
                     ' . csrf_field() . '
                     <div class="uk-grid-small uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s" uk-grid>
                         <div>
-                            <label class="uk-form-label" for="payment-type">Payment Type</label>
+                            <label class="uk-form-label" for="payment_type">Payment Type</label>
                             <div id="payment-type-container" class="uk-form-controls">
                                 '. $bank_type_drop_down.'
                             </div>
-                                <div class="uk-text-danger" id="payment-type-error"></div>
+                                <div class="uk-text-danger" id="payment_type_error"></div>
                         </div>
 
                         <div>
@@ -135,43 +138,43 @@ class PackagePurchaseController extends Controller
                             <div id="bank-name-container" class="uk-form-controls">
                                 '. $bank_list.'
                             </div>
-                            <div class="uk-text-danger" id="bank-name-error"></div>
+                            <div class="uk-text-danger" id="bank_name_error"></div>
                         </div>
 
                         <div>
                             <label class="uk-form-label" for="account_holder">Account Holder</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="account_holder" type="text" placeholder="Enter Account Holder Name">
+                                <input name="account_holder" class="uk-input" id="account_holder" type="text" placeholder="Enter Account Holder Name">
                             </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="account-holder-error"></div>
+                            <div class="uk-text-danger uk-margin-small-top" id="account_holder_error"></div>
                         </div>
                         <div>
                             <label class="uk-form-label" for="account_no">Account No</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="account_no" type="text" placeholder="Enter Account No">
+                                <input class="uk-input" name="account_no" id="account_no" type="text" placeholder="Enter Account No">
                             </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="account-error"></div>
+                            <div class="uk-text-danger uk-margin-small-top" id="account_no_error"></div>
                         </div>
                         <div>
                             <label class="uk-form-label" for="branch">Branch</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="branch" type="text" placeholder="Enter branch Name">
+                                <input class="uk-input" id="branch" type="text" name="branch"  placeholder="Enter branch Name">
                             </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="branch-error"></div>
+                            <div class="uk-text-danger uk-margin-small-top" id="branch_error"></div>
                         </div>
                         <div>
                             <label class="uk-form-label" for="transaction-id">Transaction ID</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="transaction-id" type="text" placeholder="Enter Transaction ID Name">
+                                <input class="uk-input" id="transaction-id" name="transaction_id" type="text" placeholder="Enter Transaction ID Name">
                             </div>
-                            <div class="uk-text-danger uk-margin-small-top" id="Transaction ID-error"></div>
+                            <div class="uk-text-danger uk-margin-small-top" id="transaction_id_error"></div>
                         </div>
                         <div>
                             <label class="uk-form-label" for="image">Image or Screen Shot</label>
                             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                                 <input id="image" type="file" name="image" '.$load_img_onchange.'>
                                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
-                                <div class="uk-text-danger" id="image-error"></div>
+                                <div class="uk-text-danger" id="image_error"></div>
                             </div>
                         </div>
 
@@ -180,7 +183,7 @@ class PackagePurchaseController extends Controller
                         </div>
                     </div>
                     <div class="uk-text-center ">
-                        <button class="button primary" type="button" id="submit-payment">Submit</button>
+                        <button class="button primary" type="button" id="submit-payment" onclick="submitPayment()" >Submit</button>
                     </div>
                 </form>
             </div>
@@ -203,20 +206,25 @@ class PackagePurchaseController extends Controller
 
     public function loadBankName(Request $request)
     {
-        return createDropDownUiKit( "bank-name","", "SELECT id,name from banks where bank_type=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
+        return createDropDownUiKit( "bank_name","", "SELECT id,name from banks where bank_type=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
     }
 
     public function submitPayment(Request $request)
     {
         // Validation rules
         $request->validate([
-            'payment-type' => 'required|in:1,2',
-            'bank-name' => 'required_if:payment-type,1',
-            'account_holder' => 'required|string|max:255',
-            'account_no' => 'required|numeric',
-            'branch' => 'nullable|string|max:255',
-            'transaction-id' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'payment_type'      => 'required|in:1,2',
+            'bank_name'         => 'required|numeric',
+            'account_holder'    => 'required_if:payment_type,1|string|max:255',
+            'account_no'        => 'required|numeric',
+            'branch'            => 'required_if:payment_type,1|string|max:255',
+            'transaction_id'    => 'required|string|max:255',
+            'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ],
+        [
+            'branch.required_if'         => 'The branch name is required.',
+            'account_holder.required_if' => 'The account holder field is required.',
+            'bank_name.numeric'          => 'Invalid bank name.'
         ]);
 
         // Logic to save the data or perform actions
