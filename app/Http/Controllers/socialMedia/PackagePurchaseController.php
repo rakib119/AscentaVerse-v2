@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\socialMedia;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyBankDtls;
 use App\Models\PackagePurchaseMst;
 use App\Models\SocialPackageBreakDown;
 use App\Models\SocialPackageFeatureDtls;
@@ -113,7 +114,7 @@ class PackagePurchaseController extends Controller
             );
 
             $banks                  = array();
-            $bank_type_drop_down    = createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');",0,0 );
+            $bank_type_drop_down    = createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');loadHtmlElement('".route('loadBankDtls')."', this.value, 'bank-details');",0,0 );
             $bank_list              = createDropDownUiKit( "bank_name","", $banks,"", 1, "-- Select --","", "",0,0 );
             $load_img_onchange      = 'onchange="loadFile(event,'."'imgOutput'".')"';
             $url                    = route('submitManualPayment');
@@ -124,10 +125,7 @@ class PackagePurchaseController extends Controller
             return $html = '
             <div class="uk-container uk-margin-large-top">
                 <div id="bank-details">
-                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
-                        <h3 class="uk-card-title">Bank Details</h3>
-                        <p style="color:red;"> Bank :brack Bank; Acc No: 6t6756757u8,6t6756757u8, Branch:TTt, Card Holder:XXXX </>
-                    </div>
+
                 </div>
                 <form class="uk-form-stacked" id="payment-form" action="'.$url.'">
                     ' . csrf_field() . '
@@ -137,15 +135,21 @@ class PackagePurchaseController extends Controller
                             <div id="payment-type-container" class="uk-form-controls">
                                 '. $bank_type_drop_down.'
                             </div>
-                                <div class="uk-text-danger" id="payment_type_error"></div>
+                                <div class="uk-text-danger uk-margin-small-top" id="payment_type_error"></div>
                         </div>
-
+                        <div>
+                            <label class="uk-form-label" for="company_account_no">Company Account No</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" name="company_account_no" id="company_account_no" type="text" placeholder="Company Account No">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="company_account_no_error"></div>
+                        </div>
                         <div>
                             <label class="uk-form-label" for="bank-name">Bank Name</label>
                             <div id="bank-name-container" class="uk-form-controls">
                                 '. $bank_list.'
                             </div>
-                            <div class="uk-text-danger" id="bank_name_error"></div>
+                            <div class="uk-text-danger uk-margin-small-top" id="bank_name_error"></div>
                         </div>
 
                         <div>
@@ -181,7 +185,7 @@ class PackagePurchaseController extends Controller
                             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                                 <input id="image" type="file" name="image" '.$load_img_onchange.'>
                                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
-                                <div class="uk-text-danger" id="image_error"></div>
+                                <div class="uk-text-danger uk-margin-small-top" id="image_error"></div>
                             </div>
                         </div>
 
@@ -190,7 +194,7 @@ class PackagePurchaseController extends Controller
                         </div>
                     </div>
                     <div class="uk-text-center ">
-                        <button class="button primary" type="button" id="submit-payment" onclick="submitPayment()" >Submit</button>
+                        <button style="cursor:pointer;" class="button primary" type="button" id="submit-payment" onclick="submitPayment()" >Submit</button>
                     </div>
                 </form>
             </div>
@@ -215,24 +219,69 @@ class PackagePurchaseController extends Controller
     {
         return createDropDownUiKit( "bank_name","", "SELECT id,name from banks where bank_type=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
     }
+    public function loadBankDtls(Request $request)
+    {
+        $bank_dtls = CompanyBankDtls::where('bank_type',$request->data)->get();
+        $th = "";
+        if ($request->data==1)
+        {
+            $th = "<th>Branch</th>";
+        }
+        $header = "<tr>
+                    <th>Bank Name</th>
+                    <th>Account No</th>
+                    $th
+                </tr>";
+        $body_tr=$td="";
+        foreach ($bank_dtls as  $v)
+        {
+            if ($request->data==1)
+            {
+                $td = "<th>$v->branch</th>";
+            }
+            $body_tr .= "<tr>
+                            <td>$v->bank_name</td>
+                            <td>$v->account_number</td>
+                            $td
+                        </tr>";
+        }
+
+        $html = '<div class="uk-card uk-card-default uk-card-hover uk-card-body" style="margin-bottom:15px;">
+                    <h3 class="uk-card-title">Bank Details</h3>
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                             '.$header.'
+                        </thead>
+                        <tbody>
+                            '.$body_tr.'
+                        </tbody>
+                    </table>
+                </div>';
+                return $html ;
+    }
 
     public function submitPayment(Request $request)
     {
 
         // Validation rules
         $request->validate([
-            'payment_type'      => 'required|in:1,2',
-            'bank_name'         => 'required|numeric',
-            'account_holder'    => 'required_if:payment_type,1|string|max:255',
+            'payment_type'      => 'required|in:1,2|not_in:0',
+            'bank_name'         => 'required|numeric|not_in:0',
+            'company_account_no'=> 'required|numeric',
+            'account_holder'    => 'nullable|required_if:payment_type,1|string|max:255',
             'account_no'        => 'required|numeric',
-            'branch'            => 'required_if:payment_type,1|string|max:255',
+            'branch'            => 'nullable|required_if:payment_type,1|string|max:255',
             'transaction_id'    => 'required|string|max:255',
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ],
         [
+            'payment_type.not_in'        => 'The payment type is required.',
             'branch.required_if'         => 'The branch name is required.',
             'account_holder.required_if' => 'The account holder field is required.',
-            'bank_name.numeric'          => 'Invalid bank name.'
+            'bank_name.not_in'           => 'The bank name  is required.',
+            'bank_name.numeric'          => 'Invalid bank name.',
+            'company_account_no.numeric' => 'Invalid company account no.',
+            'account_no.numeric'         => 'Invalid account no.'
         ]);
 
         if (Session::get('package_info') == null || empty(Session::get('package_info'))) {
@@ -243,7 +292,7 @@ class PackagePurchaseController extends Controller
         }
         $package_info = session('package_info');
 
-        $msg_str = uploadImage( 'public/social-media/assets/images/package_purchase_img',$request,'image'); //Custom Helpers
+        $msg_str = uploadImage( 'public/social-media/assets/images/package_purchase_img/',$request,'image'); //Custom Helpers
         $msgArr  = explode('*',$msg_str);
         PackagePurchaseMst::insert([
             'package_mst_id'        => $package_info['package_id'],
@@ -256,6 +305,7 @@ class PackagePurchaseController extends Controller
             'payment_type'          => $request->payment_type,
             'bank_name'             => $request->bank_name,
             'account_holder'        => $request->account_holder,
+            'company_account_no'    => $request->company_account_no,
             'account_no'            => $request->account_no,
             'branch'                => $request->branch,
             'transaction_id'        => $request->transaction_id,
@@ -265,7 +315,7 @@ class PackagePurchaseController extends Controller
         ]);
 
         // Logic to save the data or perform actions
-
+        Session::forget('package_info');
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
     }
 

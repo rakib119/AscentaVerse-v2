@@ -18,12 +18,12 @@ return new class extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->float('package_value')->nullable();
             $table->float('discount_per')->nullable();
-            $table->float('package_value')->nullable();
             $table->float('payment_amount')->nullable();
             $table->integer('payment_method')->nullable();
             $table->integer('payment_type')->nullable();
             $table->integer('bank_name')->nullable();
             $table->string('account_holder')->nullable()->max(255);
+            $table->string('company_account_no')->nullable()->max(50);
             $table->string('account_no')->nullable()->max(50);
             $table->string('branch')->nullable()->max(255);
             $table->string('transaction_id')->nullable()->max(255);

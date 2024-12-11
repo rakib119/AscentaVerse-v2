@@ -502,9 +502,11 @@ function submitPayment() {
         contentType: false, // Prevent jQuery from setting the Content-Type header
         success: function (response) {
             if (response.success) {
+                document.location.href="/"
                 alert(response.message);
-                $('#payment-form')[0].reset(); // Reset form after success
-                $('#imgOutput').attr('src', ''); // Clear image preview
+                // $('#payment-form')[0].reset(); // Reset form after success
+                // $('#imgOutput').attr('src', ''); // Clear image preview
+
             }
         },
         error: function (xhr) {
