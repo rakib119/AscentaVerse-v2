@@ -119,6 +119,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
 
     //DynamicContentController
     Route::resource('content', DynamicContentController::class);
+    //Package Purchase History
+    Route::get('/package-purchage-history', [PackagePurchaseController::class, 'package_purchage_history'])->name('packagePurchage.history');
 
 });
 

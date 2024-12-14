@@ -10,6 +10,7 @@ use App\Models\SocialPackageFeatureDtls;
 use App\Models\SocialPackageMst;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class PackagePurchaseController extends Controller
@@ -317,6 +318,19 @@ class PackagePurchaseController extends Controller
         // Logic to save the data or perform actions
         Session::forget('package_info');
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
+    }
+    public function package_purchage_history()
+    {
+       $history = DB::table('package_purchase_mst','a')
+        ->leftJoin('users as b', 'b.id', '=','a.user_id' )
+        ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
+        ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
+        ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
+        ->select('c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
+        ->orderBy('a.id','desc')
+        ->get();
+
+        return view('dashboard.socialMedia.package_purchage_history.index', compact('history'));
     }
 
 }
