@@ -284,6 +284,12 @@ class UserInfoController extends Controller
         return createDropDownUiKit( "upazila","", "SELECT id,name from upazilas where district_id=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
 
     }
+    public function userInfoList(Request $request)
+    {
+
+        return createDropDownUiKit( "upazila","", "SELECT id,name from upazilas where district_id=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
+
+    }
 
 
 }

@@ -54,6 +54,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     });
     Route::get('user/list',[BackendController::class, 'user_list'])->name('user.list');
     Route::get('user/details/{id}',[BackendController::class, 'user_details'])->name('user.details');
+    //USER INFO
+    Route::get('user/info/list', [BackendController::class, 'user_list'])->name('userInfoList');
 
     // BANNER
     Route::resource('homeS1Left', hs1LeftController::class)->only(['index','store','update']);
@@ -119,9 +121,11 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
 
     //DynamicContentController
     Route::resource('content', DynamicContentController::class);
+
     //Package Purchase History
     Route::get('/package-purchage-history', [PackagePurchaseController::class, 'package_purchage_history'])->name('packagePurchage.history');
     Route::post('/package-purchage-status-update/{id}', [PackagePurchaseController::class, 'update_purchage_status'])->name('packagePurchage.status-update');
+
 
 });
 
