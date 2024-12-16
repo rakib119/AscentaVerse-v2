@@ -326,11 +326,19 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
+        ->select('a.id','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
         ->orderBy('a.id','desc')
         ->get();
 
         return view('dashboard.socialMedia.package_purchage_history.index', compact('history'));
     }
-
+    public function update_purchage_status(Request $request, string $id)
+    {
+        $info = PackagePurchaseMst::findOrFail($id);
+        $info->payment_status   = $request->status;
+        $info->updated_by       = auth()->id();
+        $info->updated_at       = Carbon::now();
+        $info->save();
+        return back()->with('success','Updated successfully');
+    }
 }

@@ -1,15 +1,15 @@
-@extends('dashboard.layout.dashboard')
 @section('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 @endsection
 @section('javacript')
-    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
-    <script>
-        $(document).ready( function () {
-           $('#usersTable').DataTable();
-        } );
+<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
     </script>
 @endsection
+@extends('dashboard.layout.dashboard')
 @section('content')
 <div class="main-content">
     <div class="page-content">
@@ -35,7 +35,7 @@
                             <div class="card-body">
                                 <h2 class="header-title mb-4">Purchase List</h2>
                                 <div class="table-responsive">
-                                    <table id="usersTable" class="table table-centered table-nowrap mb-0">
+                                    <table id="myTable" class="table table-centered table-nowrap mb-0">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>SL</th>
@@ -83,7 +83,29 @@
                                                 <td>{{ $v->company_account_no }}</td>
                                                 <td> <span class="badge bg-{{$badge_color_array[$v->payment_status]}}"> {{$payment_status_array[$v->payment_status]}} </span></td>
                                                 <td>
-                                                    <a class="btn btn-success" href="">Accept</a>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary has-arrow dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Action <i class="fas fa-angle-down"></i> </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('success-form').submit();">Success</a></li>
+                                                                <li><a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('cancel-form').submit();">Reject</a></li>
+                                                                <li><a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('pending-form').submit();">Pending</a></li>
+
+                                                                <form id="success-form" action="{{route('packagePurchage.status-update',$v->id)}}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="status" value="1">
+                                                                </form>
+
+                                                                <form id="cancel-form" action="{{route('packagePurchage.status-update',$v->id)}}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="status" value="2">
+                                                                </form>
+
+                                                                <form id="pending-form" action="{{route('packagePurchage.status-update',$v->id)}}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="status" value="0">
+                                                                </form>
+                                                            </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             @endforeach
