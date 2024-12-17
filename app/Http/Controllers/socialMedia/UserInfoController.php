@@ -5,8 +5,12 @@ namespace App\Http\Controllers\socialMedia;
 use App\Http\Controllers\Controller;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Illuminate\Support\Facades\Session;
+use Mpdf\Mpdf;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
 
 class UserInfoController extends Controller
 {
@@ -284,12 +288,53 @@ class UserInfoController extends Controller
         return createDropDownUiKit( "upazila","", "SELECT id,name from upazilas where district_id=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
 
     }
-    public function userInfoList(Request $request)
+    public function user_details($encrypt_id)
     {
-
-        return createDropDownUiKit( "upazila","", "SELECT id,name from upazilas where district_id=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
-
+        $id = decrypt($encrypt_id);
+        $user = UserInfo::where('user_id', $id)->first();
+        return view('dashboard.pages.userdetails', compact('user'));
     }
+    public function generatePDF2($id)
+    {
+        try {
+            $userinfo = DB::table('user_infos')->where('id',$id)->first();
+            $userinfoArray = (array)$userinfo;
 
+            $mpdf = new Mpdf();
+            $data = [
+                'userinfoArray' => $userinfoArray
+            ];
+            $html = view('dashboard.pdf.user_info', $data)->render();
+            $mpdf->WriteHTML($html);
+
+            return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+    public function generatePDF($id)
+    {
+        try {
+            $userinfo = DB::table('user_infos')->where('id',$id)->first();
+            $userinfoArray = (array)$userinfo;
+
+            $mpdf = new Mpdf();
+            $data = [
+                'userinfoArray' => $userinfoArray
+            ];
+            // return view('dashboard.pdf.user_info', $data);
+            $html = view('dashboard.pdf.user_info', $data)->render();
+
+            $mpdf = new Mpdf();
+
+            // Write HTML to PDF
+            $mpdf->WriteHTML($html);
+
+            // Output the PDF
+            return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
 
 }

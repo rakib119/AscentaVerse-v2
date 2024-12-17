@@ -40,11 +40,6 @@ class BackendController extends Controller
 
         return view('dashboard.pages.users', compact('users'));
     }
-    public function user_details($encrypt_id)
-    {
-        $id = decrypt($encrypt_id);
-        $user = UserInfo::where('user_id', $id)->first();
-        return view('dashboard.pages.userdetails', compact('user'));
-    }
+
 
 }

@@ -53,7 +53,7 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
         Route::get('/', 'dashboard')->name('dashboard');
     });
     Route::get('user/list',[BackendController::class, 'user_list'])->name('user.list');
-    Route::get('user/details/{id}',[BackendController::class, 'user_details'])->name('user.details');
+    Route::get('user/details/{id}',[UserInfoController::class, 'user_details'])->name('user.details');
     //USER INFO
     Route::get('user/info/list', [BackendController::class, 'user_list'])->name('userInfoList');
 
@@ -151,6 +151,8 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/load-division', [UserInfoController::class, 'loadDivision'])->name('loadDivision');
     Route::get('/load-district', [UserInfoController::class, 'loadDistrict'])->name('loadDistrict');
     Route::get('/load-upazila', [UserInfoController::class, 'loadUpazila'])->name('loadUpazila');
+    Route::get('/generate-pdf/{id}', [UserInfoController::class, 'generatePDF'])->name('generatePDF');
+
 
     Route::get('/upgrade-to-premium',[PackagePurchaseController::class, 'upgrade_to_premium'])->name('social.upgrade');
     Route::get('/choose-plan/{id}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
