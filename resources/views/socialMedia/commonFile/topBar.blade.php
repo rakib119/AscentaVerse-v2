@@ -371,10 +371,10 @@
 
                     <ul class="dropdown-user-menu">
                         <li><a href="{{ route('social.myAccount')}}"> <i class="uil-user"></i> My Account </a> </li>
-                        <li><a href="#"> <i class="uil-thumbs-up"></i> Liked Pages </a></li>
-                        <li><a href="#"> <i class="uil-cog"></i> Account Settings</a></li>
-                        <li><a href="{{ route('social.upgrade')}}" style="color:#1a73e8"> <i class="uil-bolt"></i> Upgrade To Premium</a>
-                        </li>
+                        {{-- <li><a href="#"> <i class="uil-thumbs-up"></i> Liked Pages </a></li> --}}
+                        {{-- <li><a href="#"> <i class="uil-cog"></i> Account Settings</a></li> --}}
+                        <li><a href="{{ route('social.upgrade')}}" style="color:#1a73e8"> <i class="uil-bolt"></i> Upgrade To Premium</a></li>
+                        <li><a href="{{ route('social.pay_renewal_fees')}}" style="color:#1a73e8"> <i class="uil-bolt"></i> Pay Renewal Fees</a></li>
                         <li><a href="{{ route('social.myInfo')}}" style="color:#1a73e8"> <i class="icon-line-awesome-info"></i> My Information</a>
                         </li>
                         <li>

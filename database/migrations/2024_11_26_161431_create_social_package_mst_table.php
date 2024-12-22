@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('price')->nullable();
             $table->float('discount_per')->nullable();
             $table->float('discounted_amount')->nullable();
+            $table->float('renewal_fee')->nullable();
             $table->string('renewable_message')->nullable();
             $table->integer('status_active')->default(1);
             $table->integer('is_deleted')->default(0);

@@ -155,11 +155,14 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
 
 
     Route::get('/upgrade-to-premium',[PackagePurchaseController::class, 'upgrade_to_premium'])->name('social.upgrade');
+    Route::get('/pay-renewal-fees',[PackagePurchaseController::class, 'pay_renewal_fees'])->name('social.pay_renewal_fees');
+    Route::get('/offile-renewal-fees/{id}',[PackagePurchaseController::class, 'offline_renewal_fees'])->name('social.offline_renewal_fees');
     Route::get('/choose-plan/{id}',[PackagePurchaseController::class, 'choose_plane'])->name('social.choose_plane');
     Route::get('/load-package-subtotal',[PackagePurchaseController::class, 'load_package_subtotal'])->name('social.load_subtotal');
     Route::get('/load-payment-method',[PackagePurchaseController::class, 'load_payment_method'])->name('social.load_payment_method');
     Route::get('/load-bank-name', [PackagePurchaseController::class, 'loadBankName'])->name('loadBankName');
     Route::get('/load-bank-dtls', [PackagePurchaseController::class, 'loadBankDtls'])->name('loadBankDtls');
     Route::post('/submit-payment', [PackagePurchaseController::class, 'submitPayment'])->name('submitManualPayment');
+    Route::post('/submit-renewal-fees', [PackagePurchaseController::class, 'submitRenewalFees'])->name('submitRenewalFees');
 
 });

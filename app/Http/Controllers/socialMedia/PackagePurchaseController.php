@@ -17,7 +17,7 @@ class PackagePurchaseController extends Controller
 {
     public function upgrade_to_premium()
     {
-        $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewable_message')->where('status_active',1)->where('is_deleted',0)->get();
+        $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewal_fee','renewable_message')->where('status_active',1)->where('is_deleted',0)->get();
         $package_features = SocialPackageFeatureDtls::select('id','mst_id','feature','short_desc')->where('status_active',1)->where('is_deleted',0)->get();
         return view('socialMedia.pages.upgradeToPremium', compact('package','package_features'));
     }
@@ -80,7 +80,7 @@ class PackagePurchaseController extends Controller
                 <div>
                     <h6 class="uk-text-danger uk-text-center" id="checkboxError"> </h6>
                     <button class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" onclick=" getPaymentComponent(1,'.$method_route.', '.$id.', '.$html_container.')">Online Payment</button>
-                    <button class="uk-button uk-button-primary uk-border-rounded uk-margin-small-top" onclick="getPaymentComponent(2,'.$method_route.', '.$id.', '.$html_container.')"">Ofline Payment</button>
+                    <button class="uk-button uk-button-primary uk-border-rounded uk-margin-small-top" onclick="getPaymentComponent(2,'.$method_route.', '.$id.', '.$html_container.')"">Offline Payment</button>
                 </div>
 
             </div>';
@@ -222,6 +222,7 @@ class PackagePurchaseController extends Controller
     }
     public function loadBankDtls(Request $request)
     {
+        if (!$request->data) return "";
         $bank_dtls = CompanyBankDtls::where('bank_type',$request->data)->get();
         $th = "";
         if ($request->data==1)
@@ -303,6 +304,7 @@ class PackagePurchaseController extends Controller
             'discount_per'          => $package_info['discount_per'],
             'payment_amount'        => $package_info['payable_amount'],
             'payment_method'        => $package_info['payment_method'],
+            'payment_for'           => 1, //new package purchase
             'payment_type'          => $request->payment_type,
             'bank_name'             => $request->bank_name,
             'account_holder'        => $request->account_holder,
@@ -326,7 +328,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
+        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
         ->orderBy('a.id','desc')
         ->get();
 
@@ -340,5 +342,75 @@ class PackagePurchaseController extends Controller
         $info->updated_at       = Carbon::now();
         $info->save();
         return back()->with('success','Updated successfully');
+    }
+
+    public function pay_renewal_fees()
+    {
+        $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewal_fee')->where('status_active',1)->where('id',1)->where('is_deleted',0)->get();
+        $package_features = SocialPackageFeatureDtls::select('id','mst_id','feature','short_desc')->where('status_active',1)->where('is_deleted',0)->get();
+        return view('socialMedia.pages.renewal_fees', compact('package','package_features'));
+    }
+    public function offline_renewal_fees(Request $request ,string $package_id)
+    {
+        $package_mst_id = decrypt($package_id);
+        $package        = SocialPackageMst::select('id','renewal_fee')->where('status_active',1)->where('id',$package_mst_id)->where('is_deleted',0)->first();
+
+        return view('socialMedia.pages.offline_renewal_fees', compact('package'));
+    }
+
+    public function submitRenewalFees(Request $request)
+    {
+        // Validation rules
+        $request->validate([
+            'payment_type'      => 'required|in:1,2|not_in:0',
+            'bank_name'         => 'required|numeric|not_in:0',
+            'company_account_no'=> 'required|numeric',
+            'account_holder'    => 'nullable|required_if:payment_type,1|string|max:255',
+            'account_no'        => 'required|numeric',
+            'branch'            => 'nullable|required_if:payment_type,1|string|max:255',
+            'transaction_id'    => 'required|string|max:255',
+            'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'amount'            => 'required',
+        ],
+        [
+            'payment_type.not_in'        => 'The payment type is required.',
+            'branch.required_if'         => 'The branch name is required.',
+            'account_holder.required_if' => 'The account holder field is required.',
+            'bank_name.not_in'           => 'The bank name  is required.',
+            'bank_name.numeric'          => 'Invalid bank name.',
+            'company_account_no.numeric' => 'Invalid company account no.',
+            'account_no.numeric'         => 'Invalid account no.'
+        ]);
+
+        $package_mst_id = decrypt($request->package_id);
+        $package        = SocialPackageMst::select('id','renewal_fee')->where('status_active',1)->where('id',$package_mst_id)->where('is_deleted',0)->first();
+
+        if (!$package) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong, please try again after some time.'
+            ], 500);
+        }
+
+        $msg_str = uploadImage( 'public/social-media/assets/images/package_purchase_img/',$request,'image'); //Custom Helpers
+        $msgArr  = explode('*',$msg_str);
+        PackagePurchaseMst::insert([
+            'package_mst_id'        => $package->id,
+            'user_id'               => auth()->id(),
+            'payment_amount'        => $package->renewal_fee,
+            'payment_for'           => 2, // renewal fee
+            'payment_method'        => 2,
+            'payment_type'          => $request->payment_type,
+            'bank_name'             => $request->bank_name,
+            'account_holder'        => $request->account_holder,
+            'company_account_no'    => $request->company_account_no,
+            'account_no'            => $request->account_no,
+            'branch'                => $request->branch,
+            'transaction_id'        => $request->transaction_id,
+            'image'                 => $msgArr[1],
+            'created_by'            => auth()->id(),
+            'created_at'            => Carbon::now(),
+        ]);
+        return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
     }
 }

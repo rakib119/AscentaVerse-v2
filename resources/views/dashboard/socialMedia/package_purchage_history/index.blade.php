@@ -1,3 +1,6 @@
+@php
+    $payment_for_array = array(0=> '',1=> 'new package',2=> 'Renewal Fees');
+@endphp
 @section('css')
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 @endsection
@@ -40,6 +43,7 @@
                                             <tr>
                                                 <th>SL</th>
                                                 <th>Img</th>
+                                                <th>Purchase For</th>
                                                 <th>Purchase By</th>
                                                 <th>Pkg Name</th>
                                                 <th>Sub Pkg Name</th>
@@ -69,6 +73,7 @@
                                                         <img height="30" src="{{$img_link}}" alt="not found">
                                                     </a>
                                                 </td>
+                                                <td>{{ $payment_for_array[$v->payment_for] }}</td>
                                                 <td>{{ $v->purchase_by}}</td>
                                                 <td>{{ $v->package_name	}}</td>
                                                 <td>{{ $v->sub_package_name	}}</td>
