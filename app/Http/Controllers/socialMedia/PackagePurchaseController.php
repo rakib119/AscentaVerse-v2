@@ -17,6 +17,7 @@ class PackagePurchaseController extends Controller
 {
     public function upgrade_to_premium()
     {
+        Session::forget('package_info');
         $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewal_fee','renewable_message')->where('status_active',1)->where('is_deleted',0)->get();
         $package_features = SocialPackageFeatureDtls::select('id','mst_id','feature','short_desc')->where('status_active',1)->where('is_deleted',0)->get();
         return view('socialMedia.pages.upgradeToPremium', compact('package','package_features'));
@@ -48,6 +49,24 @@ class PackagePurchaseController extends Controller
             $dist_msg           = $discount>0 ? '<span class="uk-text-muted"><del>৳'.$price.'</del></span>' : "";
             $dist_per_msg       = $discount_per>0 ? ' <p class="uk-text-success">Plan discount -'.$discount_per.'% <span class="uk-text-danger">-৳ '.$price.'</span></p>' :  "<p class='uk-text-success'>Plan discount $discount_per%";
 
+            $onClickHtml = '';
+            if ($desc_link)
+            {
+                $link_rows = explode('**', $desc_link);
+                $i=0;
+                foreach ($link_rows as $row) {
+                    $parts = explode('!!', $row);
+                    if (count($parts) === 2) {
+                        $disc_link = trim($parts[0]);
+                        $label_text = trim($parts[1]);
+                        if ($i) $onClickHtml .= '<br>';
+                        $i++;
+                        $onClickHtml .= '<label style="font-size:12px;cursor:pointer;"> <input style="height:10px;width:10px;border-radius:2px;" id="cbox-'.$i.'" data-description-link="' . $disc_link . '" class="uk-checkbox link-checkbox " onclick="handleCheckboxClick(this)" type="checkbox"> ' . $label_text . ' </label>';
+
+                    }
+                }
+            }
+
             $package_data_array = array(
                 'package_id'            => $mst_id,
                 'selected_package_id'   => $id,
@@ -65,17 +84,8 @@ class PackagePurchaseController extends Controller
                     <p class="uk-text-lead uk-text-bold"> ৳'.$package_break_down?->discounted_amount.'</p>
                 </div>
                 '.$dist_per_msg.'
-                <div class="uk-margin uk-child-width-auto">
-                    <label><input id="cbox" data-description-link="'.$desc_link.'" class="uk-checkbox" onclick="handleCheckboxClick(this)" type="checkbox">
-                    Click here to read details
-                    </label>
-
-                </div>
-                <div class="uk-margin uk-child-width-auto">
-                    <label><input id="cbox" data-description-link="'.$desc_link.'" class="uk-checkbox" onclick="handleCheckboxClick(this)" type="checkbox">
-                    Click here to read details
-                    </label>
-
+                <div class="uk-child-width-auto">
+                    '.$onClickHtml.'
                 </div>
                 <div>
                     <h6 class="uk-text-danger uk-text-center" id="checkboxError"> </h6>
@@ -189,7 +199,13 @@ class PackagePurchaseController extends Controller
                                 <div class="uk-text-danger uk-margin-small-top" id="image_error"></div>
                             </div>
                         </div>
-
+                        <div>
+                            <label class="uk-form-label" for="reference-no">Ref. Number</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input text-boxes-numeric" id="reference-no" name="reference_no" type="text" placeholder="Enter reference no" maxlength="11">
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="reference_no_error"></div>
+                        </div>
                         <div>
                             <img id="imgOutput" style="height:80px;" src="">
                         </div>
@@ -275,6 +291,7 @@ class PackagePurchaseController extends Controller
             'branch'            => 'nullable|required_if:payment_type,1|string|max:255',
             'transaction_id'    => 'required|string|max:255',
             'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'reference_no'      => 'nullable|numeric||regex:/^\d{0,11}$/',
         ],
         [
             'payment_type.not_in'        => 'The payment type is required.',
@@ -312,6 +329,7 @@ class PackagePurchaseController extends Controller
             'account_no'            => $request->account_no,
             'branch'                => $request->branch,
             'transaction_id'        => $request->transaction_id,
+            'reference_no'          => $request->reference_no,
             'image'                 => $msgArr[1],
             'created_by'            => auth()->id(),
             'created_at'            => Carbon::now(),

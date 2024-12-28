@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardControllers\home\TeamController;
 use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
+use App\Http\Controllers\DashboardControllers\social_media\NotificationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\socialMedia\PackagePurchaseController;
 use App\Http\Controllers\socialMedia\SocialMediaController;
@@ -125,6 +126,9 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     //Package Purchase History
     Route::get('/package-purchage-history', [PackagePurchaseController::class, 'package_purchage_history'])->name('packagePurchage.history');
     Route::post('/package-purchage-status-update/{id}', [PackagePurchaseController::class, 'update_purchage_status'])->name('packagePurchage.status-update');
+    //NOTIFICATION
+    Route::resource('notification', NotificationController::class);
+
 
 
 });

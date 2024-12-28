@@ -23,7 +23,7 @@
             <div id="main_payment_container">
 
             </div>
-            <div id="package_container">
+            <div id="package_container" style="display: none">
                 <div class="uk-position-relative" uk-grid>
                     <div class="uk-width-1-2@m mt-sm-3 pl-sm-0 p-sm-4">
                         <div class="uk-container uk-margin-top">
@@ -81,6 +81,11 @@
                     });
             </script>
         @endif
+        @else
+        <script>
+            $( document ).ready(function() {
+                $('#package_container').css('display', 'block');
+            });
+        </script>
     @endif
-
 @endsection
