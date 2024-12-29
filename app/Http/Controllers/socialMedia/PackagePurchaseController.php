@@ -334,7 +334,7 @@ class PackagePurchaseController extends Controller
             'created_by'            => auth()->id(),
             'created_at'            => Carbon::now(),
         ]);
-
+        store_notification('Package purchase requested received and pending.It will be update soon',auth()->id());
         // Logic to save the data or perform actions
         Session::forget('package_info');
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
@@ -359,6 +359,10 @@ class PackagePurchaseController extends Controller
         $info->updated_by       = auth()->id();
         $info->updated_at       = Carbon::now();
         $info->save();
+
+        $status = $request->status;
+        $message= $status == 1 ? 'Payment request verified successfully' : ($status == 2 ? 'Payment request rejected' : 'Payment request pending');
+        store_notification($message,$info->user_id);
         return back()->with('success','Updated successfully');
     }
 
@@ -429,6 +433,8 @@ class PackagePurchaseController extends Controller
             'created_by'            => auth()->id(),
             'created_at'            => Carbon::now(),
         ]);
+
+        store_notification('Renewal Fees payment request send succesfully. It will update soon',auth()->id());
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
     }
 }

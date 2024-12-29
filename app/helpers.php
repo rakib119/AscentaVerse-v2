@@ -470,4 +470,22 @@ if (!function_exists('return_library_array')) {
         return $new_array;
     }
 }
+if (!function_exists('store_notification')) {
+
+    function store_notification($message, $user_id)
+    {
+        try {
+            DB::table('notifications')->insert([
+                'message' => $message,
+                'user_id' => $user_id,
+                'created_by' => auth()->id(),
+                'created_at' => Carbon::now(),
+            ]);
+
+            return 1;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+}
 ?>

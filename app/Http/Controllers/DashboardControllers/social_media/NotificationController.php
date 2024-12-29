@@ -36,12 +36,7 @@ class NotificationController extends Controller
 
         try
         {
-            Notification::insert([
-                'message'=>$request->message,
-                'user_id'=>$request->user_name,
-                'created_by'=>auth()->id(),
-                'created_at'=>Carbon::now(),
-            ]);
+            store_notification($request->message,$request->user_name);
             return back()->with('success','Added successfully');
         }
         catch (Exception $e)
@@ -53,7 +48,7 @@ class NotificationController extends Controller
 
     public function get_notifications(Notification $notification)
     {
-        $notifications = Notification::where('user_id',auth()->id())->get();
+        $notifications = Notification::where('user_id',auth()->id())->latest()->take(10)->get();
         $html = '';
         $no_of_unread = 0;
         foreach ($notifications as $v)
