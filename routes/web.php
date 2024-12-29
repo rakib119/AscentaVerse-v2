@@ -169,4 +169,7 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::post('/submit-payment', [PackagePurchaseController::class, 'submitPayment'])->name('submitManualPayment');
     Route::post('/submit-renewal-fees', [PackagePurchaseController::class, 'submitRenewalFees'])->name('submitRenewalFees');
 
+    Route::get('/get-notifications', [NotificationController::class, 'get_notifications'])->name('get_notifications');
+    Route::get('/read-notification', [NotificationController::class, 'read_notification'])->name('read_notification');
+
 });

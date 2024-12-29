@@ -18,7 +18,9 @@ return new class extends Migration
             $table->text('message');
             $table->string('type')->default('info');
             $table->boolean('is_read')->default(false);
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

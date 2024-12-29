@@ -489,6 +489,33 @@ function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
         $('#checkboxError').html('Please checked first');
     }
 }
+function getNotifications() {
+    $.ajax({
+        url: "/social-media/get-notifications",
+        type: "GET",
+        success: function (response)
+        {
+            // console.log(response);
+            splitData   = response.split('**');
+            $('#unread_notification').html(splitData[0]);
+            $('#notification_list').html(splitData[1]);
+
+        }
+    });
+
+    setInterval(getNotifications, 60000*3);
+}
+getNotifications();
+function readNotification(notificationId) {
+    $.ajax({
+        url: "/social-media/read-notification",
+        type: "get",
+        success: function (response)
+        {
+            getNotifications();
+        }
+    });
+}
 
 function submitPayment() {
     // Create a FormData object to handle file uploads
