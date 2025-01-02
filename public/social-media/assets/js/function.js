@@ -396,26 +396,7 @@ let loadFile = function(event,previewClass) {
     }
 };
 
-/* function set_all_onclick()
-{
 
-
-	// To Change Background Color of Validated Field\
-    jQuery(".uk-input").click(function() {
-        var contentPanelId = jQuery(this).attr("id");
-        if(document.getElementById(contentPanelId).style.backgroundColor!="")
-            document.getElementById(contentPanelId).style.backgroundColor="";
-
-    });
-
-    jQuery(".uk-textarea").click(function() {
-        var contentPanelId = jQuery(this).attr("id");
-        if(document.getElementById(contentPanelId).style.backgroundColor!="")
-            document.getElementById(contentPanelId).style.backgroundColor="";
-
-    });
-
-} */
 function loadDropDown(routeUrl, data, containerId) {
     $.ajax({
         url: routeUrl,
