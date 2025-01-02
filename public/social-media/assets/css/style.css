@@ -9,21 +9,21 @@
 /* -------------------------------------------------------------- */
 /* Table of Contents
  -----------------------------------------------------------------
- 
+
    #Base
    section
    #responsive-tab
    #responsive-tab style-1
    #responsive-tab style-2
-   #responsive-tab style-3 
+   #responsive-tab style-3
    #responsive-tab style-4
    #embed-video
    #countdown
    #footer
    #Background
-   #Button 
+   #Button
    #spacing
-   #avatar 
+   #avatar
    #simplebar
    #nprogress
    #grid_slider_header
@@ -52,7 +52,7 @@
    #btn-option
    #dropdown option nav
    #list-items
-   #list-group-items 
+   #list-group-items
    #contact-list
    #events-list
    #event-catagroy-card
@@ -61,7 +61,7 @@
  ----------------------------------------------------------------- */
 
 /* -------------------------------------------------------------- */
-/* 01. Import googlefonts 
+/* 01. Import googlefonts
  ----------------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 
@@ -584,7 +584,7 @@ html {
 
 
 /* ---------------------------------- */
-/*  embed video responsive 
+/*  embed video responsive
 ------------------------------------- */
 
 .embed-video {
@@ -605,7 +605,7 @@ html {
 
 
 /* ---------------------------------- */
-/* docs list 
+/* docs list
 ------------------------------------- */
 .docs-list li.uk-active a {
   color: #1a73e8
@@ -803,7 +803,7 @@ html {
 
 
 /* ---------------------------------- */
-/* animation   
+/* animation
 ------------------------------------- */
 
 .transition-3d-hover,
@@ -1050,7 +1050,7 @@ body #backtotop a {
 
 
 /* ---------------------------------- */
-/* Background   
+/* Background
 ------------------------------------- */
 .bg-primary,
 .bg-primary-hover:hover {
@@ -1109,7 +1109,7 @@ body #backtotop a {
 
 
 /* ---------------------------------- */
-/* gradient Backgrounds  
+/* gradient Backgrounds
 ------------------------------------- */
 .bg-transparent {
   background-color: transparent !important;
@@ -1188,7 +1188,7 @@ body #backtotop a {
 
 
 /* ---------------------------------- */
-/* Background Soft Colors  
+/* Background Soft Colors
 ------------------------------------- */
 .bg-soft-primary {
   background-color: rgba(55, 125, 255, 0.1) !important;
@@ -1263,7 +1263,7 @@ body #backtotop a {
 
 
 /* ---------------------------------- */
-/* button  
+/* button
 ------------------------------------- */
 
 .button {
@@ -1285,8 +1285,11 @@ body #backtotop a {
   margin: 0;
   height: 37px;
   transition: all 0.08s ease 0s;
+  cursor: pointer;
 }
-
+.invalid-input {
+    border-color: #f0506e !important;
+}
 .button.block {
   display: block;
   width: 100%;
@@ -1351,7 +1354,7 @@ fieldset:disabled a.button {
 
 
 /* ---------------------------------- */
-/* Button size  
+/* Button size
 ------------------------------------- */
 .button.small {
   font-size: 12px;
@@ -1387,7 +1390,7 @@ fieldset:disabled a.button {
 }
 
 /* ---------------------------------- */
-/* Button components  
+/* Button components
 ------------------------------------- */
 
 .button.default {
@@ -2267,7 +2270,7 @@ input:checked+.btn-switch-slider:before {
 }
 
 /* ---------------------------------- */
-/*  Spacing  
+/*  Spacing
 ------------------------------------- */
 
 .m-1 {
@@ -4787,7 +4790,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/* border 
+/* border
 ------------------------------------- */
 
 .border {
@@ -5230,7 +5233,7 @@ a.text-indigo:focus {
 }
 
 
-/* ---------------------------------- 
+/* ----------------------------------
 ///////////
 
 /* ---------------------------------- */
@@ -5454,7 +5457,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/*  Simplebar  
+/*  Simplebar
 /* ---------------------------------- */
 
 [data-simplebar] {
@@ -5662,7 +5665,7 @@ a.text-indigo:focus {
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px; 
+  height: 3px;
 }
 
 /* Fancy blur effect   */
@@ -5768,7 +5771,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/* grid slider header and their icon sliders  
+/* grid slider header and their icon sliders
 ------------------------------------- */
 
 .grid-slider-header {
@@ -5852,7 +5855,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/* Slider nav custom icon  
+/* Slider nav custom icon
 ------------------------------------- */
 
 /* Slider custom icon */
@@ -5940,7 +5943,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/* Slider nav arrow  
+/* Slider nav arrow
 ------------------------------------- */
 
 
@@ -6110,7 +6113,7 @@ span.arrow-right::after {
 
 
 /* ---------------------------------- */
-/* Header Dropdown Notification box   
+/* Header Dropdown Notification box
 ------------------------------------- */
 
 .dropdown-notifications {
@@ -6550,7 +6553,7 @@ ul.dropdown-user-menu .menu-divider {
 
 
 /* ---------------------------------- */
-/* button option menu  
+/* button option menu
 ------------------------------------- */
 .btn-option {
   position: absolute !important;
@@ -7254,7 +7257,7 @@ ul.dropdown-user-menu .menu-divider {
 
 
 /* ---------------------------------- */
-/* user details card avatar 
+/* user details card avatar
 ------------------------------------- */
 
 /*  User Details */
@@ -7510,7 +7513,7 @@ ul.dropdown-user-menu .menu-divider {
 
 
 /* ---------------------------------- */
-/*   main header 
+/*   main header
 ------------------------------------- */
 
 #main_header {
@@ -7641,7 +7644,7 @@ header .head_search {
   min-width: 450px;
 }
 
-.head_search .head_search_cont input:focus { 
+.head_search .head_search_cont input:focus {
   border-radius: 8px 8px 0px 0px;
 }
 
@@ -7743,7 +7746,7 @@ header .head_user .opts_account>img {
 }
 
 /* ---------------------------------- */
-/*   custom header btn icons 
+/*   custom header btn icons
 ------------------------------------- */
 header .icon-browse {
   width: 340px;
@@ -7819,7 +7822,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/*   main sidebar 
+/*   main sidebar
 ------------------------------------- */
 
 
@@ -8781,7 +8784,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* photo  card   
+/* photo  card
 ------------------------------------- */
 .photo-card {
   box-sizing: border-box;
@@ -8881,7 +8884,7 @@ header .opts_icon_link:hover {
 }
 
 /* ---------------------------------- */
-/* Video Post card 
+/* Video Post card
 ------------------------------------- */
 .group-card {
   transition: 0.3s;
@@ -8967,7 +8970,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* catagroy  card   
+/* catagroy  card
 ------------------------------------- */
 .group-catagroy-card {
   /* background-color: #ffffff; */
@@ -9069,12 +9072,12 @@ header .opts_icon_link:hover {
  @media (max-width: 965px) {
    .page-card-media img {
   width: 40px;
-  height: 40px; 
+  height: 40px;
 }
  }
 
 
- 
+
 /* ---------------------------------- */
 /* friend-card
 ------------------------------------- */
@@ -9152,7 +9155,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* catagroy  card   
+/* catagroy  card
 ------------------------------------- */
 .profile-friend-card {
   transition: 0.3s;
@@ -9199,7 +9202,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* story  card   
+/* story  card
 ------------------------------------- */
 .story-slider>* {
   padding-left: 6px !important;
@@ -9374,7 +9377,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* Add  Post state 
+/* Add  Post state
 ------------------------------------- */
 .post-new {
   margin-bottom: 20px;
@@ -9416,7 +9419,7 @@ header .opts_icon_link:hover {
 
 .post-new-media-input .uk-input:focus {
   border-radius: 5px;
- 
+
   border-color: #f1f3f4;
 }
 
@@ -9449,7 +9452,7 @@ header .opts_icon_link:hover {
 
 
 
-/* post new overlay*/ 
+/* post new overlay*/
 
 .post-new-overyly{
   z-index: 1;
@@ -9495,7 +9498,7 @@ header .opts_icon_link:hover {
   background-color: transparent;
   border-color: transparent;
   }
-   
+
 
 .post-focus  .main_sidebar {
     z-index: 0 !important;
@@ -9573,7 +9576,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/*  posts 
+/*  posts
 /* ---------------------------------- */
 
 .post {
@@ -9650,7 +9653,7 @@ header .opts_icon_link:hover {
 }
 
 .post .post-description {
-  padding: 15px 15px 15px; 
+  padding: 15px 15px 15px;
   padding-bottom: 8px;
 }
 
@@ -9713,7 +9716,7 @@ header .opts_icon_link:hover {
   border: 0;
   margin: 4px 4px;
   box-shadow: none;
-  padding: 9px 5px; 
+  padding: 9px 5px;
   transition: all .1s ease-in-out;
   cursor: pointer;
   display: flex;
@@ -9804,7 +9807,7 @@ header .opts_icon_link:hover {
 }
 
 .post-comments {
-  padding: 15px; 
+  padding: 15px;
 }
 
 .post-comments-single {
@@ -9949,7 +9952,7 @@ header .opts_icon_link:hover {
 
   .post-new-media-input .uk-input {
     height: 40px;
-  } 
+  }
 
   .post .post-state .post-state-btns {
     margin: 4px 0
@@ -9958,7 +9961,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* channal sigle page design  
+/* channal sigle page design
 ------------------------------------- */
 .profile .profile-cover {
   min-height: 100%;
@@ -10078,12 +10081,12 @@ header .opts_icon_link:hover {
 
 
 .nav-profile {
-  border-top: 1px solid #efefef; 
-  box-shadow: 0px 6px 17px -12px #c4c4c4; 
+  border-top: 1px solid #efefef;
+  box-shadow: 0px 6px 17px -12px #c4c4c4;
   margin-top: 13px;
   position: relative;
   margin: auto;
-  z-index: 2; 
+  z-index: 2;
   background: white;
 }
 
@@ -10193,7 +10196,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* channal sigle page design  
+/* channal sigle page design
 ------------------------------------- */
 
 .single-group .group-cover {
@@ -10425,7 +10428,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/* button option menu  
+/* button option menu
 ------------------------------------- */
 .btn-option {
   font-size: 21px;
@@ -10522,7 +10525,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/*  list-items   
+/*  list-items
 /* ---------------------------------- */
 
 .list-items {
@@ -10568,7 +10571,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/*  list-items group   
+/*  list-items group
 /* ---------------------------------- */
 
 .list-group-items {
@@ -10606,7 +10609,7 @@ header .opts_icon_link:hover {
 
 
 /* ---------------------------------- */
-/*  contact list  
+/*  contact list
 /* ---------------------------------- */
 
 .contact-list {
@@ -10712,7 +10715,7 @@ header .opts_icon_link:hover {
 }
 
 /* ---------------------------------- */
-/*  events list  
+/*  events list
 /* ---------------------------------- */
 
 
@@ -10796,9 +10799,9 @@ header .opts_icon_link:hover {
 
 
 
- 
+
 /* ---------------------------------- */
-/* catagroy  card   
+/* catagroy  card
 ------------------------------------- */
 .event-catagroy-card {
   box-sizing: border-box;
@@ -10852,13 +10855,13 @@ header .opts_icon_link:hover {
   }
 }
 
- 
 
 
- 
+
+
 
 /* ---------------------------------- */
-/* Video Post card 
+/* Video Post card
 ------------------------------------- */
 .video-post {
   transition: 0.3s;
@@ -10969,7 +10972,7 @@ span.video-post-time {
 }
 
 /* ---------------------------------- */
-/* Small Devices 
+/* Small Devices
 ------------------------------------- */
 @media (max-width: 760px) {
   .video-post {
@@ -11050,7 +11053,7 @@ span.video-post-time {
 
 @media (min-width: 767px) {
 
-  /* ---------------------------------- 
+  /* ----------------------------------
    Video list small
   ------------------------------------- */
 
@@ -11060,8 +11063,8 @@ span.video-post-time {
  .video-post-small.video-post .video-post-thumbnail {
    height: 125px;
   }
-  /* ---------------------------------- 
-   Display Video post  as list  
+  /* ----------------------------------
+   Display Video post  as list
   ------------------------------------- */
   .video-post-list.video-post {
     margin-bottom: 30px;
@@ -11171,7 +11174,7 @@ span.video-post-time {
   }
 
 }
- 
+
 
 /* ---------------------------------- */
 /* Blog Post
@@ -11462,7 +11465,7 @@ span.blog-post-info-tag {
   font-size: 15px;
   letter-spacing: .2px;
 }
- 
+
 
 .blog-content p {
   font-size: 15px;
@@ -11475,7 +11478,7 @@ span.blog-post-info-tag {
 
 
 /* ---------------------------------- */
-/* course card   
+/* course card
 ------------------------------------- */
 
 .course-card {
@@ -11780,8 +11783,8 @@ span.blog-post-info-tag {
   margin-top: -25px;
 }
 
-.course-intro-banner { 
-  position: relative; 
+.course-intro-banner {
+  position: relative;
   background-color: #607387;
   overflow: hidden;
 }
@@ -11851,7 +11854,7 @@ ul.course-curriculum-list {
   border-radius: 4px;
 }
 
-.course-curriculum-list>li:hover { 
+.course-curriculum-list>li:hover {
   color: #3282ed;
 }
 
@@ -11876,7 +11879,7 @@ ul.course-curriculum-list {
   content: "\f2be";
   background: #474a58;
   color: white;
-  border-radius: 100%; 
+  border-radius: 100%;
   z-index: 2;
 }
 
@@ -11966,7 +11969,7 @@ ul.course-curriculum-list {
   text-align: center;
   padding: 8px 0;
 }
- 
+
 .course-card-category  img{
     max-width: 80px;
     margin: 10px 0;
@@ -12111,9 +12114,9 @@ ul.course-curriculum-list {
 
 
 /* ---------------------------------- */
-/* Questions 
+/* Questions
 ------------------------------------- */
-.quiz-block { 
+.quiz-block {
   margin-bottom: 16px;
   padding-bottom: 16px;
 }
@@ -12179,7 +12182,7 @@ ul.course-curriculum-list {
 }
 
 .quiz-block .btn-acts i {
-  font-size: 24px; 
+  font-size: 24px;
   border-radius: 100px !important;
   padding: 7px;
 }
@@ -12221,7 +12224,7 @@ ul.course-curriculum-list {
 .quiz-block-replay {
   border-top: 1px solid #cecece;
   padding: 20px;
-  border: 1px solid #f1f3f4; 
+  border: 1px solid #f1f3f4;
   box-shadow: 0px 4px 9px -7px #797979;
 }
 
@@ -12268,7 +12271,7 @@ ul.course-curriculum-list {
   position: relative;
   border: 3px solid white;
 }
- 
+
 .quiz-group-card-content h3 {
   font-size: 17px;
   margin-bottom: 3px;
@@ -12352,23 +12355,23 @@ ul.story-side-list{
     margin: 0;
     padding: 0;
 }
- 
+
 ul.story-side-list li a{
   display: flex;
   align-items: center;
   margin-bottom: 4px;
   padding: 10px 9px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 .story-pop ul.story-side-list li.uk-active  a ,
 .story-pop ul.story-side-list li a:hover{
   background-color: #f1f3f4;
 }
- 
+
 ul.story-side-list li a .story-user-media{
     margin-right: 10px;
 }
- 
+
 ul.story-side-list li a .story-user-media img {
   width: 40px;
   height: 40px;
@@ -12379,7 +12382,7 @@ ul.story-side-list li a .story-user-media img {
 ul.story-side-list li a .story-user-innr{
     flex: 1;
 }
- 
+
 ul.story-side-list li a .add-story-btn{
   width: 40px;
   height: 40px;
@@ -12437,7 +12440,7 @@ ul.story-side-list li a .story-user-innr p span.story-time-ago{
 /* story content innr */
 .story-pop .story-content .story-content-innr {
   max-width: 400px;
-  height: 540px; 
+  height: 540px;
   position: relative;
 }
 
@@ -12468,7 +12471,7 @@ ul.story-side-list li a .story-user-innr p span.story-time-ago{
   width: 100%;
   height: 100%;
   opacity: 0.5;
-  border-radius: inherit; 
+  border-radius: inherit;
   box-shadow: 0px 0px 28px 0px black inset;
 }
 
@@ -12554,7 +12557,7 @@ ul.story-side-list li a .story-user-innr p span.story-time-ago{
   /* margin-bottom: 16px; */
   /* border-radius: 6px; */
 }
- 
+
 .job-block .job-block-logo {
   flex: 1;
   max-width: 55px;
@@ -12604,7 +12607,7 @@ ul.story-side-list li a .story-user-innr p span.story-time-ago{
   margin-right: 6px;
 }
 
-@media (max-width: 960px) { 
+@media (max-width: 960px) {
   .job-block .job-block-description p {
   margin-left: -70px !important;
 }

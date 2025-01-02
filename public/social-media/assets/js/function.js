@@ -549,3 +549,59 @@ function submitPayment() {
         }
     });
 }
+
+function allowNumbersOnly(inputElement) {
+    let value = $(inputElement).val();
+    // Remove invalid characters (anything except 0-9 and .)
+    let validValue = value.replace(/[^0-9.]/g, '');
+    // Ensure only one decimal point
+    validValue = validValue.replace(/(\..*)\./g, '$1');
+    $(inputElement).val(validValue);
+}
+
+function validateBangladeshiPhoneNumber(phoneNumber) {
+    // Regular expression to match Bangladeshi phone number format
+    const regex = /^(01[3-9]\d{8})$/;
+    return regex.test(phoneNumber);
+}
+
+function validateEmailAddress(email) {
+    // Regular expression to validate email format
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+$(function() {
+
+    $(document).on('input', '.text_boxes', function() {
+        let validValue = $(this).val().replace(/[^a-zA-Z\s-.;,]/g, '','-');
+        $(this).val(validValue);
+    });
+
+    $(document).on('input', '.text_boxes_numeric', function() {
+        allowNumbersOnly(this);
+    });
+
+    $(document).on('input', '.phone-input', function() {
+        let  phoneNumber = $(this).val();
+        if (phoneNumber.length > 11) {
+            phoneNumber = phoneNumber.slice(0, 11);
+            $(this).val(phoneNumber);
+        }
+        if (validateBangladeshiPhoneNumber(phoneNumber)) {
+            $(this).removeClass('invalid-input');
+        } else {
+            $(this).addClass('invalid-input');
+        }
+    });
+
+    $(document).on('input', '.email-input', function() {
+        const email = $(this).val();
+        if (validateEmailAddress(email)) {
+            $(this).removeClass('invalid-input');
+        } else {
+            $(this).addClass('invalid-input');
+        }
+    });
+});
+

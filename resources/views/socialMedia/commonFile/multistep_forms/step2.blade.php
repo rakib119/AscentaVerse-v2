@@ -30,17 +30,17 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> First Name *</h5>
-                <input type="text" name="first_name" class="uk-input" id="first_name" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" placeholder="First Name" value="{{$first_name??''}}">
+                <input type="text" name="first_name" class="uk-input text_boxes" id="first_name" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" placeholder="First Name" value="{{$first_name??''}}">
                 <div class="uk-text-danger" id="first_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2">Middle Name *</h5>
-                <input type="text" name="middle_name" class="uk-input" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="middle_name" placeholder="Middle Name" value="{{$middle_name??''}}">
+                <input type="text" name="middle_name" class="uk-input text_boxes" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="middle_name" placeholder="Middle Name" value="{{$middle_name??''}}">
                 <div class="uk-text-danger" id="middle_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Last Name *</h5>
-                <input type="text" name="last_name" class="uk-input" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="last_name" placeholder="Last Name" value="{{$last_name??''}}">
+                <input type="text" name="last_name" class="uk-input text_boxes" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="last_name" placeholder="Last Name" value="{{$last_name??''}}">
                 <div class="uk-text-danger" id="last_name"></div>
             </div>
             <div>
@@ -91,12 +91,12 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Postal Code *</h5>
-                <input type="text" name="postcode" class="uk-input" placeholder="Postal Code" value="{{$postcode??''}}">
+                <input type="text" name="postcode" class="uk-input text_boxes_numeric"  placeholder="Postal Code" value="{{$postcode??''}}">
                 <div class="uk-text-danger" id="postcode"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Address *</h5>
-                <textarea class="uk-textarea" rows="1" name="address"  placeholder="Address">{{$address??''}}</textarea>
+                <textarea class="uk-textarea" rows="1" name="address text_boxes"  placeholder="Address">{{$address??''}}</textarea>
                 <div class="uk-text-danger" id="address"></div>
             </div>
             <div>
@@ -120,12 +120,12 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Mobile *</h5>
-                <input type="text" name="mobile" class="uk-input" placeholder="Mobile" value="{{$mobile??''}}">
+                <input type="text" name="mobile" class="uk-input phone-input" placeholder="Mobile" value="{{$mobile??''}}">
                 <div class="uk-text-danger" id="mobile"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> E-mail *</h5>
-                <input type="email" name="email" class="uk-input" placeholder="E-mail" value="{{$email??''}}">
+                <input type="email" name="email" class="uk-input email-input" placeholder="E-mail" value="{{$email??''}}">
                 <div class="uk-text-danger" id="email"></div>
             </div>
 
@@ -150,12 +150,12 @@
             <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
                 <div>
                     <h5 class="uk-text-bold mb-2"> Audio verification Code *</h5>
-                    <input type="text" name="audio_verification_code" class="uk-input" placeholder="Audio verification Code" value="{{$audio_verification_code??''}}">
+                    <input type="text" name="audio_verification_code" class="uk-input text_boxes_numeric" placeholder="Audio verification Code" value="{{$audio_verification_code??''}}">
                     <div class="uk-text-danger" id="audio_verification_code"></div>
                 </div>
                 <div>
                     <h5 class="uk-text-bold mb-2"> Video verification Code *</h5>
-                    <input type="text" name="video_verification_code" class="uk-input" placeholder="Video verification Code" value="{{$video_verification_code??''}}">
+                    <input type="text" name="video_verification_code" class="uk-input text_boxes_numeric" placeholder="Video verification Code" value="{{$video_verification_code??''}}">
                     <div class="uk-text-danger" id="video_verification_code"></div>
                 </div>
             </div>

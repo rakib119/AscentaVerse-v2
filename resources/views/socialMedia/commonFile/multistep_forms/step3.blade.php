@@ -21,7 +21,7 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="father_full_name" id="father_full_name" class="uk-input" readonly value="{{ $father_full_name ?? ''}}"  >
+                <input type="text" name="father_full_name" id="father_full_name" class="uk-input text_boxes" readonly value="{{ $father_full_name ?? ''}}"  >
                 <div class="uk-text-danger" id="full_name_error"></div>
             </div>
             <div>
@@ -61,12 +61,12 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Mobile *</h5>
-                <input type="text" name="father_mobile" class="uk-input" placeholder="Mobile" value="{{ $father_mobile ?? ''}}">
+                <input type="text" name="father_mobile" class="uk-input phone-input" placeholder="Mobile" value="{{ $father_mobile ?? ''}}">
                 <div class="uk-text-danger" id="father_mobile_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> E-mail *</h5>
-                <input type="email" name="father_email" class="uk-input" placeholder="E-mail" value="{{ $father_email ?? ''}}">
+                <input type="email" name="father_email" class="uk-input email-input" placeholder="E-mail" value="{{ $father_email ?? ''}}">
                 <div class="uk-text-danger" id="father_email_error"></div>
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
@@ -80,17 +80,17 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="mother_full_name" id="mother_full_name" class="uk-input" readonly value="{{ $mother_full_name ?? ''}}">
+                <input type="text" name="mother_full_name" id="mother_full_name" class="uk-input text_boxes" readonly value="{{ $mother_full_name ?? ''}}">
                 <div class="uk-text-danger" id="mother_full_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> First Name *</h5>
-                <input type="text" name="mother_first_name" id="mother_first_name" class="uk-input" placeholder="First Name" onkeyup="completeFull_name('mother_first_name*mother_middle_name*mother_last_name', 'mother_full_name')" value="{{ $mother_first_name ?? ''}}" >
+                <input type="text" name="mother_first_name" id="mother_first_name" class="uk-input text_boxes" placeholder="First Name" onkeyup="completeFull_name('mother_first_name*mother_middle_name*mother_last_name', 'mother_full_name')" value="{{ $mother_first_name ?? ''}}" >
                 <div class="uk-text-danger" id="mother_first_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Middle Name</h5>
-                <input type="text" name="mother_middle_name" id="mother_middle_name" class="uk-input" placeholder="Middle Name"  onkeyup="completeFull_name('mother_first_name*mother_middle_name*mother_last_name', 'mother_full_name')" value="{{ $mother_middle_name ?? ''}}" >
+                <input type="text" name="mother_middle_name" id="mother_middle_name" class="uk-input text_boxes" placeholder="Middle Name"  onkeyup="completeFull_name('mother_first_name*mother_middle_name*mother_last_name', 'mother_full_name')" value="{{ $mother_middle_name ?? ''}}" >
                 <div class="uk-text-danger" id="mother_middle_name_error"></div>
             </div>
             <div>
@@ -120,12 +120,12 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Mobile *</h5>
-                <input type="text" name="mother_mobile" class="uk-input" placeholder="Mobile" value="{{ $mother_mobile ?? ''}}" >
+                <input type="text" name="mother_mobile" class="uk-input phone-input" placeholder="Mobile" value="{{ $mother_mobile ?? ''}}" >
                 <div class="uk-text-danger" id="mother_mobile_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> E-mail *</h5>
-                <input type="email" name="mother_email" class="uk-input" placeholder="E-mail" value="{{ $mother_email ?? ''}}" >
+                <input type="email" name="mother_email" class="uk-input email-input" placeholder="E-mail" value="{{ $mother_email ?? ''}}" >
                 <div class="uk-text-danger" id="mother_email_error"></div>
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
@@ -139,27 +139,27 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="emergency_full_name" id="emergency_full_name" class="uk-input" readonly value="{{ $emergency_full_name ?? ''}}" >
+                <input type="text" name="emergency_full_name" id="emergency_full_name" class="uk-input text_boxes" readonly value="{{ $emergency_full_name ?? ''}}" >
                 <div class="uk-text-danger" id="emergency_full_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> First Name *</h5>
-                <input type="text" name="emergency_first_name" id="emergency_first_name" class="uk-input" placeholder="First Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_first_name ?? ''}}">
+                <input type="text" name="emergency_first_name" id="emergency_first_name" class="uk-input text_boxes" placeholder="First Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_first_name ?? ''}}">
                 <div class="uk-text-danger" id="emergency_first_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Middle Name</h5>
-                <input type="text" name="emergency_middle_name" id="emergency_middle_name" class="uk-input" placeholder="Middle Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_middle_name ?? ''}}">
+                <input type="text" name="emergency_middle_name" id="emergency_middle_name" class="uk-input text_boxes" placeholder="Middle Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_middle_name ?? ''}}">
                 <div class="uk-text-danger" id="emergency_middle_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Last Name</h5>
-                <input type="text" name="emergency_last_name" id="emergency_last_name" class="uk-input" placeholder="Last Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_last_name ?? ''}}" >
+                <input type="text" name="emergency_last_name" id="emergency_last_name" class="uk-input text_boxes" placeholder="Last Name"  onkeyup="completeFull_name('emergency_first_name*emergency_middle_name*emergency_last_name', 'emergency_full_name')" value="{{ $emergency_last_name ?? ''}}" >
                 <div class="uk-text-danger" id="emergency_last_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Relation *</h5>
-                <input type="text" name="emergency_relation" class="uk-input" placeholder="Relation" value="{{ $emergency_relation ?? ''}}" >
+                <input type="text" name="emergency_relation" class="uk-input text_boxes" placeholder="Relation" value="{{ $emergency_relation ?? ''}}" >
                 <div class="uk-text-danger" id="emergency_relation_error"></div>
             </div>
             <div>
@@ -184,12 +184,12 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Mobile *</h5>
-                <input type="text" name="emergency_mobile" class="uk-input" placeholder="Mobile" value="{{ $emergency_mobile ?? ''}}">
+                <input type="text" name="emergency_mobile" class="uk-input phone-input" placeholder="Mobile" value="{{ $emergency_mobile ?? ''}}">
                 <div class="uk-text-danger" id="emergency_mobile_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> E-mail *</h5>
-                <input type="email" name="emergency_email" class="uk-input" placeholder="E-mail" value="{{ $emergency_email ?? ''}}">
+                <input type="email" name="emergency_email" class="uk-input email-input" placeholder="E-mail" value="{{ $emergency_email ?? ''}}">
                 <div class="uk-text-danger" id="emergency_email_error"></div>
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
