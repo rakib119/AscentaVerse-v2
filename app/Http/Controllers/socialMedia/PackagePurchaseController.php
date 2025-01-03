@@ -334,7 +334,8 @@ class PackagePurchaseController extends Controller
             'created_by'            => auth()->id(),
             'created_at'            => Carbon::now(),
         ]);
-        store_notification('Package purchase requested received and pending.It will be update soon',auth()->id());
+        $message ="Package purchase requested received and pending. It will be update soon";
+        store_notification($message,auth()->id());
         // Logic to save the data or perform actions
         Session::forget('package_info');
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
@@ -346,7 +347,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status' )
+        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks' )
         ->orderBy('a.id','desc')
         ->get();
 
@@ -433,11 +434,59 @@ class PackagePurchaseController extends Controller
             'created_by'            => auth()->id(),
             'created_at'            => Carbon::now(),
         ]);
-
-        store_notification('Renewal Fees payment request send succesfully. It will update soon',auth()->id());
+        $message = "payment request of $request->amount BDT for renewal fee has been received and pending. It will be updated soon.";
+        store_notification($message,auth()->id());
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
     }
-    public function make_payment(Request $request)
+    public function submitPaymentV2(Request $request)
+    {
+        // Validation rules
+        $request->validate([
+            'payment_type'      => 'required|in:1,2|not_in:0',
+            'bank_name'         => 'required|numeric|not_in:0',
+            'company_account_no'=> 'required|numeric',
+            'account_holder'    => 'nullable|required_if:payment_type,1|string|max:255',
+            'account_no'        => 'required|numeric',
+            'branch'            => 'nullable|required_if:payment_type,1|string|max:255',
+            'transaction_id'    => 'required|string|max:255',
+            'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'amount'            => 'required',
+            'remarks'           => 'required',
+        ],
+        [
+            'payment_type.not_in'        => 'The payment type is required.',
+            'branch.required_if'         => 'The branch name is required.',
+            'account_holder.required_if' => 'The account holder field is required.',
+            'bank_name.not_in'           => 'The bank name  is required.',
+            'bank_name.numeric'          => 'Invalid bank name.',
+            'company_account_no.numeric' => 'Invalid company account no.',
+            'account_no.numeric'         => 'Invalid account no.'
+        ]);
+
+
+        $msg_str = uploadImage( 'public/social-media/assets/images/package_purchase_img/',$request,'image'); //Custom Helpers
+        $msgArr  = explode('*',$msg_str);
+        PackagePurchaseMst::insert([
+            'user_id'               => auth()->id(),
+            'payment_for'           => 2, // renewal fee
+            'payment_method'        => 2,
+            'payment_type'          => $request->payment_type,
+            'bank_name'             => $request->bank_name,
+            'account_holder'        => $request->account_holder,
+            'company_account_no'    => $request->company_account_no,
+            'account_no'            => $request->account_no,
+            'branch'                => $request->branch,
+            'transaction_id'        => $request->transaction_id,
+            'remarks'               => $request->remarks,
+            'image'                 => $msgArr[1],
+            'created_by'            => auth()->id(),
+            'created_at'            => Carbon::now(),
+        ]);
+        $message = "Payment request of $request->amount BDT  has been received and pending. It will be updated soon.";
+        store_notification($message,auth()->id());
+        return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
+    }
+    public function make_payment()
     {
         return view('socialMedia.pages.make_payment');
     }

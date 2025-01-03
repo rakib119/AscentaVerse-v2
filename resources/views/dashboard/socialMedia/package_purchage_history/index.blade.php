@@ -41,22 +41,23 @@
                                     <table id="myTable" class="table table-centered table-nowrap mb-0">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>SL</th>
-                                                <th>Img</th>
-                                                <th>Purchase For</th>
-                                                <th>Purchase By</th>
-                                                <th>Pkg Name</th>
-                                                <th>Sub Pkg Name</th>
-                                                <th>Pkg Value</th>
-                                                <th>Dist. %</th>
-                                                <th>Payment</th>
-                                                <th>Bank Name</th>
-                                                <th>Branch</th>
-                                                <th>Acc. Holder</th>
-                                                <th>Acc. No</th>
-                                                <th>Trnx Id	</th>
-                                                <th>Com. Acc</th>
-                                                <th>Action</th>
+                                                <th style="width:30px">SL</th>
+                                                <th style="width:40px">Img</th>
+                                                <th style="width:40px">Purchase For</th>
+                                                <th style="width:40px">Purchase By</th>
+                                                <th style="width:40px">Pkg Name</th>
+                                                <th style="width:40px">Sub Pkg Name</th>
+                                                <th style="width:40px">Pkg Value</th>
+                                                <th style="width:40px">Dist. %</th>
+                                                <th style="width:40px">Payment</th>
+                                                <th style="width:40px">Bank Name</th>
+                                                <th style="width:40px">Branch</th>
+                                                <th style="width:40px">Acc. Holder</th>
+                                                <th style="width:40px">Acc. No</th>
+                                                <th style="width:40px">Trnx Id	</th>
+                                                <th style="width:40px">Com. Acc</th>
+                                                <th style="width:40px">Remarks</th>
+                                                <th style="width:40px">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,7 +71,7 @@
                                                         $badge_color_array = array(0=>'info',1=>'success',2=>'danger');
                                                     @endphp
                                                     <a target="_blank" href="{{$img_link}}">
-                                                        <img height="30" src="{{$img_link}}" alt="not found">
+                                                        <img width="30" src="{{$img_link}}" alt="not found">
                                                     </a>
                                                 </td>
                                                 <td>{{ $payment_for_array[$v->payment_for] }}</td>
@@ -87,6 +88,7 @@
                                                 <td>{{ $v->transaction_id }}</td>
                                                 <td>{{ $v->company_account_no }}</td>
                                                 <td> <span class="badge bg-{{$badge_color_array[$v->payment_status]}}"> {{$payment_status_array[$v->payment_status]}} </span></td>
+                                                <td>{{ $v->remarks }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary has-arrow dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> Action <i class="fas fa-angle-down"></i> </button>

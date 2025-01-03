@@ -29,7 +29,8 @@ return new class extends Migration
             $table->string('branch')->nullable()->max(255);
             $table->string('transaction_id')->nullable()->max(255);
             $table->string('image')->nullable()->max(255);
-            $table->string('reference_no ')->nullable()->max(30);
+            $table->string('reference_no')->nullable()->max(30);
+            $table->text('remarks')->nullable();
             $table->integer('payment_status')->default(0)->comment('0 for pending 1for confirmed 2 for reject');
             $table->integer('status_active')->default(1);
             $table->integer('is_deleted')->default(0);

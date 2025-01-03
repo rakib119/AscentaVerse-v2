@@ -168,6 +168,7 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/load-bank-name', [PackagePurchaseController::class, 'loadBankName'])->name('loadBankName');
     Route::get('/load-bank-dtls', [PackagePurchaseController::class, 'loadBankDtls'])->name('loadBankDtls');
     Route::post('/submit-payment', [PackagePurchaseController::class, 'submitPayment'])->name('submitManualPayment');
+    Route::post('/submit-payment-v2', [PackagePurchaseController::class, 'submitPaymentV2'])->name('submitManualPaymentV2');
     Route::post('/submit-renewal-fees', [PackagePurchaseController::class, 'submitRenewalFees'])->name('submitRenewalFees');
 
     Route::get('/get-notifications', [NotificationController::class, 'get_notifications'])->name('get_notifications');

@@ -20,12 +20,12 @@
    <!-- contents -->
    <div class="main_content">
         <div class="main_content_inner p-sm-0 ml-sm-4">
-            <h1> Renewal Fees Payment </h1>
+            <h1>Make Payment </h1>
             <div class="uk-container uk-margin-large-top">
                 <div id="bank-details">
 
                 </div>
-                <form class="uk-form-stacked" id="payment-form" action="{{route('submitRenewalFees')}}">
+                <form class="uk-form-stacked" id="payment-form" action="{{route('submitManualPaymentV2')}}">
                     @csrf
                     <div class="uk-grid-small uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s" uk-grid>
                         <div>
@@ -95,10 +95,14 @@
                                 <div class="uk-text-danger uk-margin-small-top" id="image_error"></div>
                             </div>
                         </div>
+                        <div>
+                            <label class="uk-form-label" for="image">Remarks</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="remarks" type="text" name="remarks"  placeholder="Enter payment reason">
 
-                        {{-- <div>
-                            <img id="imgOutput" style="height:80px;" src="">
-                        </div> --}}
+                            </div>
+                            <div class="uk-text-danger uk-margin-small-top" id="remarks_error"></div>
+                        </div>
                     </div>
                     <div class="uk-text-center ">
                         <button style="cursor:pointer;" class="button primary" type="button" id="submit-payment" onclick="submitPayment()" >Submit</button>
