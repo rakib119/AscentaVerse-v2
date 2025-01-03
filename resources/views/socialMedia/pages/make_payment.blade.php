@@ -74,8 +74,8 @@
                         <div>
                             <label class="uk-form-label" for="amount">Amount</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="amount" name="amount" type="text" value="{{ $package->renewal_fee }}" readonly>
-                                <input id="package_id" name="package_id" type="hidden" value="{{ Crypt::encrypt($package->id) }}" readonly>
+                                <input class="uk-input text_boxes_numeric" id="amount " name="amount" type="text" value="" placeholder="Enter Amount">
+
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="amount_error"></div>
                         </div>

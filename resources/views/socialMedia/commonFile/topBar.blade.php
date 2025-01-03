@@ -290,8 +290,9 @@
                         {{-- <li><a href="{{ route('social.myAccount')}}"> <i class="uil-user"></i> My Account </a> </li> --}}
                         {{-- <li><a href="#"> <i class="uil-thumbs-up"></i> Liked Pages </a></li> --}}
                         {{-- <li><a href="#"> <i class="uil-cog"></i> Account Settings</a></li> --}}
-                        <li><a href="{{ route('social.upgrade')}}"> <i class="uil-bolt"></i> Upgrade To Premium</a></li>
-                        <li><a href="{{ route('social.pay_renewal_fees')}}"> <i class="uil-bolt"></i> Pay Renewal Fees</a></li>
+                        <li><a href="{{ route('social.makePayment')}}"> <i class="icon-feather-dollar-sign"></i> Make Payment</a>
+                        <li><a href="{{ route('social.upgrade')}}"> <i class="icon-feather-package"></i> Upgrade To Premium</a></li>
+                        <li><a href="{{ route('social.pay_renewal_fees')}}"> <i class="icon-material-outline-autorenew"></i> Pay Renewal Fees</a></li>
                         <li><a href="{{ route('social.myInfo')}}"> <i class="icon-material-outline-check-circle"></i> Verify Account</a>
                         </li>
                         <li>

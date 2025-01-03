@@ -158,6 +158,7 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/generate-pdf/{id}', [UserInfoController::class, 'generatePDF'])->name('generatePDF');
 
 
+    Route::get('/make-payment',[PackagePurchaseController::class, 'make_payment'])->name('social.makePayment');
     Route::get('/upgrade-to-premium',[PackagePurchaseController::class, 'upgrade_to_premium'])->name('social.upgrade');
     Route::get('/pay-renewal-fees',[PackagePurchaseController::class, 'pay_renewal_fees'])->name('social.pay_renewal_fees');
     Route::get('/offile-renewal-fees/{id}',[PackagePurchaseController::class, 'offline_renewal_fees'])->name('social.offline_renewal_fees');

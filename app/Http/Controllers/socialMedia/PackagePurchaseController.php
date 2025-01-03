@@ -177,7 +177,7 @@ class PackagePurchaseController extends Controller
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="account_no_error"></div>
                         </div>
-                        <div>
+                        <div id="branch-container" style="display: none;">
                             <label class="uk-form-label" for="branch">Branch</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="branch" type="text" name="branch"  placeholder="Enter branch Name">
@@ -436,5 +436,9 @@ class PackagePurchaseController extends Controller
 
         store_notification('Renewal Fees payment request send succesfully. It will update soon',auth()->id());
         return response()->json(['success' => true, 'message' => 'Form submitted successfully']);
+    }
+    public function make_payment(Request $request)
+    {
+        return view('socialMedia.pages.make_payment');
     }
 }

@@ -531,6 +531,25 @@ function submitPayment() {
     });
 }
 
+function showHidePaymetInput(inputElement){
+    if (inputElement.value == '1') {
+        $('#payment_input').css('display', 'block');
+    } else {
+        $('#payment_input').css('display', 'none');
+    }
+}
+$('#payment_type').on('change', function() {
+    if (this.value == '1') {
+        if ($('#branch-container')) {
+            $('#branch-container').css('display', 'block');
+        }
+    }
+    if (this.value == '2') {
+        if ($('#branch-container')) {
+            $('#branch-container').css('display', 'none');
+        }
+    }
+  })
 //====================================================================================================
                                 // INPUT VALIDATION SCRIPTS START
 //====================================================================================================
