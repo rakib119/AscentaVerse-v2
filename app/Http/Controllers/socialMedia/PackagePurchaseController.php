@@ -239,43 +239,30 @@ class PackagePurchaseController extends Controller
     public function loadBankDtls(Request $request)
     {
         if (!$request->data) return "";
-        $bank_dtls = CompanyBankDtls::where('bank_type',$request->data)->get();
-        $th = "";
-        if ($request->data==1)
-        {
-            $th = "<th>Branch</th>";
-        }
-        $header = "<tr>
-                    <th>Bank Name</th>
-                    <th>Account No</th>
-                    $th
-                </tr>";
-        $body_tr=$td="";
-        foreach ($bank_dtls as  $v)
-        {
-            if ($request->data==1)
-            {
-                $td = "<th>$v->branch</th>";
-            }
-            $body_tr .= "<tr>
-                            <td>$v->bank_name</td>
-                            <td>$v->account_number</td>
-                            $td
-                        </tr>";
+
+        $bank_dtls = CompanyBankDtls::where('bank_type', $request->data)->get();
+        $body_div = "";
+
+        foreach ($bank_dtls as $v) {
+            $branch_info = ($request->data == 1) ? "<strong>Branch:</strong> $v->branch<br>" : "";
+            $body_div .= '
+                <div class="uk-card uk-card-default uk-card-body">
+                    <strong>Bank Name:</strong> ' . $v->bank_name . '<br>
+                    <strong>Account No:</strong> ' . $v->account_number . '<br>
+                    ' . $branch_info . '
+                </div>';
         }
 
-        $html = '<div class="uk-card uk-card-default uk-card-hover uk-card-body" style="margin-bottom:15px;">
-                    <h3 class="uk-card-title">Bank Details</h3>
-                    <table class="uk-table uk-table-striped">
-                        <thead>
-                             '.$header.'
-                        </thead>
-                        <tbody>
-                            '.$body_tr.'
-                        </tbody>
-                    </table>
-                </div>';
-                return $html ;
+        $html = '
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body" style="margin-bottom:15px;">
+            <h3 class="uk-card-title">Bank Details</h3>
+            <div class="uk-child-width-1-1@s uk-child-width-1-1@m" uk-grid>
+                ' . $body_div . '
+            </div>
+        </div>';
+
+        return $html;
+
     }
 
     public function submitPayment(Request $request)
