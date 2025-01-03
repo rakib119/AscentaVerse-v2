@@ -1295,7 +1295,20 @@ body #backtotop a {
   width: 100%;
   padding: 0;
 }
-
+.phone-input-container {
+    position: relative;
+}
+.phone-prefix {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+}
+.uk-input.phone-input {
+    padding-left: 50px; /* Adjust padding to accommodate the prefix */
+}
 
 @media screen and (prefers-reduced-motion:reduce) {
   .button {

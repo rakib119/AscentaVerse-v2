@@ -151,7 +151,7 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::post('/submit-step/{step}', [UserInfoController::class, 'submitStep'])->name('submitStep');
     Route::get('/load-step/{step}', [UserInfoController::class, 'loadStep'])->name('loadStep');
 
-    Route::get('/my-info',[UserInfoController::class, 'myInfo'])->name('social.myInfo');
+    Route::get('/verify-account',[UserInfoController::class, 'myInfo'])->name('social.myInfo');
     Route::get('/load-division', [UserInfoController::class, 'loadDivision'])->name('loadDivision');
     Route::get('/load-district', [UserInfoController::class, 'loadDistrict'])->name('loadDistrict');
     Route::get('/load-upazila', [UserInfoController::class, 'loadUpazila'])->name('loadUpazila');

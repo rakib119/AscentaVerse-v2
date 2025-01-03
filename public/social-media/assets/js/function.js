@@ -556,11 +556,25 @@ function validateEmailAddress(email) {
     return regex.test(email);
 }
 
+function capitalizeText(text) {
+    return text.replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+    });
+}
+function textBoxes(inputElement) {
+    return $(inputElement).val().trimStart().replace(/\s+/g, ' ').replace(/[^a-zA-Z\s-.;,]/g, '','-');
+
+}
+
 $(function() {
 
     $(document).on('input', '.text_boxes', function() {
-        let validValue = $(this).val().replace(/[^a-zA-Z\s-.;,]/g, '','-');
+        let validValue = textBoxes(this)
         $(this).val(validValue);
+    });
+    $(document).on('input', '.text_boxes_uppercase', function() {
+        let validValue = textBoxes(this)
+        $(this).val(validValue.toUpperCase());
     });
 
     $(document).on('input', '.text_boxes_numeric', function() {
@@ -574,18 +588,18 @@ $(function() {
             $(this).val(phoneNumber);
         }
         if (validateBangladeshiPhoneNumber(phoneNumber)) {
-            $(this).removeClass('invalid-input');
+            $(this).removeClass('uk-form-danger');
         } else {
-            $(this).addClass('invalid-input');
+            $(this).addClass('uk-form-danger');
         }
     });
 
     $(document).on('input', '.email-input', function() {
         const email = $(this).val();
         if (validateEmailAddress(email)) {
-            $(this).removeClass('invalid-input');
+            $(this).removeClass('uk-form-danger');
         } else {
-            $(this).addClass('invalid-input');
+            $(this).addClass('uk-form-danger');
         }
     });
 });

@@ -25,22 +25,22 @@
         <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
             <div>
                 <h5 class="uk-text-bold mb-2"> Full Name *</h5>
-                <input type="text" name="full_name" class="uk-input" id="full_name" value="{{ $full_name ?? ''}}"  readonly>
+                <input type="text" name="full_name" class="uk-input text_boxes uk-text-uppercase" id="full_name" value="{{ $full_name ?? ''}}"  readonly>
                 <div class="uk-text-danger" id="full_name_error"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> First Name *</h5>
-                <input type="text" name="first_name" class="uk-input text_boxes" id="first_name" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" placeholder="First Name" value="{{$first_name??''}}">
+                <input type="text" name="first_name" class="uk-input text_boxes_uppercase" id="first_name" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" placeholder="First Name" value="{{$first_name??''}}">
                 <div class="uk-text-danger" id="first_name_error"></div>
             </div>
             <div>
-                <h5 class="uk-text-bold mb-2">Middle Name *</h5>
-                <input type="text" name="middle_name" class="uk-input text_boxes" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="middle_name" placeholder="Middle Name" value="{{$middle_name??''}}">
+                <h5 class="uk-text-bold mb-2">Middle Name</h5>
+                <input type="text" name="middle_name" class="uk-input text_boxes_uppercase" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="middle_name" placeholder="Middle Name" value="{{$middle_name??''}}">
                 <div class="uk-text-danger" id="middle_name_error"></div>
             </div>
             <div>
-                <h5 class="uk-text-bold mb-2"> Last Name *</h5>
-                <input type="text" name="last_name" class="uk-input text_boxes" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="last_name" placeholder="Last Name" value="{{$last_name??''}}">
+                <h5 class="uk-text-bold mb-2"> Last Name</h5>
+                <input type="text" name="last_name" class="uk-input text_boxes_uppercase" onkeyup="completeFull_name('first_name*middle_name*last_name', 'full_name')" id="last_name" placeholder="Last Name" value="{{$last_name??''}}">
                 <div class="uk-text-danger" id="last_name"></div>
             </div>
             <div>
@@ -120,7 +120,11 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Mobile *</h5>
-                <input type="text" name="mobile" class="uk-input phone-input" placeholder="Mobile" value="{{$mobile??''}}">
+
+                <div class="phone-input-container">
+                    <span class="phone-prefix">+88</span>
+                    <input type="text" name="mobile" class="uk-input phone-input" placeholder="01XXXXXXXXX" value="{{$mobile??''}}">
+                </div>
                 <div class="uk-text-danger" id="mobile"></div>
             </div>
             <div>
@@ -131,13 +135,13 @@
 
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> NID OR DOB Certificate *</h5>
-                <input type="file" name="nid_or_dob">
+                <input type="file" multiple accept=".jpg,.jpeg" name="nid_or_dob">
                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
                 <div class="uk-text-danger" id="nid_or_dob"></div>
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> Document *</h5>
-                <input type="file" name="nid_or_dob">
+                <input type="file" multiple accept=".jpg,.jpeg" name="nid_or_dob">
                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload Document" disabled="">
                 <div class="uk-text-danger" id=""></div>
             </div>
@@ -150,12 +154,12 @@
             <div class="uk-child-width-1-2@s uk-grid-small p-4" uk-grid>
                 <div>
                     <h5 class="uk-text-bold mb-2"> Audio verification Code *</h5>
-                    <input type="text" name="audio_verification_code" class="uk-input text_boxes_numeric" placeholder="Audio verification Code" value="{{$audio_verification_code??''}}">
+                    <input type="text" name="audio_verification_code" class="uk-input text_boxes_numeric" placeholder="Audio verification Code" value="{{$audio_verification_code??''}}" maxlength="5">
                     <div class="uk-text-danger" id="audio_verification_code"></div>
                 </div>
                 <div>
                     <h5 class="uk-text-bold mb-2"> Video verification Code *</h5>
-                    <input type="text" name="video_verification_code" class="uk-input text_boxes_numeric" placeholder="Video verification Code" value="{{$video_verification_code??''}}">
+                    <input type="text" name="video_verification_code" class="uk-input text_boxes_numeric" placeholder="Video verification Code" value="{{$video_verification_code??''}}" maxlength="5">
                     <div class="uk-text-danger" id="video_verification_code"></div>
                 </div>
             </div>
