@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('religion')->nullable();
             $table->string('mobile',15)->nullable();
             $table->string('email',255)->nullable();
-            $table->string('nid_or_dob',255)->nullable();
-            $table->string('documents',255)->nullable();
+            $table->text('nid_or_dob')->nullable();
+            $table->text('documents')->nullable();
             $table->integer('country')->nullable();
             $table->integer('division')->nullable();
             $table->integer('district')->nullable();
@@ -48,8 +48,8 @@ return new class extends Migration
             $table->integer('father_religion')->nullable();
             $table->string('father_mobile',15)->nullable();
             $table->string('father_email',255)->nullable();
-            $table->string('father_nid_or_dob',255)->nullable();
-            $table->string('father_documents',255)->nullable();
+            $table->text('father_nid_or_dob')->nullable();
+            $table->text('father_documents')->nullable();
             $table->integer('father_approved_status')->nullable();
             $table->integer('father_info_approved_by')->nullable();
 
@@ -65,8 +65,8 @@ return new class extends Migration
             $table->integer('mother_religion')->nullable();
             $table->string('mother_mobile',15)->nullable();
             $table->string('mother_email',255)->nullable();
-            $table->string('mother_nid_or_dob',255)->nullable();
-            $table->string('mother_documents',255)->nullable();
+            $table->text('mother_nid_or_dob')->nullable();
+            $table->text('mother_documents')->nullable();
             $table->integer('mother_approved_status')->nullable();
             $table->integer('mother_info_approved_by')->nullable();
 
@@ -83,8 +83,8 @@ return new class extends Migration
             $table->string('emergency_relation')->nullable();
             $table->string('emergency_mobile',15)->nullable();
             $table->string('emergency_email',255)->nullable();
-            $table->string('emergency_nid_or_dob',255)->nullable();
-            $table->string('emergency_documents',255)->nullable();
+            $table->text('emergency_nid_or_dob')->nullable();
+            $table->text('emergency_documents')->nullable();
             $table->integer('emergency_approved_status')->nullable();
 
             $table->timestamp('emergency_info_created_at')->nullable();

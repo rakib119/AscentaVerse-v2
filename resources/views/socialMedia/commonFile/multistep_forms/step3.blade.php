@@ -74,7 +74,7 @@
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> NID OR DOB Certificate *</h5>
-                <input type="file" name="father_nid_or_dob">
+                <input type="file" name="father_nid_or_dob[]" multiple>
                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
                 <div class="uk-text-danger" id="father_nid_or_dob_error"></div>
             </div>
@@ -136,7 +136,7 @@
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> NID OR DOB Certificate *</h5>
-                <input type="file" name="mother_nid_or_dob">
+                <input type="file" name="mother_nid_or_dob[]" multiple>
                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
                 <div class="uk-text-danger" id="mother_nid_or_dob_error"></div>
             </div>
@@ -203,7 +203,7 @@
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> NID OR DOB Certificate *</h5>
-                <input type="file" name="emergency_nid_or_dob">
+                <input type="file" name="emergency_nid_or_dob[]" multiple>
                 <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
                 <div class="uk-text-danger" id="emergency_nid_or_dob_error"></div>
             </div>

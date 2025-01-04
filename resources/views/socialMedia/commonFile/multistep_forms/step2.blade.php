@@ -96,7 +96,7 @@
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Address *</h5>
-                <textarea class="uk-textarea" rows="1" name="address text_boxes"  placeholder="Address">{{$address??''}}</textarea>
+                <textarea class="uk-textarea text_boxes" rows="1" name="address"  placeholder="Address">{{$address??''}}</textarea>
                 <div class="uk-text-danger" id="address"></div>
             </div>
             <div>
@@ -135,14 +135,14 @@
 
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> NID OR DOB Certificate *</h5>
-                <input type="file" multiple accept=".jpg,.jpeg" name="nid_or_dob">
-                <input class="uk-input uk-form-width-large" type="text" placeholder="Upload File" disabled="">
+                <input type="file" multiple accept=".jpg,.jpeg" name="nid_or_dob[]">
+                <input class="uk-input uk-form-width-large" type="text" placeholder="Upload Files" disabled="">
                 <div class="uk-text-danger" id="nid_or_dob"></div>
             </div>
             <div uk-form-custom="target: true" class="uk-form-custom uk-first-column">
                 <h5 class="uk-text-bold mb-2"> Document *</h5>
-                <input type="file" multiple accept=".jpg,.jpeg" name="nid_or_dob">
-                <input class="uk-input uk-form-width-large" type="text" placeholder="Upload Document" disabled="">
+                <input type="file" multiple accept=".jpg,.jpeg" name="documents[]">
+                <input class="uk-input uk-form-width-large" type="text" placeholder="Upload Documents" disabled="">
                 <div class="uk-text-danger" id=""></div>
             </div>
         </div>

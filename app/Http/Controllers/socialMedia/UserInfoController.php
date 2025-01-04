@@ -190,6 +190,46 @@ class UserInfoController extends Controller
     {
         $userId = auth()->id();
         $data = $this->getStepData($step, $request);
+        if($step == 2)
+        {
+            if ($request->hasFile('nid_or_dob'))
+            {
+                $msg_str    = uploadMultiImage('public/social-media/assets/images/user_documents/',$request,'nid_or_dob');
+                $msgArr     = explode('*',$msg_str);
+                $data['nid_or_dob'] = $msgArr[1];
+            }
+            if ($request->hasFile('documents'))
+            {
+                $msg_str2    = uploadMultiImage('public/social-media/assets/images/user_documents/',$request,'documents');
+                $msgArr2     = explode('*',$msg_str2);
+                $data['documents'] = $msgArr2[1];
+            }
+        }
+        if($step == 3)
+        {
+            // FATHER'S DOCUMENTS
+            if ($request->hasFile('father_nid_or_dob'))
+            {
+                $msg_str    = uploadMultiImage('public/social-media/assets/images/user_documents/',$request,'father_nid_or_dob');
+                $msgArr     = explode('*',$msg_str);
+                $data['father_nid_or_dob'] = $msgArr[1];
+            }
+
+            // MOTHER'S DOCUMENTS
+            if ($request->hasFile('mother_nid_or_dob'))
+            {
+                $msg_str3    = uploadMultiImage('public/social-media/assets/images/user_documents/',$request,'mother_nid_or_dob');
+                $msgArr3     = explode('*',$msg_str3);
+                $data['mother_nid_or_dob'] = $msgArr3[1];
+            }
+            //EMERGENCY PERSON'S DOCUMENTS
+            if ($request->hasFile('emergency_nid_or_dob'))
+            {
+                $msg_str5    = uploadMultiImage('public/social-media/assets/images/user_documents/',$request,'emergency_nid_or_dob');
+                $msgArr5     = explode('*',$msg_str5);
+                $data['emergency_nid_or_dob'] = $msgArr5[1];
+            }
+        }
 
         // Check if user info exists, and update or insert accordingly
         UserInfo::updateOrCreate(
