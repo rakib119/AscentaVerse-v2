@@ -487,15 +487,22 @@ function getNotifications() {
     setInterval(getNotifications, 60000*3);
 }
 getNotifications();
-function readNotification(notificationId) {
-    $.ajax({
-        url: "/social-media/read-notification",
-        type: "get",
-        success: function (response)
-        {
-            getNotifications();
-        }
-    });
+function readNotification() {
+    let unReadNotification = $('#unread_notification').html()*1;
+    if (unReadNotification) {
+        $.ajax({
+            url: "/social-media/read-notification",
+            type: "get",
+            success: function (response)
+            {
+                getNotifications();
+            }
+        });
+    }
+    else
+    {
+        getNotifications();
+    }
 }
 
 function submitPayment() {

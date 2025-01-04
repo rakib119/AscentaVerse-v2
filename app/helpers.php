@@ -62,6 +62,34 @@ if (!function_exists('uploadImage')) {
         }
     }
 }
+if (!function_exists('uploadMultiImage')) {
+    function uploadMultiImage($basepath,$request,$field_name)
+    {
+        try {
+            $image_name_array = array();
+            if ($request->hasFile($field_name))
+            {
+                $manager      = new ImageManager(new Driver());
+                $image_files  = $request->file($field_name);
+                foreach ($image_files as $image_file)
+                {
+                    $image_name = Str::random(15).'.'.$image_file->getClientOriginalExtension();
+                    $image      = $manager->read($image_file);
+                    $path       = base_path($basepath . $image_name);
+                    $image->save($path);
+                    $image_name_array[] = $image_name;
+                }
+                return "1*".implode("##",$image_name_array);
+            }
+            else{
+                return "1*0";
+            }
+        } catch (Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
+}
 if (!function_exists('insertDeleteLink')) {
     function insertDeleteLink($file_location,$section_id)
     {
