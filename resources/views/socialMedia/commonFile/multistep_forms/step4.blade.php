@@ -13,7 +13,7 @@
 <div class="p-3">
     <div class="p-4">
         <div style="display:flex; justify-content:space-between">
-            <h2>Review & Submit</h2>
+            <h2>Verify Account</h2>
             @if ($final_info_approved_at==1)
                 <a class="button secondary" href="{{ route('user.details',Crypt::encrypt(auth()->id())) }}">Download <i class="icon-feather-download-cloud"></i> </a>
             @elseif ($is_final_submited==1)
@@ -24,8 +24,8 @@
     </div>
     @if ($is_final_submited==1)
         <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">Your information is submitted successfully!</h4>
-            <p>Our team will review your information and get back to you soon.</p>
+            <h4 class="alert-heading text-success">Your information is submitted successfully!</h4>
+            <p class="text-info">Our team will review your information and get back to you soon.</p>
         </div>
     @endif
     @if (!$is_final_submited==1)
@@ -35,6 +35,9 @@
 
 </div>
 @if (!$is_final_submited==1)
+    <div class="p-4">
+        <h2>Review & Submit</h2>
+    </div>
     <div class="uk-container uk-margin-top">
         <div class="p-4">
             <p>Review your information before submitting.</p>
