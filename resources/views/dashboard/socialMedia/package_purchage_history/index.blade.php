@@ -1,18 +1,10 @@
 @php
     $payment_for_array = array(0=> '',1=> 'new package',2=> 'Renewal Fees');
 @endphp
-@section('css')
-<link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
-@endsection
-@section('javacript')
-<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
-<script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    } );
-    </script>
-@endsection
 @extends('dashboard.layout.dashboard')
+@section('css')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 <div class="main-content">
     <div class="page-content">
@@ -127,4 +119,13 @@
        </div>
     </div>
 </div>
+@endsection
+
+@section('javacript')
+    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
 @endsection
