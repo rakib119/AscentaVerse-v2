@@ -211,6 +211,11 @@ function handleFormSubmit(stepNumber, formData) {
             currentStep = stepNumber + 1;
             $('#multi-step-form-container').html(response.html);
             UIkit.notification({message: 'Saved successfully!', status: 'success'});
+            console.log(currentStep);
+            if (stepNumber == 4) {
+                location.reload();
+            }
+
         } else {
             // Show validation errors
             showValidationErrors(response.errors);
@@ -518,7 +523,7 @@ function submitPayment() {
         success: function (response) {
             if (response.success) {
                 document.location.href="/"
-                alert(response.message);
+                UIkit.notification({message: 'Submited successfully!', status: 'success'});
                 // $('#payment-form')[0].reset(); // Reset form after success
                 // $('#imgOutput').attr('src', ''); // Clear image preview
 
