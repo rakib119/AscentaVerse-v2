@@ -2,6 +2,7 @@
 @extends('dashboard.layout.dashboard')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 @endsection
 @section('content')
     <div class="main-content">
@@ -95,8 +96,8 @@
                                             @foreach ( $notifications as $v)
                                             <tr>
                                                 <td>{{$loop->index+1}}</td>
-                                                <td>{{ Str::substr($v->message, 0, 50)."..."}}</td>
-                                                <td>{{ Str::substr($v->user_name, 0, 50)."..." }}</td>
+                                                <td>{{ Str::substr($v->message, 0, 50)}} {{ (Str::length($v->message)>50) ?"...":"" }}</td>
+                                                <td>{{ Str::substr($v->user_name, 0, 50)}} {{ (Str::length($v->user_name)>50) ?"...":"" }}</td>
                                                 <td> <span class="badge bg-{{ $v->is_read==1 ? 'primary' : 'warning' }}">{{ $v->is_read==1 ? 'Read' : 'Unread' }}</span> </td>
                                                 <td>
                                                     <a href="" class="btn btn-primary" >Edit</a>
@@ -119,10 +120,12 @@
 
 @section('javacript')
 
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"> </script>
     <script>
         $(document).ready(function() {
             $('#user-name').select2();
+            $('#myTable').DataTable();
         });
     </script>
 @endsection

@@ -18,7 +18,10 @@ class NotificationController extends Controller
     public function index()
     {
         $users  = User::select('id','name','role_id')->get();
-        $notifications = Notification::get();
+        $notifications = Notification::leftjoin('users','users.id','notifications.user_id')
+            ->select('notifications.*','users.name as user_name')
+            ->latest()
+            ->get();
         return view('dashboard.socialMedia.notification.index', compact('notifications','users'));
     }
 
