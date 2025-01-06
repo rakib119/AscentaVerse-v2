@@ -489,9 +489,9 @@ function getNotifications() {
         }
     });
 
-    setInterval(getNotifications, 60000*3);
+
 }
-getNotifications();
+setInterval(getNotifications, 60000*3);
 function readNotification() {
     let unReadNotification = $('#unread_notification').html()*1;
     if (unReadNotification) {

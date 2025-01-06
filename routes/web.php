@@ -57,6 +57,8 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::get('user/details/{id}',[UserInfoController::class, 'user_details'])->name('user.details');
     //USER INFO
     Route::get('user/info/list', [BackendController::class, 'user_list'])->name('userInfoList');
+    Route::put('user/info/verify', [UserInfoController::class, 'user_verify'])->name('userInfoVerify');
+    Route::put('user/info/reject', [UserInfoController::class, 'user_reject'])->name('userInfoReject');
 
     // BANNER
     Route::resource('homeS1Left', hs1LeftController::class)->only(['index','store','update']);

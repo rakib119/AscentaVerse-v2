@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\socialMedia;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\UserInfo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -123,7 +125,7 @@ class UserInfoController extends Controller
             case 2:
                 return [
                     'full_name'     => 'required|max:255',
-                    'first_name'    => 'required|max:80',
+                    'first_name'    => 'nullable|max:80',
                     'middle_name'   => 'nullable|max:80',
                     'last_name'     => 'nullable|max:80',
                     'gender'        => 'required',
@@ -139,8 +141,8 @@ class UserInfoController extends Controller
                     'upazila'       => 'required',
                     'postcode'      => 'required',
                     'address'       => 'required',
-                    'audio_verification_code' =>'nullable',
-                    'video_verification_code' => 'nullable'
+                    'audio_verification_code' =>'required',
+                    'video_verification_code' => 'required'
                 ];
             case 3:
                 return [
@@ -330,9 +332,106 @@ class UserInfoController extends Controller
     }
     public function user_details($encrypt_id)
     {
-        $id = decrypt($encrypt_id);
-        $user = UserInfo::where('user_id', $id)->first();
-        return view('dashboard.pages.userdetails', compact('user'));
+        $user_id = decrypt($encrypt_id);
+        return view('dashboard.pages.userdetails', compact('user_id'));
+    }
+    function user_verify(Request $request)
+    {
+        $request->validate([
+            'varification_code'=>'required|max:30',
+        ]);
+        $user_id        = $request->user_id;
+        $user_info_id   = $request->user_info_id;
+        $user           = User::find($user_id);
+
+        // UPDATE THE USER INFO
+        $UserInfo   = UserInfo::find($user_info_id);
+        $auth_user  = auth()->id();
+
+        DB::beginTransaction();
+
+        $UserInfo->is_personal_info_approved    = 1;
+        $UserInfo->father_approved_status       = 1;
+        $UserInfo->mother_approved_status       = 1;
+        $UserInfo->emergency_approved_status    = 1;
+
+        $UserInfo->personal_info_approved_by    = $auth_user;
+        $UserInfo->father_info_approved_by      = $auth_user;
+        $UserInfo->mother_info_approved_by      = $auth_user;
+        $UserInfo->final_approved_by            = $auth_user;
+
+        $UserInfo->personal_info_approved_at    = Carbon::now();
+        $UserInfo->father_info_approved_at      = Carbon::now();
+        $UserInfo->mother_info_approved_at      = Carbon::now();
+        $UserInfo->emergency_info_approved_at   = Carbon::now();
+        $UserInfo->final_info_approved_at       = Carbon::now();
+        $userInfoUpdateStatus                   = $UserInfo->save();
+
+        // UPDATE THE USER
+
+        $user->is_verified          = 1;
+        $user->verification_code    = $request->varification_code;
+        $userUpdateStatus           = $user->save();
+
+        if($userInfoUpdateStatus && $userUpdateStatus)
+        {
+            DB::commit();
+            return back()->with('success','User Verified Successfully');
+        }
+        else
+        {
+            DB::rollBack();
+            return back()->with('error','User Verification Failed');
+        }
+
+    }
+    function user_reject(Request $request)
+    {
+
+        $user_id        = $request->user_id;
+        $user_info_id   = $request->user_info_id;
+        $user           = User::find($user_id);
+
+        // UPDATE THE USER INFO
+        $UserInfo   = UserInfo::find($user_info_id);
+        $auth_user  = auth()->id();
+
+        DB::beginTransaction();
+
+        $UserInfo->is_personal_info_approved    = 2;
+        $UserInfo->father_approved_status       = 2;
+        $UserInfo->mother_approved_status       = 2;
+        $UserInfo->emergency_approved_status    = 2;
+
+        $UserInfo->personal_info_approved_by    = $auth_user;
+        $UserInfo->father_info_approved_by      = $auth_user;
+        $UserInfo->mother_info_approved_by      = $auth_user;
+        $UserInfo->final_approved_by            = null;
+
+        $UserInfo->personal_info_approved_at    = Carbon::now();
+        $UserInfo->father_info_approved_at      = Carbon::now();
+        $UserInfo->mother_info_approved_at      = Carbon::now();
+        $UserInfo->emergency_info_approved_at   = Carbon::now();
+        $UserInfo->final_info_approved_at       = null;
+        $userInfoUpdateStatus                   = $UserInfo->save();
+
+        // UPDATE THE USER
+
+        $user->is_verified          = 2;
+        $user->verification_code    = null;
+        $userUpdateStatus           = $user->save();
+
+        if($userInfoUpdateStatus && $userUpdateStatus)
+        {
+            DB::commit();
+            return back()->with('success','User Verified Successfully');
+        }
+        else
+        {
+            DB::rollBack();
+            return back()->with('error','User Verification Failed');
+        }
+
     }
     public function generatePDF2($id)
     {
