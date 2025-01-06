@@ -14,21 +14,26 @@
     <div class="p-4">
         <div style="display:flex; justify-content:space-between">
             <h2>Verify Account</h2>
-            @if ($final_info_approved_at==1)
-                <a class="button secondary" href="{{ route('user.details',Crypt::encrypt(auth()->id())) }}">Download <i class="icon-feather-download-cloud"></i> </a>
+            @if ($final_info_approved_at)
+                <a class="button info" href="{{ route('user.details',Crypt::encrypt(auth()->id())) }}">Download Now<i class="icon-feather-download-cloud"></i> </a>
             @elseif ($is_final_submited==1)
                 <a class="button info"  href="javaScript:void(0)">Pending <i class="icon-feather-alert-circle"></i> </a>
             @endif
         </div>
 
     </div>
-    @if ($is_final_submited==1)
+    @if ($final_info_approved_at)
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading text-success">Your information is approved!</h4>
+            <p class="text-success">You can download your information.Click download now. </p>
+
+        </div>
+    @elseif ($is_final_submited==1 && $final_info_approved_at==null)
         <div class="alert alert-info" role="alert">
             <h4 class="alert-heading text-success">Your information is submitted successfully!</h4>
             <p class="text-info">Our team will review your information and get back to you soon.</p>
         </div>
-    @endif
-    @if (!$is_final_submited==1)
+    @else
         <hr class="m-0">
         <p> Verification type <i class="icon-material-outline-arrow-forward"></i> Personal Information  <i class="icon-material-outline-arrow-forward"></i> Documents <i class="icon-material-outline-arrow-forward"></i> Guardian Information <i class="icon-material-outline-arrow-forward"></i> Review & Submit </p>
     @endif

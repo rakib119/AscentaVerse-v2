@@ -376,6 +376,8 @@ class UserInfoController extends Controller
         if($userInfoUpdateStatus && $userUpdateStatus)
         {
             DB::commit();
+            $message = "Your Account has been verified by the admin.Thank you for being with us.";
+            store_notification($message,$user_id);
             return back()->with('success','User Verified Successfully');
         }
         else
@@ -413,6 +415,7 @@ class UserInfoController extends Controller
         $UserInfo->mother_info_approved_at      = Carbon::now();
         $UserInfo->emergency_info_approved_at   = Carbon::now();
         $UserInfo->final_info_approved_at       = null;
+        $UserInfo->is_final_submited            = null;
         $userInfoUpdateStatus                   = $UserInfo->save();
 
         // UPDATE THE USER
@@ -424,6 +427,8 @@ class UserInfoController extends Controller
         if($userInfoUpdateStatus && $userUpdateStatus)
         {
             DB::commit();
+            $message = "Your veridfication has been rejected by the admin.Please contact with the admin for more details.Thank you for being with us.";
+            store_notification($message,$user_id);
             return back()->with('success','User Verified Successfully');
         }
         else
