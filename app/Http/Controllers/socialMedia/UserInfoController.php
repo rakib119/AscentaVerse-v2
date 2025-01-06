@@ -376,7 +376,7 @@ class UserInfoController extends Controller
         if($userInfoUpdateStatus && $userUpdateStatus)
         {
             DB::commit();
-            $message = "Your Account has been verified by the admin.Thank you for being with us.";
+            $message = "Your Account has been verified by the admin.Your verification code is ".$request->varification_code.".Thank you for being with us.";
             store_notification($message,$user_id);
             return back()->with('success','User Verified Successfully');
         }

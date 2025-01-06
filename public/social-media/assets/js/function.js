@@ -491,7 +491,8 @@ function getNotifications() {
 
 
 }
-setInterval(getNotifications, 60000*3);
+setInterval(getNotifications, 30000);//30000 milliseconds = 30 seconds
+
 function readNotification() {
     let unReadNotification = $('#unread_notification').html()*1;
     if (unReadNotification) {
