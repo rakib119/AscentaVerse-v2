@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Mpdf\Mpdf;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserInfoController extends Controller
 {
@@ -438,25 +439,36 @@ class UserInfoController extends Controller
         }
 
     }
-    public function generatePDF2($id)
+    public function generatePDF($id)
     {
         try {
-            $userinfo = DB::table('user_infos')->where('id',$id)->first();
+            /* $userinfo = DB::table('user_infos')->where('id',$id)->first();
             $userinfoArray = (array)$userinfo;
-
-            $mpdf = new Mpdf();
             $data = [
                 'userinfoArray' => $userinfoArray
-            ];
-            $html = view('dashboard.pdf.user_info', $data)->render();
-            $mpdf->WriteHTML($html);
+            ]; */
+            $user_id =$id;
+            // return view('dashboard.pages.userdetails', compact('user_id'));
+            // return view('dashboard.pdf.user_info', compact('user_id'));
+            $html = view('dashboard.pdf.user_info', $user_id)->render();
 
-            return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
+            // Load HTML into Dompdf and generate PDF
+            $pdf = Pdf::loadHTML($html);
+
+            // Stream the PDF to the browser
+            return $pdf->stream('user_info_form.pdf');
+            // return view('dashboard.pdf.user_info', $data);
+            /* $mpdf = new Mpdf();
+
+            $html = view('dashboard.pdf.user_info', $data)->render();
+            $mpdf->WriteHTML($html); */
+            return $pdf = Pdf::loadView('dashboard.pdf.user_info', compact('data'))->setPaper('a4', 'landscape');
+            // return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }
-    public function generatePDF($id)
+    public function generatePDF3($id)
     {
         try {
             $userinfo = DB::table('user_infos')->where('id',$id)->first();

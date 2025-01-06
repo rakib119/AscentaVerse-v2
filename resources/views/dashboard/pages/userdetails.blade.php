@@ -43,7 +43,7 @@
                                     <h4 class="header-title mb-4">User Info</h4>
                                     <div>
                                         <a class="btn btn-info" target="blank" href="{{route('userInfoList')}}">Back </a>
-                                        <a class="btn btn-primary" target="blank" href="{{route('generatePDF',$id)}}">Print <i class="fa fa-print"></i> </a>
+                                        <a class="btn btn-primary" target="blank" href="{{route('generatePDF',$user_id)}}">Print <i class="fa fa-print"></i> </a>
                                     </div>
 
                                 </div>
