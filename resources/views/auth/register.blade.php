@@ -45,13 +45,20 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com" onchange="validateEmail()">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                                <div id="message"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input type="text" id="otp" name="otp" placeholder="Enter OTP" style="display:none;">
+                                    <button type="button" id="verifyBtn" style="display:none;" onclick="verifyOTP()">Verify OTP</button>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -108,4 +115,16 @@
     </div>
 </section>
 @endsection
+
+<!-- Email input -->
+<input type="email" id="email" name="email" placeholder="Enter your email" onchange="validateEmail()">
+
+<!-- Message Area -->
+<div id="message"></div>
+
+<!-- OTP input -->
+<input type="text" id="otp" name="otp" placeholder="Enter OTP" style="display:none;">
+<button type="button" id="verifyBtn" style="display:none;" onclick="verifyOTP()">Verify OTP</button>
+
+<!-- CSRF token for AJAX request -->
 

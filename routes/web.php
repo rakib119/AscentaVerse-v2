@@ -17,13 +17,13 @@ use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\DashboardControllers\social_media\NotificationController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\socialMedia\PackagePurchaseController;
 use App\Http\Controllers\socialMedia\SocialMediaController;
 use App\Http\Controllers\socialMedia\UserInfoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 $sectionIdArray = array( 1=>'Home Sec 1 left',2=>'Home Sec 1 Right(Banner)',3=>'Home Sec 2(About)',4=>'Home Sec 3 Right',5=>'Home Sec 3 Left',6=>'Home Sec 4',7=>'Faq',8=>'Team',9=>'Blog',10=>'Testimonial',11=>'Blog Details',12=>'Contact');
 Auth::routes();
 
@@ -46,6 +46,7 @@ Route::controller(HomeController::class)->group(function(){
 
 });
 Route::post('send/message',[ContactController::class, 'send_message'])->name('send_message');
+Route::post('/send-otp', [EmailVerificationController::class, 'sendOTP'])->name('send.otp');
 
 // HOME PAGE MANAGEMENT ROUTES
 Route::middleware(['auth','RoutePermission'])->group(function () {

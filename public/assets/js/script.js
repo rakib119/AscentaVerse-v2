@@ -727,3 +727,47 @@
 	});
 
 })(window.jQuery);
+
+function validateEmail() {
+    let email = document.getElementById('email').value;
+    let messageDiv = document.getElementById('message');
+    let otpInput = document.getElementById('otp');
+    let verifyBtn = document.getElementById('verifyBtn');
+
+    // Basic Email Validation using regular expression
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (emailRegex.test(email)) {
+        // Email is valid, now send AJAX request to verify
+        messageDiv.innerHTML = "Valid email. Sending OTP...";
+        messageDiv.style.color = "green";
+
+        // Send AJAX request to backend to send OTP
+        $.ajax({
+            url: "{{ route('send.otp') }}", // Define this route in Laravel
+            type: "POST",
+            data: { email: email },
+            success: function(response) {
+                if (response.success) {
+                    messageDiv.innerHTML = "OTP sent successfully!";
+                    messageDiv.style.color = "green";
+                    otpInput.style.display = "inline-block";
+                    verifyBtn.style.display = "inline-block";
+                } else {
+                    messageDiv.innerHTML = response.message;
+                    messageDiv.style.color = "red";
+                }
+            },
+            error: function(xhr, status, error) {
+                messageDiv.innerHTML = "Error sending OTP. Please try again.";
+                messageDiv.style.color = "red";
+            }
+        });
+    } else {
+        // Invalid email
+        messageDiv.innerHTML = "Please enter a valid email address.";
+        messageDiv.style.color = "red";
+        otpInput.style.display = "none";
+        verifyBtn.style.display = "none";
+    }
+}
