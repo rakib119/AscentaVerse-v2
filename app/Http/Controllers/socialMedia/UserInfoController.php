@@ -442,28 +442,31 @@ class UserInfoController extends Controller
     public function generatePDF($id)
     {
         try {
-            /* $userinfo = DB::table('user_infos')->where('id',$id)->first();
-            $userinfoArray = (array)$userinfo;
-            $data = [
-                'userinfoArray' => $userinfoArray
-            ]; */
-            $user_id =$id;
-            // return view('dashboard.pages.userdetails', compact('user_id'));
-            // return view('dashboard.pdf.user_info', compact('user_id'));
-            $html = view('dashboard.pdf.user_info', $user_id)->render();
 
-            // Load HTML into Dompdf and generate PDF
-            $pdf = Pdf::loadHTML($html);
+            $user_id = $id;
 
-            // Stream the PDF to the browser
-            return $pdf->stream('user_info_form.pdf');
-            // return view('dashboard.pdf.user_info', $data);
-            /* $mpdf = new Mpdf();
+            $user       = DB::table('users')->where('id',$user_id)->first();
+            $data       = DB::table('genarel_infos')->select('field_name','value')->get();
+            if (!$user->verification_code) {
+                return back()->with('error','User not verified');
+            }
+            $dataArray  = array();
+            foreach ($data as $v)
+            {
+                $dataArray[$v->field_name] = $v->value;
+            }
+            extract($dataArray);
 
-            $html = view('dashboard.pdf.user_info', $data)->render();
-            $mpdf->WriteHTML($html); */
-            return $pdf = Pdf::loadView('dashboard.pdf.user_info', compact('data'))->setPaper('a4', 'landscape');
-            // return response($mpdf->Output('', 'S'))->header('Content-Type', 'application/pdf');
+            $logoPath = public_path('assets/images/info/' . $logo);
+
+            $base64_logo = base64_encode(file_get_contents($logoPath));
+            $logo = 'data:image/png;base64,' . $base64_logo;
+
+
+            $html        = view('dashboard.pdf.user_info',compact('user_id','user','logo'))->render();
+            $pdf         = Pdf::loadHTML($html);
+            $date        = Carbon::now();
+            return $pdf->stream($date.'.pdf');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
@@ -471,15 +474,27 @@ class UserInfoController extends Controller
     public function generatePDF3($id)
     {
         try {
-            $userinfo = DB::table('user_infos')->where('id',$id)->first();
-            $userinfoArray = (array)$userinfo;
+            $user_id = $id;
 
-            $mpdf = new Mpdf();
-            $data = [
-                'userinfoArray' => $userinfoArray
-            ];
-            // return view('dashboard.pdf.user_info', $data);
-            $html = view('dashboard.pdf.user_info', $data)->render();
+            $user       = DB::table('users')->where('id',$user_id)->first();
+            $data       = DB::table('genarel_infos')->select('field_name','value')->get();
+            if (!$user->verification_code) {
+                return back()->with('error','User not verified');
+            }
+            $dataArray  = array();
+            foreach ($data as $v)
+            {
+                $dataArray[$v->field_name] = $v->value;
+            }
+            extract($dataArray);
+
+            $logoPath = public_path('assets/images/info/' . $logo);
+
+            $base64_logo = base64_encode(file_get_contents($logoPath));
+            $logo = 'data:image/png;base64,' . $base64_logo;
+
+
+            $html        = view('dashboard.pdf.user_info',compact('user_id','user','logo'))->render();
 
             $mpdf = new Mpdf();
 

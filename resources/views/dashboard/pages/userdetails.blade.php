@@ -43,7 +43,9 @@
                                     <h4 class="header-title mb-4">User Info</h4>
                                     <div>
                                         <a class="btn btn-info" target="blank" href="{{route('userInfoList')}}">Back </a>
-                                        <a class="btn btn-primary" target="blank" href="{{route('generatePDF',$user_id)}}">Print <i class="fa fa-print"></i> </a>
+                                        @if ($user->verification_code)
+                                            <a class="btn btn-primary" target="blank" href="{{route('generatePDF',$user_id)}}">Print <i class="fa fa-print"></i> </a>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -58,7 +60,7 @@
                                         </div>
                                         <div class="form-check">
                                             <input readonly class="form-check-input" id="flexCheckedDisabled2" name="verification_type[]" value="2" type="checkbox"
-                                                checked>
+                                            {{ in_array(2, $verification_type_arr) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexCheckedDisabled2">Freelancer</label>
                                         </div>
                                     </div>
