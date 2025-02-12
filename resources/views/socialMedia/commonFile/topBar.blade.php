@@ -21,6 +21,8 @@
         $social_media_user_data = session()->get('social_media_user_data');
     }
     extract($social_media_user_data);
+   $is_package_purchase = DB::table('package_purchase_mst')->where(['user_id'=>auth()->id(),'payment_for'=>1,'payment_status'=>1,'status_active'=>1,'is_deleted'=>0])->exists();
+
 @endphp
 <!-- header -->
 <div id="main_header">
@@ -291,8 +293,11 @@
                         {{-- <li><a href="#"> <i class="uil-thumbs-up"></i> Liked Pages </a></li> --}}
                         {{-- <li><a href="#"> <i class="uil-cog"></i> Account Settings</a></li> --}}
                         <li><a href="{{ route('social.makePayment')}}"> <i class="icon-feather-dollar-sign"></i> Make Payment</a>
-                        <li><a href="{{ route('social.upgrade')}}"> <i class="icon-feather-package"></i> Upgrade To Premium</a></li>
-                        <li><a href="{{ route('social.pay_renewal_fees')}}"> <i class="icon-material-outline-autorenew"></i> Pay Renewal Fees</a></li>
+                        @if ($is_package_purchase)
+                            <li><a href="{{ route('social.pay_renewal_fees')}}"> <i class="icon-material-outline-autorenew"></i> Pay Renewal Fees</a></li>
+                        @else
+                            <li><a href="{{ route('social.upgrade')}}"> <i class="icon-feather-package"></i> Upgrade To Premium</a></li>
+                        @endif
                         <li><a href="{{ route('social.myInfo')}}"> <i class="icon-material-outline-check-circle"></i> Verify Account</a>
                         </li>
                         <li>
