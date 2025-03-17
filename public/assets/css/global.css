@@ -1140,8 +1140,193 @@ img{
 .btn-style-one:hover:before{
 	top: -40%;
 }
+/* Btn Style Form */
 
+.btn-style-form{
+	position: relative;
+	/* font-weight:700; */
+	overflow: hidden;
+	text-align:center;
+	/* padding: 18px 44px;*/
+    padding: 0px 14px 0px 14px;
+    line-height: 41px;
+    border-radius: 5px;
+	display:inline-block;
+	letter-spacing:1px;
+	color: var(--white-color);
+	font-size: var(--font-16);
+	text-transform: capitalize;
+	font-family:var(--font-family-Rubik);
+	background-color: var(--color-thirtyone);
+}
+
+.btn-style-form:before{
+	-webkit-transition-duration: 800ms;
+	transition-duration: 800ms;
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	content: "";
+	top: -200%;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	border-radius: 50%;
+	z-index: 1;
+	background: var(--white-color);
+}
+
+.btn-style-form:hover:before{
+	top: 0%;
+}
+
+.btn-style-form .btn-wrap{
+	position:relative;
+	z-index:1;
+	float:left;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-style-form .btn-wrap .text-one{
+	position: relative;
+	display: block;
+	color: var(--white-color);
+	transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+}
+
+.btn-style-form:hover .btn-wrap  .text-one:first-child{
+	-webkit-transform: translateY(-150%);
+    -ms-transform: translateY(-150%);
+    transform: translateY(-150%);
+}
+
+.btn-style-form .btn-wrap .text-two{
+	position: absolute;
+    top: 100%;
+    display: block;
+	color: var(--white-color);
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.btn-style-form:hover .btn-wrap .text-two{
+	top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: var(--white-color);
+
+}
+
+.btn-style-form:hover .btn-wrap .text-two{
+	color: var(--white-color);
+}
+
+.btn-style-form:hover .arrow{
+    color: var(--white-color);
+}
+
+.btn-style-form i{
+	font-style:normal;
+	font-size: var(--font-14);
+	margin-left:var(--margin-left-5);
+}
+
+.btn-style-form .arrow{
+	position:relative;
+	z-index:1;
+	font-style:normal;
+	-webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+	margin-left:var(--margin-left-10);
+	font-family: 'Font Awesome 5 Pro';
+}
+
+.btn-style-form:hover{
+    color: var(--white-color);
+}
+
+.btn-style-form:hover:before{
+	top: -40%;
+    background-image: linear-gradient(90deg, #2439FF 0%, #9F49E1 1%, #2439FF) !important;
+    background-color: transparent !important;
+    color: var(--white-color);
+
+}
 /* Btn Style Two */
+/* OTP STYLE BUTTON */
+.otp-style-btn {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 0px 14px;
+    line-height: 41px;
+    border-radius: 5px;
+    display: inline-block;
+    letter-spacing: 1px;
+    color: var(--white-color);
+    font-size: var(--font-16);
+    text-transform: capitalize;
+    font-family: var(--font-family-Rubik);
+    background-color: var(--color-thirtyone);
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.otp-style-btn:before {
+    -webkit-transition-duration: 800ms;
+    transition-duration: 800ms;
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    content: "";
+    top: -200%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: 1;
+    background: var(--white-color);
+}
+
+.otp-style-btn:hover:before {
+    top: -40%;
+    background-image: linear-gradient(90deg, #2439FF 0%, #9F49E1 1%, #2439FF) !important;
+    background-color: transparent !important;
+}
+
+.otp-style-btn span {
+    position: relative;
+    z-index: 2; /* Ensure text is above the pseudo-element */
+    display: block;
+    transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.otp-style-btn:hover span {
+    color: var(--white-color);
+}
+
+.otp-style-btn i {
+    font-style: normal;
+    font-size: var(--font-14);
+    margin-left: var(--margin-left-5);
+    transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.otp-style-btn:hover i {
+    color: var(--white-color);
+}
+
+/* OTP STYLE BUTTON */
 
 .btn-style-two{
 	position: relative;

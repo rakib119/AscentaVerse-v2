@@ -9673,3 +9673,17 @@ button.accordion-button.collapsed, button.accordion-button {
   /* Define the pulse-border2 animation */
   @keyframes pulse-border2{0%{transform:scale(1);opacity:.67}100%{transform:scale(2.2);opacity:0}}
   @-webkit-keyframes pulse-border2{0%{transform:scale(1);opacity:.67}100%{transform:scale(2.2);opacity:0}}
+/* Smooth fade transition for the button text */
+#otp-email-sending-btn-html {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+#otp-email-sending-btn-html.fade-out {
+    opacity: 0;
+}
+#verifyBtnText {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}

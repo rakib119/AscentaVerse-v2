@@ -40,38 +40,70 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="row mb-3">
+                            {{-- EMAIL --}}
+                            <div class="row ">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com" onchange="validateEmail()">
-
+                                    <div class="input-group">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="example@gmail.com">
+                                        <div class="input-group-append">
+                                            <button onclick="validateEmail()" id="otp-email-sending-btn" class="otp-style-btn theme-btn btn-item" type="button"> <span id="otp-email-sending-btn-html">Send Otp</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p id="otp-sending-message"></p>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div id="message"></div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3 d-none" id="email_verification_box" >
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Verify Otp') }}</label>
+
                                 <div class="col-md-6">
-                                    <input type="text" id="otp" name="otp" placeholder="Enter OTP" style="display:none;">
-                                    <button type="button" id="verifyBtn" style="display:none;" onclick="verifyOTP()">Verify OTP</button>
+                                    <div class="input-group">
+                                        <input id="email-otp" type="text" class="form-control @error('email_otp') is-invalid @enderror" name="email_otp" placeholder="Enter Otp">
+                                        <div class="input-group-append">
+                                            <button class="otp-style-btn theme-btn btn-item" onclick="validateEmailOtp()" type="button" id="verifyBtn"><span>Confirm</span></button>
+                                        </div>
+                                    </div>
+                                    <p id="email_otp_error"></p>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            {{-- Phone Number --}}
+                            <div class="row">
                                 <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="01*********">
-
+                                    <div class="input-group">
+                                        <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="01*********">
+                                        <div class="input-group-append">
+                                            <button onclick="validateMobileNumber()" id="otp-phone-sending-btn" class="otp-style-btn theme-btn btn-item" type="button"> <span id="otp-phone-sending-btn-html">Send Otp</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p id="phone-otp-sending-message"></p>
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-none" id="phone_verification_box" >
+                                <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Verify Otp') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input id="phone-otp" type="text" class="form-control @error('phone_otp') is-invalid @enderror" name="phone_otp" placeholder="Enter Otp">
+                                        <div class="input-group-append">
+                                            <button class="otp-style-btn theme-btn btn-item" onclick="validateMobileOtp()" type="button" id="verifyBtn"><span>Confirm</span></button>
+                                        </div>
+                                    </div>
+                                    <p id="phone_otp_error"></p>
                                 </div>
                             </div>
 
@@ -115,16 +147,4 @@
     </div>
 </section>
 @endsection
-
-<!-- Email input -->
-<input type="email" id="email" name="email" placeholder="Enter your email" onchange="validateEmail()">
-
-<!-- Message Area -->
-<div id="message"></div>
-
-<!-- OTP input -->
-<input type="text" id="otp" name="otp" placeholder="Enter OTP" style="display:none;">
-<button type="button" id="verifyBtn" style="display:none;" onclick="verifyOTP()">Verify OTP</button>
-
-<!-- CSRF token for AJAX request -->
 

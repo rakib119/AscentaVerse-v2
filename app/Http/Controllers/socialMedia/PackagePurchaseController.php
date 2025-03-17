@@ -356,7 +356,9 @@ class PackagePurchaseController extends Controller
 
     public function pay_renewal_fees()
     {
-        $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewal_fee')->where('status_active',1)->where('id',1)->where('is_deleted',0)->get();
+        $package_mst_id = DB::table('package_purchase_mst')->select('package_mst_id')->where(['user_id'=>auth()->id(),'payment_for'=>1,'payment_status'=>1,'status_active'=>1,'is_deleted'=>0])->first()->package_mst_id;
+
+        $package = SocialPackageMst::select('id','package_name','short_desc','price','discount_per','discounted_amount','renewal_fee')->where(['status_active'=>1,'is_deleted'=>0,'id'=>$package_mst_id])->get();
         $package_features = SocialPackageFeatureDtls::select('id','mst_id','feature','short_desc')->where('status_active',1)->where('is_deleted',0)->get();
         return view('socialMedia.pages.renewal_fees', compact('package','package_features'));
     }
