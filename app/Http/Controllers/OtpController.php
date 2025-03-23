@@ -16,7 +16,7 @@ class OtpController extends Controller
     {
         // Validate email format
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
         ]);
 
         $email = $request->email; // Email to send OTP to
@@ -28,8 +28,8 @@ class OtpController extends Controller
         Session::put('email_otp_created_at', now());
 
         // Send notification to email
-        Notification::route('mail', $email)
-            ->notify(new SendOtpNotification($otp));
+        // Notification::route('mail', $email)
+            // ->notify(new SendOtpNotification($otp));
 
         return response()->json([
             'success' => true,
@@ -104,14 +104,15 @@ class OtpController extends Controller
         Session::put('phone_number', $phone);
         Session::put('phone_otp_created_at', now());
 
-        // Send notification to email
-        // Notification::route('mail', $email)
-        //     ->notify(new SendOtpNotification($otp));
+        $msg = "Your OTP for Registration is:$otp. (". env('APP_NAME').")";
+        // Send OTP via SMS
+        $sms_response = send_sms($phone,$msg);
 
         return response()->json([
             'success' => true,
             'message' => 'OTP sent successfully!',
             'otp' => $otp,
+            'sms_response' => $sms_response,
         ]);
     }
 

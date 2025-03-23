@@ -516,4 +516,27 @@ if (!function_exists('store_notification')) {
         }
     }
 }
+if (!function_exists('send_sms')) {
+
+    function send_sms($phnNmbr,$msg) {
+        $url = "https://sms.mram.com.bd/smsapips";
+        $data = [
+          "api_key" => "C300166767e02d902080f9.18576701",
+          "type" => "text/unicode",
+          "contacts" => "$phnNmbr",
+          "senderid" => "ASCENTA ASV",
+          "purpose" => "OTP",
+          "msg" => "$msg",
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+      }
+}
 ?>
