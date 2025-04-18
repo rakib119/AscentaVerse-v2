@@ -519,12 +519,12 @@ if (!function_exists('store_notification')) {
 if (!function_exists('send_sms')) {
 
     function send_sms($phnNmbr,$msg) {
-        $url = "https://sms.mram.com.bd/smsapips";
+        $url = env('SMS_GETWAY_API_URL');
         $data = [
-          "api_key" => "C300166767e02d902080f9.18576701",
+          "api_key" => env('SMS_GETWAY_API_KEY'),
           "type" => "text/unicode",
           "contacts" => "$phnNmbr",
-          "senderid" => "ASCENTA ASV",
+          "senderid" => env('SMS_GETWAY_API_SENDER_ID'),
           "purpose" => "OTP",
           "msg" => "$msg",
         ];
@@ -537,6 +537,6 @@ if (!function_exists('send_sms')) {
         $response = curl_exec($ch);
         curl_close($ch);
         return $response;
-      }
+    }
 }
 ?>

@@ -1,6 +1,6 @@
 @extends('fontend.layout.layout')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/intlTelInput.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/intlTelInput.min.css') }}"> --}}
 @endsection
 @section('mainContent')
 <!-- Banner One -->
@@ -164,7 +164,7 @@
 
 @section('javaScricpt')
     <script src="{{asset('assets/js/otpValidation.js')}}"></script>
-    <script src="{{ asset('assets/js/intlTelInput.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/intlTelInput.min.js') }}"></script>
     <script>
         var countryData = window.intlTelInputGlobals.getCountryData(),
         input = document.querySelector("#phone"),
@@ -243,5 +243,5 @@
         // on keyup / change flag: reset
         input.addEventListener('change', reset);
         input.addEventListener('keyup', reset);
-    </script>
+    </script> --}}
 @endsection

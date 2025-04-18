@@ -156,7 +156,7 @@ function validateMobileNumber() {
     let otpInput    = $('#phone_verification_box');
     let otpBtn      = $('#otp-phone-sending-btn');
     let otpBtnText  = $('#otp-phone-sending-btn-html');
-    let phoneOtp    = $('#phone-otp').val();
+    let phoneOtp    = $('#phone-otp');
 
     // Basic phone Validation using regular expression
     let phoneRegex = /^(?:\+88|88)?01[3-9]\d{8}$/;
