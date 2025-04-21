@@ -30,26 +30,27 @@
                             <div class="card-body">
                                 <h2 class="header-title mb-4">Purchase List</h2>
                                 <div class="table-responsive">
-                                    <table id="myTable" class="table table-centered table-nowrap mb-0">
+                                    <table id="myTable" class="table table-centered table-nowrap mb-0" width="710">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th style="width:30px">SL</th>
-                                                <th style="width:40px">Img</th>
-                                                <th style="width:40px">Purchase For</th>
-                                                <th style="width:40px">Purchase By</th>
-                                                <th style="width:40px">Pkg Name</th>
-                                                <th style="width:40px">Sub Pkg Name</th>
-                                                <th style="width:40px">Pkg Value</th>
-                                                <th style="width:40px">Dist. %</th>
-                                                <th style="width:40px">Payment</th>
-                                                <th style="width:40px">Bank Name</th>
-                                                <th style="width:40px">Branch</th>
-                                                <th style="width:40px">Acc. Holder</th>
-                                                <th style="width:40px">Acc. No</th>
-                                                <th style="width:40px">Trnx Id	</th>
-                                                <th style="width:40px">Com. Acc</th>
-                                                <th style="width:40px">Remarks</th>
-                                                <th style="width:40px">Action</th>
+                                                <th width="30">SL</th>
+                                                <th width="40">Img</th>
+                                                <th width="40">Purchase For</th>
+                                                <th width="40">Purchase By</th>
+                                                <th width="40">Pkg Name</th>
+                                                <th width="40">Sub Pkg Name</th>
+                                                <th width="40">Pkg Value</th>
+                                                <th width="40">Dist. %</th>
+                                                <th width="40">Payment</th>
+                                                <th width="40">Bank Name</th>
+                                                <th width="40">Branch</th>
+                                                <th width="40">Acc. Holder</th>
+                                                <th width="40">Acc. No</th>
+                                                <th width="40">Trnx Id	</th>
+                                                <th width="40">Com. Acc</th>
+                                                <th width="40">Payment Status</th>
+                                                <th width="40">Remarks</th>
+                                                <th width="40">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

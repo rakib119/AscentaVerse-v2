@@ -42,6 +42,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>Verification Code</th>
                                                 <th>Details</th>
                                             </tr>
                                         </thead>
@@ -52,6 +53,7 @@
                                                 <td>{{ $user->name}}</td>
                                                 <td>{{ $user->email}}</td>
                                                 <td>{{ $user->mobile}}</td>
+                                                <td>{{ $user->verification_code}}</td>
                                                 <td>
                                                     @if ($user->user_id )
                                                         <a class="btn btn-success" href="{{route('user.details',
