@@ -281,7 +281,22 @@
                             <div class="dropdown-user-avatar">
                                 <img src="{{ asset('social-media/assets/images/uploaded_img/'.$thumbnail_profile)}}" alt="">
                             </div>
-                            <div class="dropdown-user-name"> {{auth()->user()->name}} </div>
+                            <div class="dropdown-user-name" style="display: flex; justify-content:center; align-items:center;">
+                                <div>
+                                    {{auth()->user()->name}}
+                                </div>
+                                <div style="margin-left: 5px;">
+                                    @if (auth()->user()->is_verified==1)
+                                        <img style="height: 25px !important;" src="{{ asset('social-media/assets/images/verify.png') }}" class="verified-badge" uk-tooltip="title: Verified Account ; pos: bottom ;offset:7">
+                                    @endif
+                                </div>
+                                {{-- {{auth()->user()->name}}
+                                @if (auth()->user()->is_verified==1)
+                                    <span style="color: #1a73e8;" class="verified-badge" uk-tooltip="title: Verified Account ; pos: bottom ;offset:7">
+                                        <i class="icon-feather-check-circle"></i>
+                                    </span>
+                                @endif --}}
+                            </div>
                         </div>
 
                     </a>

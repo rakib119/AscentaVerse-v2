@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notifications\SendOtpNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 
@@ -28,13 +29,13 @@ class OtpController extends Controller
         Session::put('email_otp_created_at', now());
 
         // Send notification to email
-        Notification::route('mail', $email)
-            ->notify(new SendOtpNotification($otp));
+        // Notification::route('mail', $email)
+        //     ->notify(new SendOtpNotification($otp));
 
         return response()->json([
             'success' => true,
             'message' => 'OTP sent successfully!',
-            // 'otp' => $otp,
+            'otp' => $otp,
         ]);
     }
 
@@ -72,6 +73,7 @@ class OtpController extends Controller
         // Validate OTP
         if ($enteredOtp == $sessionOtp) {
             Session::put('verified_email_address', $email_address);
+            Session::put('email_verified_at', Carbon::now());
             // Clean up session after successful verification
             Session::forget(['email_otp', 'email_address', 'otp_created_at']);
 
@@ -106,13 +108,13 @@ class OtpController extends Controller
 
         $msg = "Your OTP for Registration is:$otp. (". env('APP_NAME').")";
         // Send OTP via SMS
-        $sms_response = send_sms($phone,$msg);
+        // $sms_response = send_sms($phone,$msg);
 
         return response()->json([
             'success' => true,
             'message' => 'OTP sent successfully!',
-            // 'otp' => $otp,
-            'sms_response' => $sms_response,
+            'otp' => $otp,
+            // 'sms_response' => $sms_response,
         ]);
     }
 
@@ -150,6 +152,7 @@ class OtpController extends Controller
         // Validate OTP
         if ($enteredOtp == $sessionOtp) {
             Session::put('verified_phone_number', $phone_number);
+            Session::put('phone_number_verified_at', Carbon::now());
             // Clean up session after successful verification
             Session::forget(['phone_otp', 'phone_number', 'phone_otp_created_at']);
 

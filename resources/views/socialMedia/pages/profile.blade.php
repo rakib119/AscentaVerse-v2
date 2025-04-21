@@ -39,10 +39,20 @@
                         <input id="profilePhoto" style="display: none;" type="file" accept="jpg,png"  onchange="cropImage(this,1,260,260,'profile_photo_view')">
 
                     </div>
-                    <div class="profile-details-info">
-                        <h1> {{auth()->user()->name}} </h1>
-                        {{-- <p> Family , Food , Fashion , Fourever <a href="#">Edit </a></p> --}}
+                    <div class="profile-details-info" style="display: flex;align-items: center; justify-content: center;">
+                        <div>
+                            <h1> {{auth()->user()->name}} </h1>
+                        </div>
+                        <div style="margin-left: 5px;">
+                            @if (auth()->user()->is_verified==1)
+                                <img style="height: 35px !important;" src="{{ asset('social-media/assets/images/verify.png') }}" class="verified-badge" uk-tooltip="title: Verified Account ; pos: bottom ;offset:7">
+                            @endif
+                        </div>
+
                     </div>
+                    @if (auth()->user()->verification_code)
+                        <h5> Verification Code: <span style="color: #1a73e8">{{auth()->user()->verification_code}}</span> </h5>
+                    @endif
 
                 </div>
 

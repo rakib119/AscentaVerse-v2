@@ -56,9 +56,7 @@
                                     </div>
                                     <p id="otp-sending-message"></p>
                                     @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <p class="text-danger"> {{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -91,9 +89,7 @@
                                     <p class="my-2 text-danger" id="valid-msg"></p>
                                     <p class="my-2 text-danger" id="error-msg"></p>
                                     @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -121,9 +117,7 @@
                                     </div>
                                     <span class="my-2 text-danger " id="newPasswordError"></span>
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>

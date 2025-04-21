@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -50,8 +51,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' =>  ['required', 'string', 'max:30', 'unique:users'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'phone' =>  ['required', 'string', 'max:30', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $verified_email         = Session::get('verified_email_address');
+        $email_verified_at      = Session::get('email_verified_at');
+        $verified_phone_number  = Session::get('verified_phone_number');
+        $phone_num_verified_at  = Session::get('phone_number_verified_at');
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
+            'email' => $verified_email,
+            'phone_number' => $verified_phone_number,
+            'email_verified_at' => $email_verified_at ,
+            'phone_number_verified_at' => $phone_num_verified_at,
+            'phone_number_verified_at' => $phone_num_verified_at,
             'password' => Hash::make($data['password']),
         ]);
     }
