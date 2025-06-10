@@ -47,7 +47,7 @@ class TeamController extends Controller
             'phone'=>'required|max:40',
             'email'=>'required|max:200',
             'address'=>'required|max:255',
-            'short_description'=>'required|max:500',
+            // 'short_description'=>'required|max:500',
             'description'=>'nullable|max:3500',
         ]);
 
@@ -81,7 +81,7 @@ class TeamController extends Controller
                     'email'                 =>  $request->email,
                     'details_title'         =>  $request->details_title,
                     'address'               =>  $request->address,
-                    'short_description'     =>  $request->short_description,
+                    // 'short_description'     =>  $request->short_description,
                     'description'           =>  $request->description,
                     'section_id'            =>  8,
                     'is_displayed_in_home'  =>  $is_displayed,
@@ -177,7 +177,7 @@ class TeamController extends Controller
             'phone'=>'required|max:40',
             'email'=>'required|max:200',
             'address'=>'required|max:255',
-            'short_description'=>'required|max:500',
+            // 'short_description'=>'required|max:500',
             'description'=>'nullable|max:3500',
         ]);
         try
@@ -243,7 +243,7 @@ class TeamController extends Controller
                 $service->email                 = $request->email;
                 $service->details_title         = $request->details_title;
                 $service->address               = $request->address;
-                $service->short_description     = $request->short_description;
+                // $service->short_description     = $request->short_description;
                 $service->description           = $request->description;
                 $service->is_displayed_in_home  = $is_displayed;
                 // $service->slug = Str::slug($request->name)."-".strtotime(Carbon::now()) ;

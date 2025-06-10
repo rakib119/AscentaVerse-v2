@@ -30,7 +30,7 @@
                             style="background-image: url({{asset('assets/images/teams/'.$v->photo)}}); background-size: cover;">
                             <div class="overlay"></div>
                             <div class="item--holder-inner">
-                                <div class="item--desc"> {{ Str::substr($v->short_description,0, 30) }}...</div>
+                                <div class="item--desc"> &nbsp;&nbsp;&nbsp;</div>
                                 <h4 class="item--title"><a href="{{ route('team_details',$v->slug)}}">{{ $v->name }}</a></h4>
                                 <div class="item--position">{{ $v->designation }}</div>
                                 <div class="item--social">

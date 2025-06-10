@@ -256,7 +256,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-12 d-none">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="short_description">Short Description <span class="text-danger">*&nbsp;&nbsp;NB: max 500 characters</span></label>
 
@@ -360,7 +360,7 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Name </th>
-                                            <th>Short Desc. </th>
+                                            {{-- <th>Short Desc. </th> --}}
                                             <th>Button Name. </th>
                                             <th>Displayed </th>
                                             <th>Img. </th>
@@ -372,7 +372,7 @@
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{ Str::substr($v->name, 0, 50)."..."}}</td>
-                                            <td>{{ Str::substr($v->short_description, 0, 50)."..." }}</td>
+                                            {{-- <td>{{ Str::substr($v->short_description, 0, 50)."..." }}</td> --}}
                                             <td>{{ $v->button_name }}</td>
                                             <td> <span class="badge bg-{{ $v->is_displayed_in_home==1 ? 'primary' : 'warning' }}">{{ $v->is_displayed_in_home==1 ? 'Home' : 'Service' }}</span> </td>
                                             <td>

@@ -163,7 +163,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-12 d-none">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="short_description">Short Description <span class="text-danger">*&nbsp;&nbsp;NB: max 500 characters</span></label>
 
