@@ -3,6 +3,7 @@
 @endphp
 @extends('fontend.layout.layout')
 @section('mainContent')
+    @if ($data)
     <!-- Page Title -->
     <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$blog_background)}})">
         <div class="auto-container">
@@ -95,5 +96,28 @@
 			</div>
 		</div>
 	</section>
+    @else
+        <!-- Page Title -->
+    <section class="page-title" style="background-image:url({{asset('assets/images/info/'.$blog_background)}})">
+        <div class="auto-container">
+			<h2>Team Member Details</h2>
+			<ul class="bread-crumb clearfix">
+				<li><a href="{{route('home')}}">Home</a></li>
+				<li><a href="#">Team Member Details</a></li>
+				<li></li>
+			</ul>
+        </div>
+    </section>
+    <!-- End Page Title -->
+
+	<section class="about-two">
+		<div class="about-two_pattern-two" style="background-image:url({{asset('assets/images/background/pattern-13.png')}})"></div>
+		<div class="auto-container">
+			<div class="row">
+				<h2 class="text-center text-danger"> 404 Not Found </h2>
+			</div>
+		</div>
+	</section>
+    @endif
 
 @endsection
