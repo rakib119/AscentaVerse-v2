@@ -239,7 +239,7 @@
                                                     <label class="form-label" for="icon3">Icon 3 <span class="text-danger">*</span></label>
                                                     <select id="icon3" type="text" class="form-control" name="icon3">
                                                         @foreach ($social_icons as $icon)
-                                                            <option {{ old('icon3')== $icon->id ? 'selected':3}} value="{{$icon->id}}" >{{$icon->name}}</option>
+                                                            <option {{ old('icon3')== $icon->id ? 'selected':''}} value="{{$icon->id}}" >{{$icon->name}}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('icon3')
