@@ -42,7 +42,10 @@
                         <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="mb-2 d-flex">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <i class="fas fa-eye-slash" id="loginTogglePassword" style="margin:auto -30px; cursor: pointer;"></i></i>
+                            </div>
 
                             @error('password')
                                 <p class="text-danger">{{ $message }}</p>
@@ -91,4 +94,7 @@
         </div>
     </div>
 </section>
+@endsection
+@section('javaScricpt')
+    <script src="{{asset('assets/js/otpValidation.js')}}"></script>
 @endsection

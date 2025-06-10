@@ -211,6 +211,12 @@
             </td>
         </tr>
         <tr>
+            <td colspan="2">
+                <label >Address</label>
+                <input type="text" value="{{ $address ?? '&nbsp;' }}" >
+            </td>
+        </tr>
+        <tr>
             <td>
                 <label >Religion</label>
                 <div class="select-container">
@@ -266,6 +272,12 @@
             <td>
                 <label>Last Name</label>
                 <input type="text" value="{{ $father_last_name ?? '&nbsp;' }}" >
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label >Address</label>
+                <input type="text" value="{{ $father_address ?? '&nbsp;' }}" >
             </td>
         </tr>
         <tr>
@@ -325,6 +337,12 @@
             </td>
         </tr>
         <tr>
+            <td colspan="2">
+                <label >Address</label>
+                <input type="text" value="{{ $mother_address ?? '&nbsp;' }}" >
+            </td>
+        </tr>
+        <tr>
             <td>
                 <label >Profession</label>
                 @php $mother_profession = isset($mother_profession) ? $mother_profession : ""; @endphp
@@ -381,6 +399,12 @@
             </td>
         </tr>
         <tr>
+            <td colspan="2">
+                <label >Address</label>
+                <input type="text" value="{{ $emergency_address ?? '&nbsp;' }}" >
+            </td>
+        </tr>
+        <tr>
             <td>
                 <label>Relation</label>
                 <input type="text"  value="{{ $emergency_relation ?? '&nbsp;' }}">
@@ -420,7 +444,7 @@
         <hr />
         <b>Terms &amp; Conditions</b>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi euismod scelerisque pellentesque. Nullam at urna cursus, efficitur sapien vitae, porttitor tellus. Aliquam quis semper nisi. Morbi euismod scelerisque pellentesque. Nullam at urna cursus, efficitur sapien vitae, porttitor tellus.
+          <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi euismod scelerisque pellentesque. Nullam at urna cursus, efficitur sapien vitae, porttitor tellus. Aliquam quis semper nisi. Morbi euismod scelerisque pellentesque. Nullam at urna cursus, efficitur sapien vitae, porttitor tellus.-->
         </p>
       </aside>
 </body>

@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('father_first_name',80)->nullable();
             $table->string('father_middle_name',80)->nullable();
             $table->string('father_last_name',80)->nullable();
+            $table->text('father_address',400)->nullable();
             $table->integer('father_profession')->nullable();
             $table->integer('father_religion')->nullable();
             $table->string('father_mobile',15)->nullable();
@@ -61,6 +62,7 @@ return new class extends Migration
             $table->string('mother_first_name',80)->nullable();
             $table->string('mother_middle_name',80)->nullable();
             $table->string('mother_last_name',80)->nullable();
+            $table->text('mother_address',400)->nullable();
             $table->integer('mother_profession')->nullable();
             $table->integer('mother_religion')->nullable();
             $table->string('mother_mobile',15)->nullable();
@@ -78,6 +80,7 @@ return new class extends Migration
             $table->string('emergency_first_name',80)->nullable();
             $table->string('emergency_middle_name',80)->nullable();
             $table->string('emergency_last_name',80)->nullable();
+            $table->text('emergency_address',400)->nullable();
             $table->integer('emergency_profession')->nullable();
             $table->integer('emergency_religion')->nullable();
             $table->string('emergency_relation')->nullable();

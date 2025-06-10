@@ -360,6 +360,20 @@ $('#newPassword').keyup(function() {
     clear_pass_error();
 });
 
+$('#loginTogglePassword').click(function() {
+    var icon = $("#loginTogglePassword");
+    var passInput = $("#password");
+    if (passInput.attr('type') === 'password') {
+        passInput.attr('type', 'text');
+        icon.removeClass('fa-eye-slash');
+        icon.addClass('fa-eye');
+    } else {
+        passInput.attr('type', 'password');
+        icon.removeClass('fa-eye');
+        icon.addClass('fa-eye-slash');
+    }
+});
+
 function clear_pass_error(){
     var newPassword     = $('#newPassword').val();
     var confirmPassword = $('#confirmPassword').val();

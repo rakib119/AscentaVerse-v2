@@ -76,7 +76,7 @@
                                         <input type="text" name="first_name" class="form-control"  value="{{ $first_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold">Middle Name *</label>
+                                        <label class="form-label fw-bold">Middle Name</label>
                                         <input type="text" class="form-control" value="{{ $middle_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
@@ -87,15 +87,15 @@
                                         <label class="form-label fw-bold">Gender *</label>
                                         <div class="d-flex">
                                             <div class="form-check ">
-                                                <input class="form-check-input" type="radio" value="1" {{ isset($gender) && $gender == 1 ? 'checked' : '' }} readonly>
+                                                <input class="form-check-input" type="radio" value="1" {{ isset($gender) && $gender == 1 ? 'checked' : '' }} disabled>
                                                 <label class="form-check-label">Male</label>
                                             </div>
                                             <div class="form-check px-5">
-                                                <input class="form-check-input" type="radio" value="2" {{ isset($gender) && $gender == 2 ? 'checked' : '' }} readonly>
+                                                <input class="form-check-input" type="radio" value="2" {{ isset($gender) && $gender == 2 ? 'checked' : '' }} disabled>
                                                 <label class="form-check-label">Female</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="3" {{ isset($gender) && $gender == 3 ? 'checked' : '' }} readonly>
+                                                <input class="form-check-input" type="radio" value="3" {{ isset($gender) && $gender == 3 ? 'checked' : '' }} disabled>
                                                 <label class="form-check-label">Other</label>
                                             </div>
                                         </div>
@@ -140,6 +140,7 @@
                                         @php $profession = isset($profession) ? $profession : ""; @endphp
                                         {!! createDropDownBootstrap( "profession", "", $professionArray, "", 1, "-- Select --", "$profession", "", 1, 0 ) !!}
                                     </div>
+
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Religion *</label>
                                         <div class="form-group">
@@ -220,12 +221,16 @@
                                         <input type="text" name="first_name" class="form-control"  value="{{ $father_first_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold">Middle Name *</label>
+                                        <label class="form-label fw-bold">Middle Name</label>
                                         <input type="text" class="form-control" value="{{ $father_middle_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Last Name *</label>
                                         <input type="text"  class="form-control" value="{{ $father_last_name ?? '' }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Address *</label>
+                                        <textarea readonly class="form-control" rows="1">{{ $father_address ?? '' }}</textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Profession *</label>
@@ -280,12 +285,16 @@
                                         <input type="text" name="first_name" class="form-control"  value="{{ $mother_first_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold">Middle Name *</label>
+                                        <label class="form-label fw-bold">Middle Name</label>
                                         <input type="text" class="form-control" value="{{ $mother_middle_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Last Name *</label>
                                         <input type="text"  class="form-control" value="{{ $mother_last_name ?? '' }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Address *</label>
+                                        <textarea readonly class="form-control" rows="1">{{ $mother_address ?? '' }}</textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Profession *</label>
@@ -340,7 +349,7 @@
                                         <input type="text" name="first_name" class="form-control"  value="{{ $emergency_first_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold">Middle Name *</label>
+                                        <label class="form-label fw-bold">Middle Name</label>
                                         <input type="text" class="form-control" value="{{ $emergency_middle_name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-md-6">
@@ -351,6 +360,10 @@
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Relation *</label>
                                         <input type="text"  class="form-control" value="{{ $emergency_relation ?? '' }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Address *</label>
+                                        <textarea readonly class="form-control" rows="1">{{ $emergency_address ?? '' }}</textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold">Profession *</label>

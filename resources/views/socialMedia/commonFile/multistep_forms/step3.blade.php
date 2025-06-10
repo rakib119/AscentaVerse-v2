@@ -40,6 +40,11 @@
                 <div class="uk-text-danger" id="father_last_name_error"></div>
             </div>
             <div>
+                <h5 class="uk-text-bold mb-2"> Address *</h5>
+                <textarea class="uk-textarea text_boxes" rows="1" name="father_address"  placeholder="Address">{{$father_address??''}}</textarea>
+                <div class="uk-text-danger" id="father_address"></div>
+            </div>
+            <div>
                 <h5 class="uk-text-bold mb-2"> Profession *</h5>
                 <div class="uk-form-controls">
                     @php
@@ -100,6 +105,11 @@
                 <h5 class="uk-text-bold mb-2"> Last Name</h5>
                 <input type="text" name="mother_last_name" id="mother_last_name" onkeyup="completeFull_name('mother_first_name*mother_middle_name*mother_last_name', 'mother_full_name')" class="uk-input text_boxes_uppercase" placeholder="Last Name" value="{{ $mother_last_name ?? ''}}" >
                 <div class="uk-text-danger" id="mother_last_name_error"></div>
+            </div>
+            <div>
+                <h5 class="uk-text-bold mb-2"> Address *</h5>
+                <textarea class="uk-textarea text_boxes" rows="1" name="mother_address"  placeholder="Address">{{$mother_address??''}}</textarea>
+                <div class="uk-text-danger" id="mother_address"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Profession *</h5>
@@ -167,6 +177,11 @@
                 <h5 class="uk-text-bold mb-2"> Relation *</h5>
                 <input type="text" name="emergency_relation" class="uk-input text_boxes" placeholder="Relation" value="{{ $emergency_relation ?? ''}}" >
                 <div class="uk-text-danger" id="emergency_relation_error"></div>
+            </div>
+            <div>
+                <h5 class="uk-text-bold mb-2"> Address *</h5>
+                <textarea class="uk-textarea text_boxes" rows="1" name="emergency_address"  placeholder="Address">{{$emergency_address??''}}</textarea>
+                <div class="uk-text-danger" id="emergency_address"></div>
             </div>
             <div>
                 <h5 class="uk-text-bold mb-2"> Profession *</h5>
