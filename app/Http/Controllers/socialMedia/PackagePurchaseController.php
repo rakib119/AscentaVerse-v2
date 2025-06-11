@@ -10,8 +10,10 @@ use App\Models\SocialPackageFeatureDtls;
 use App\Models\SocialPackageMst;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PackagePurchaseController extends Controller
 {
@@ -340,8 +342,37 @@ class PackagePurchaseController extends Controller
 
         return view('dashboard.socialMedia.package_purchage_history.index', compact('history'));
     }
-    public function update_purchage_status(Request $request, string $id)
+    public function package_purchage_details(string $encrypt_id)
     {
+        try {
+            $id = Crypt::decrypt($encrypt_id);
+        } catch (\Exception $e) {
+            return back()->with('page_error', 'Invalid package purchase ID.');
+        }
+
+        $data = DB::table('package_purchase_mst','a')
+        ->leftJoin('users as b', 'b.id', '=','a.user_id' )
+        ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
+        ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
+        ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
+        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks' )
+        ->where('a.id', $id)
+        ->orderBy('a.id','desc')
+        ->first();
+        if (!$data) {
+            return back()->with('page_error', 'Data not found.');
+        }
+
+        return view('dashboard.socialMedia.package_purchage_history.show', compact('data'));
+    }
+    public function update_purchage_status(Request $request, string $encrypt_id)
+    {
+        try {
+            $id = Crypt::decrypt($encrypt_id);
+        } catch (\Exception $e) {
+            return back()->with('page_error', 'Invalid package purchase ID.');
+        }
+
         $info = PackagePurchaseMst::findOrFail($id);
         $info->payment_status   = $request->status;
         $info->updated_by       = auth()->id();
@@ -478,5 +509,37 @@ class PackagePurchaseController extends Controller
     public function make_payment()
     {
         return view('socialMedia.pages.make_payment');
+    }
+
+    public function generatePDF(string $encrypt_id)
+    {
+        try {
+            $id = Crypt::decrypt($encrypt_id);
+        } catch (\Exception $e) {
+            return back()->with('page_error', 'Invalid package purchase ID.');
+        }
+
+        $data = DB::table('package_purchase_mst','a')
+        ->leftJoin('users as b', 'b.id', '=','a.user_id' )
+        ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
+        ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
+        ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
+        ->select('a.package_mst_id','a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','b.verification_code','b.email','b.phone_number','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.created_at','a.updated_at','a.remarks' )
+        ->where('a.id', $id)
+        ->where('a.payment_status', 1) // Only verified payments
+        ->first();
+        if (!$data) {
+            return back()->with('page_error', 'Data not found. or payment request is not verified yet.');
+        }
+
+        try {
+            $date        = Carbon::now();
+            // return view('dashboard.pdf.purchase_invoice',compact('data','date'));
+            $html        = view('dashboard.pdf.purchase_invoice',compact('data','date'))->render();
+            $pdf         = Pdf::loadHTML($html);
+            return $pdf->stream("invoice-".$date.'.pdf');
+        } catch (\Exception $e) {
+            return  back()->with('page_error', $e->getMessage());
+        }
     }
 }

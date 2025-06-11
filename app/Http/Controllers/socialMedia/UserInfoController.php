@@ -454,7 +454,7 @@ class UserInfoController extends Controller
             $user       = DB::table('users')->where('id',$user_id)->first();
             $data       = DB::table('genarel_infos')->select('field_name','value')->get();
             if (!$user->verification_code) {
-                return back()->with('error','User not verified');
+                return back()->with('page_error','User not verified');
             }
             $dataArray  = array();
             foreach ($data as $v)
@@ -474,7 +474,7 @@ class UserInfoController extends Controller
             $date        = Carbon::now();
             return $pdf->stream($date.'.pdf');
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return back()->with('page_error',$e->getMessage());
         }
     }
     public function generatePDF3($id)

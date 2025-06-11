@@ -183,6 +183,16 @@ $home_link =  route('dashboard');
         </script>
     @endif
 
+    @if (session('page_error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "{{ session('page_error') }}",
+            });
+        </script>
+    @endif
+
     {{-- Script Yield --}}
     @yield('javacript')
 </body>

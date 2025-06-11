@@ -130,8 +130,10 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::resource('content', DynamicContentController::class);
 
     //Package Purchase History
-    Route::get('/package-purchage-history', [PackagePurchaseController::class, 'package_purchage_history'])->name('packagePurchage.history');
-    Route::post('/package-purchage-status-update/{id}', [PackagePurchaseController::class, 'update_purchage_status'])->name('packagePurchage.status-update');
+    Route::get('/package/purchase/history', [PackagePurchaseController::class, 'package_purchage_history'])->name('packagePurchage.history');
+    Route::get('/package/purchase/details/{id}', [PackagePurchaseController::class, 'package_purchage_details'])->name('packagePurchage.details');
+    Route::post('/package/purchase/status/update/{id}', [PackagePurchaseController::class, 'update_purchage_status'])->name('packagePurchage.status-update');
+    Route::get('/package/purchase/invoice/{id}', [PackagePurchaseController::class, 'generatePDF'])->name('packagePurchase.invoice');
     //NOTIFICATION
     Route::resource('notification', NotificationController::class);
 
