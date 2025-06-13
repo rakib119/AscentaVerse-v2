@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('email_replies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('subject');
-            $table->integer('status')->default(0);
-            $table->integer('is_replied')->default(0);
+            $table->integer('contact_id');
+            $table->text('subject');
+            $table->text('body');
+            $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
-            $table->integer('created_by')->default(0);
-            $table->text('message');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('email_replies');
     }
 };

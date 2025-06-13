@@ -28,7 +28,7 @@
              </div>
             </div>
          </div>
-       <div class="container-fluid">
+        <div class="container-fluid">
             <div class="page-content-wrapper">
                 <div class="row">
                     <div class="col-xl-12">
@@ -83,30 +83,37 @@
                 </div>
             </div>
         </div>
+        {{-- MESSAGES --}}
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title mb-4">New Messages</h4>
                     <div class="table-responsive">
-                        <table id="usersTable" class="table table-centered table-nowrap mb-0">
+                        <table id="messagesTable" class="table table-centered table-nowrap mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th>SL</th>
                                     <th>Name</th>
                                     <th>Subject</th>
-                                    <th>Message</th>
+                                    <th>Is Replied?</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($messages as $message)
-                                <tr>
+                                <tr style="background:{{ $message->status==0 ? 'linear-gradient(rgb(88, 88, 88) 0%, rgb(17, 17, 17) 100%)' : '#FFF' }} ;color:{{ $message->status==0 ? '#FFF' : '#495057' }} ;">
                                     <td>{{$loop->index+1}}</td>
-                                    <td>{{ $message->name}}</td>
-                                    <td>{{ $message->subject}}</td>
-                                    <td>{{ $message->message}}</td>
+                                    <td>{{ Str::substr($message->name, 0, 25) }} {{Str::length($message->name)>25 ? "...":""}} </td>
+                                    <td>{{ Str::substr($message->subject, 0, 70) }} {{Str::length($message->subject)>70 ? "...":""}}</td>
                                     <td>
-                                        <a class="btn btn-success" href="{{route('contact.show', $message->id)}}">Details</a>
+                                        @if ($message->is_replied)
+                                            <span class="badge bg-success">Replied</span>
+                                        @else
+                                            <span class="badge bg-danger">Not Replied</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" href="{{route('contact.show', Crypt::encrypt($message->id))}}">Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -116,40 +123,45 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title mb-4">Users</h4>
-                    <div class="table-responsive">
-                        <table id="messagesTable" class="table table-centered table-nowrap mb-0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Details</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ( $users->where('is_admin','!=','1') as $user)
-                                <tr>
-                                    <td>{{$loop->index+1}}</td>
-                                    <td>{{ $user->name}}</td>
-                                    <td>{{ $user->email}}</td>
-                                    <td>{{ $user->phone}}</td>
-                                    <td>
-                                        @if ($user->personalInfo && $user->fatherInfo && $user->motherInfo)
-                                            <a class="btn btn-success" href="{{route('user_details',$user->id)}}">Details</a>
-                                        @else
-                                            <span class="badge bg-warning">Not Available</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+        {{-- USER LIST --}}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="header-title mb-4">Users</h2>
+                        <div class="table-responsive">
+                            <table id="usersTable" class="table table-centered table-nowrap mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Verification Code</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ( $users as $user)
+                                    <tr>
+                                        <td>{{ $loop->index+1}}</td>
+                                        <td>{{ Str::substr($user->name, 0, 40) }}</td>
+                                        <td>{{ $user->email}}</td>
+                                        <td>{{ $user->mobile}}</td>
+                                        <td>{{ $user->verification_code}}</td>
+                                        <td>
+                                            @if ($user->user_id )
+                                                <a class="btn btn-success" href="{{route('user.details',
+                                                Crypt::encrypt($user->id))}}">Details</a>
+                                            @else
+                                                <span class="badge bg-warning">Not Available</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

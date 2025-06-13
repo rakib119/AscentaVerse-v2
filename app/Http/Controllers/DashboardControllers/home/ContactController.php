@@ -4,10 +4,15 @@ namespace App\Http\Controllers\DashboardControllers\home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\EmailReply;
 use App\Models\SingleSection;
+use App\Notifications\EmailReplyNotification;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Notification;
+use PharIo\Manifest\Email;
 
 class ContactController extends Controller
 {
@@ -73,15 +78,31 @@ class ContactController extends Controller
         return back()->with('success','Message sent successfully');
     }
 
-    public function show(Contact $contact)
+    public function show(string $encrypt_id)
     {
-        if (  $contact->status == 0) {
+        try {
+            $id = Crypt::decrypt($encrypt_id);
+        } catch (\Exception $e) {
+            return back()->with('page_error', 'Invalid URL.');
+        }
+
+        try {
+            $contact = Contact::findOrFail($id);
+            $replies = EmailReply::where('contact_id',$id)->get();
+        }
+        catch (Exception $e)
+        {
+            return back()->with('page_error',$e->getMessage());
+        }
+
+        if ( $contact->status == 0)
+        {
             $contact->status = 1;
             $contact->updated_by = auth()->id();
             $contact->save();
         }
 
-        return view('dashboard.contact.show',['message'=>$contact]);
+        return view('dashboard.contact.show',['message'=>$contact,'replies'=>$replies]);
     }
     public function update(Request $request, string $id)
     {
@@ -110,8 +131,48 @@ class ContactController extends Controller
         }
         catch (Exception $e)
         {
-            return back()->with('error',$e->getMessage());
+            return back()->with('page_error',$e->getMessage());
         }
+    }
+
+
+    public function email_reply(Request $request)
+    {
+        $request->validate([
+            'recipient' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        try {
+
+            // Send notification to email
+            // Notification::route('mail', $request->recipient)
+            // ->notify(new EmailReplyNotification($request));
+
+            //update contact status
+
+            $contact = Contact::find($request->contact_id);
+            $contact->is_replied = 1;
+            $contact->updated_by = auth()->id();
+            $contact->save();
+
+            //store the reply in the database
+            EmailReply::insert([
+                'contact_id' => $request->contact_id,
+                'subject'    => $request->subject,
+                'body'       => $request->message,
+                'created_by' => auth()->id(),
+                'created_at' => Carbon::now(),
+            ]);
+
+            return back()->with('success','Reply sent successfully');
+        }
+        catch (Exception $e)
+        {
+            return back()->with('page_error',$e->getMessage());
+        }
+
     }
 
 

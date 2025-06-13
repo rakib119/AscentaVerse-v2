@@ -18,9 +18,13 @@ class BackendController extends Controller
     public function dashboard()
     {
         // return session('permission_route');
-        $users = User::orderBy('id', 'DESC')->get();
+        $users = DB::table('users','a')
+            ->select('a.id','a.name','a.email','a.verification_code','b.is_final_submited','a.phone_number as mobile','b.user_id')
+            ->leftJoin('user_infos as b', 'a.id', '=', 'b.user_id')
+            ->orderBy('b.updated_at', 'DESC')
+            ->get();
         $teams =  Team::all();
-        $messages =  Contact::where('status', 0)->orderBy('id', 'DESC')->get();
+        $messages =  Contact::orderBy('id', 'DESC')->get(); //where('status', 0)->
         return view('dashboard.dashboard', compact('users', 'teams', 'messages'));
 
     }
@@ -34,8 +38,9 @@ class BackendController extends Controller
     public function user_list()
     {
         $users = DB::table('users','a')
-            ->select('a.id','a.name','a.email','a.verification_code','b.is_final_submited','b.mobile','b.user_id')
+            ->select('a.id','a.name','a.email','a.verification_code','b.is_final_submited','a.phone_number as mobile','b.user_id')
             ->leftJoin('user_infos as b', 'a.id', '=', 'b.user_id')
+            ->orderBy('b.updated_at', 'DESC')
             ->get();
 
         return view('dashboard.pages.users', compact('users'));

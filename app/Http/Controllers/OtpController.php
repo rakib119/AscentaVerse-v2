@@ -29,8 +29,8 @@ class OtpController extends Controller
         Session::put('email_otp_created_at', now());
 
         // Send notification to email
-        // Notification::route('mail', $email)
-        //     ->notify(new SendOtpNotification($otp));
+        Notification::route('mail', $email)
+            ->notify(new SendOtpNotification($otp));
 
         return response()->json([
             'success' => true,

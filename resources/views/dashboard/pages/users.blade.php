@@ -27,52 +27,52 @@
              </div>
             </div>
          </div>
-       <div class="container-fluid">
-            <div class="page-content-wrapper">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="header-title mb-4">Users</h2>
-                                <div class="table-responsive">
-                                    <table id="usersTable" class="table table-centered table-nowrap mb-0">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>SL</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Verification Code</th>
-                                                <th>Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ( $users->where('is_admin','!=','1') as $user)
-                                            <tr>
-                                                <td>{{ $loop->index+1}}</td>
-                                                <td>{{ $user->name}}</td>
-                                                <td>{{ $user->email}}</td>
-                                                <td>{{ $user->mobile}}</td>
-                                                <td>{{ $user->verification_code}}</td>
-                                                <td>
-                                                    @if ($user->user_id )
-                                                        <a class="btn btn-success" href="{{route('user.details',
-                                                        Crypt::encrypt($user->id))}}">Details</a>
-                                                    @else
-                                                        <span class="badge bg-warning">Not Available</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+        <div class="container-fluid">
+                <div class="page-content-wrapper">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="header-title mb-4">Users</h2>
+                                    <div class="table-responsive">
+                                        <table id="usersTable" class="table table-centered table-nowrap mb-0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>SL</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Verification Code</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ( $users as $user)
+                                                <tr>
+                                                    <td>{{ $loop->index+1}}</td>
+                                                    <td>{{ Str::substr($user->name, 0, 40) }}</td>
+                                                    <td>{{ $user->email}}</td>
+                                                    <td>{{ $user->mobile}}</td>
+                                                    <td>{{ $user->verification_code}}</td>
+                                                    <td>
+                                                        @if ($user->user_id )
+                                                            <a class="btn btn-success" href="{{route('user.details',
+                                                            Crypt::encrypt($user->id))}}">Details</a>
+                                                        @else
+                                                            <span class="badge bg-warning">Not Available</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-       </div>
+        </div>
     </div>
 </div>
 @endsection

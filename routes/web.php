@@ -76,6 +76,7 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
 
     //ABOUT
     Route::resource('contact', ContactController::class);
+    Route::post('email/reply',[ContactController::class, 'email_reply'])->name('email.reply');
 
     //PARTNERS
     Route::resource('homeS3Left', hs3LeftController::class)->only(['index','store','edit','update','destroy']);
