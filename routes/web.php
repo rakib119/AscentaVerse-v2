@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\DashboardControllers\social_media\NotificationController;
+use App\Http\Controllers\DashboarsController\BankManagementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\socialMedia\PackagePurchaseController;
@@ -76,7 +77,6 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
 
     //ABOUT
     Route::resource('contact', ContactController::class);
-    Route::post('email/reply',[ContactController::class, 'email_reply'])->name('email.reply');
 
     //PARTNERS
     Route::resource('homeS3Left', hs3LeftController::class)->only(['index','store','edit','update','destroy']);
@@ -135,9 +135,13 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::get('/package/purchase/details/{id}', [PackagePurchaseController::class, 'package_purchage_details'])->name('packagePurchage.details');
     Route::post('/package/purchase/status/update/{id}', [PackagePurchaseController::class, 'update_purchage_status'])->name('packagePurchage.status-update');
     Route::get('/package/purchase/invoice/{id}', [PackagePurchaseController::class, 'generatePDF'])->name('packagePurchase.invoice');
+
+    //Bank Management
+    Route::resource('bank', BankManagementController::class);
+
     //NOTIFICATION
     Route::resource('notification', NotificationController::class);
-
+    Route::post('email/reply',[ContactController::class, 'email_reply'])->name('email.reply');
 
 
 });
