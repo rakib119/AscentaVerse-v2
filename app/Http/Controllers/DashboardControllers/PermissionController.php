@@ -20,7 +20,7 @@ class PermissionController extends Controller
         // return  session('permission_route');
         $main_menu_array=$menu_name_array=array();
         $menues = MainMenu::select('id','route_name','root_menu_id','menu_name')->orderBy('route_name','asc')->get();
-        $users  = User::select('id','name','role_id')->get();
+        $users  = User::select('id','name','role_id','verification_code')->get();
         foreach ($menues as $v)
         {
             $root_menu_id = $v->root_menu_id ?? $v->id;

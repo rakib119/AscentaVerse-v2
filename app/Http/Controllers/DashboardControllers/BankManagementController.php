@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DashboarsController;
+namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
@@ -16,8 +16,8 @@ class BankManagementController extends Controller
         '2' => 'Mobile Banking'
     );
     protected $status_array = array(
+        '0' => 'Inactive',
         '1' => 'Active',
-        '2' => 'Inactive'
     );
     protected $yes_no_array = array(
         '0' => 'No',
@@ -91,7 +91,7 @@ class BankManagementController extends Controller
         $request->validate([
             'bank_type'     => 'required|in:1,2',
             'bank_name'     => 'required|max:150',
-            'status_active' => 'required|in:1,2',
+            'status_active' => 'required|in:0,1',
             'is_deleted'    => 'required|in:0,1'
         ]);
         try {

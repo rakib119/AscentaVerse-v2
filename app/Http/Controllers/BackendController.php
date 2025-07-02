@@ -38,7 +38,7 @@ class BackendController extends Controller
     public function user_list()
     {
         $users = DB::table('users','a')
-            ->select('a.id','a.name','a.email','a.verification_code','b.is_final_submited','a.phone_number as mobile','b.user_id')
+            ->select('a.id','a.name','a.email','a.verification_code','b.is_final_submited','a.phone_number as mobile','b.user_id','b.emergency_approved_status as is_approved')
             ->leftJoin('user_infos as b', 'a.id', '=', 'b.user_id')
             ->orderBy('b.updated_at', 'DESC')
             ->get();

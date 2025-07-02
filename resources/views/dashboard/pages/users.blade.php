@@ -42,6 +42,7 @@
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
+                                                    <th>Status</th>
                                                     <th>Verification Code</th>
                                                     <th>Details</th>
                                                 </tr>
@@ -53,6 +54,19 @@
                                                     <td>{{ Str::substr($user->name, 0, 40) }}</td>
                                                     <td>{{ $user->email}}</td>
                                                     <td>{{ $user->mobile}}</td>
+                                                    <td>
+                                                        @if ($user->is_approved==1)
+                                                            <span class="badge bg-success">Approved</span>
+                                                        @elseif ($user->is_approved==2)
+                                                            <span class="badge bg-danger">Rejected</span>
+                                                        @else
+                                                            @if ($user->user_id )
+                                                                <span class="badge bg-info">Need to Review</span>
+                                                            @else
+                                                                <span class="badge bg-warning">Not Submited</span>
+                                                            @endif
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $user->verification_code}}</td>
                                                     <td>
                                                         @if ($user->user_id )

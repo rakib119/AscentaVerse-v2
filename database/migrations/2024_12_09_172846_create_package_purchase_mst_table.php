@@ -22,6 +22,8 @@ return new class extends Migration
             $table->float('payment_amount')->nullable();
             $table->integer('payment_method')->nullable();
             $table->integer('payment_type')->nullable();
+            $table->integer('company_account_id')->nullable()->default(0);
+            $table->integer('company_bank_id')->nullable()->default(0);
             $table->integer('bank_name')->nullable();
             $table->string('account_holder')->nullable()->max(255);
             $table->string('company_account_no')->nullable()->max(50);

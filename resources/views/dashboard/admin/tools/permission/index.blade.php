@@ -102,7 +102,7 @@
                                                             <select id="user_id" class="form-select" aria-label="Default select example" name="user_id">
                                                                 <option value="">--Select User--</option>
                                                                 @foreach ($users as $user)
-                                                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                                                    <option value="{{$user->id}}">{{$user->name."-".$user->verification_code}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('user')
@@ -161,7 +161,7 @@
                                                                             continue;
                                                                         }
                                                                     @endphp
-                                                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                                                    <option value="{{$user->id}}">{{$user->name."-".$user->verification_code}}</option>
                                                                 @endforeach
                                                             </select>
                                                             @error('user')

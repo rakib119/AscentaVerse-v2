@@ -31,14 +31,22 @@
                         <div>
                             <label class="uk-form-label" for="payment_type">Payment Type</label>
                             <div id="payment-type-container" class="uk-form-controls">
-                                {!! createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');loadHtmlElement('".route('loadBankDtls')."', this.value, 'bank-details');",0,0 ) !!}
+                                {!! createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');loadDropDown('".route('loadDropdownCompanyBank')."', this.value, 'company-bank-container');$('#company_account_no').val('');controlBankBranch(this.value);",0,0 ) !!}
                             </div>
                                 <div class="uk-text-danger uk-margin-small-top" id="payment_type_error"></div>
                         </div>
                         <div>
+                            <label class="uk-form-label" for="company_bank">Company Bank Name</label>
+                            <div id="company-bank-container" class="uk-form-controls">
+                               {!! createDropDownUiKit( "company_bank_name","", array(),"", 1, "-- Select --","", "",0,0 ) !!}
+                            </div>
+                                <div class="uk-text-danger uk-margin-small-top" id="company_bank_error"></div>
+                        </div>
+                        <div>
                             <label class="uk-form-label" for="company_account_no">Company Account No</label>
-                            <div class="uk-form-controls">
+                            <div class="uk-form-controls" id="company-account-container">
                                 <input class="uk-input" name="company_account_no" id="company_account_no" type="text" placeholder="Company Account No">
+                                <input class="uk-input" name="company_account_id" id="company_account_id" type="hidden">
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="company_account_no_error"></div>
                         </div>

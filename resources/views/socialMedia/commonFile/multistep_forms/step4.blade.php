@@ -15,7 +15,7 @@
         <div style="display:flex; justify-content:space-between">
             <h2>Verify Account</h2>
             @if ($final_info_approved_at)
-                <a class="button info" href="{{ route('user.details',Crypt::encrypt(auth()->id())) }}">Download Now<i class="icon-feather-download-cloud"></i> </a>
+                <a class="button info" href="{{ route('generatePDF',Crypt::encrypt(auth()->id())) }}">Download Now<i class="icon-feather-download-cloud"></i> </a>
             @elseif ($is_final_submited==1)
                 <a class="button info"  href="javaScript:void(0)">Pending <i class="icon-feather-alert-circle"></i> </a>
             @endif

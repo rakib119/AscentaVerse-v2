@@ -111,7 +111,7 @@ function cropImage(inputObj, newInputID='',cropHeight=150, cropWidth=150, viewIm
                         reader.readAsDataURL(blob);
                         reader.onloadend = function() {
                             var base64data = reader.result;
-                            console.log(inputObj);
+                            // console.log(inputObj);
 
                             if (newInputID) { // Update hidden input value
                                 $(`#${newInputID}`).val(base64data);

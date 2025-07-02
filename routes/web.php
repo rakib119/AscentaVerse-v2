@@ -17,7 +17,8 @@ use App\Http\Controllers\DashboardControllers\home\TestimonialController;
 use App\Http\Controllers\DashboardControllers\InfoController;
 use App\Http\Controllers\DashboardControllers\PermissionController;
 use App\Http\Controllers\DashboardControllers\social_media\NotificationController;
-use App\Http\Controllers\DashboarsController\BankManagementController;
+use App\Http\Controllers\DashboardControllers\BankAccountController;
+use App\Http\Controllers\DashboardControllers\BankManagementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\socialMedia\PackagePurchaseController;
@@ -138,6 +139,7 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
 
     //Bank Management
     Route::resource('bank', BankManagementController::class);
+    Route::resource('bank-account', BankAccountController::class);
 
     //NOTIFICATION
     Route::resource('notification', NotificationController::class);
@@ -180,6 +182,7 @@ Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/load-payment-method',[PackagePurchaseController::class, 'load_payment_method'])->name('social.load_payment_method');
     Route::get('/load-bank-name', [PackagePurchaseController::class, 'loadBankName'])->name('loadBankName');
     Route::get('/load-bank-dtls', [PackagePurchaseController::class, 'loadBankDtls'])->name('loadBankDtls');
+    Route::get('/load-dropdown-company-bank', [PackagePurchaseController::class, 'loadDropdownCompanyBank'])->name('loadDropdownCompanyBank');
     Route::post('/submit-payment', [PackagePurchaseController::class, 'submitPayment'])->name('submitManualPayment');
     Route::post('/submit-payment-v2', [PackagePurchaseController::class, 'submitPaymentV2'])->name('submitManualPaymentV2');
     Route::post('/submit-renewal-fees', [PackagePurchaseController::class, 'submitRenewalFees'])->name('submitRenewalFees');

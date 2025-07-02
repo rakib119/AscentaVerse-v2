@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banks', function(Blueprint $table){
-			$table->id();
-			$table->string('name', 120)->unique();
-			$table->string('category', 60)->nullable();
+        Schema::create('bank_accounts', function (Blueprint $table) {
+            $table->id();
+			$table->integer('bank_id');
+			$table->string('branch_name', 255)->nullable();
+			$table->string('account_number', 50)->nullable();
+			$table->string('account_holder', 255)->nullable();
 			$table->integer('bank_type')->nullable();
 			$table->integer('status_active')->default(1);
 			$table->integer('is_deleted')->default(0);
 			$table->integer('created_by')->nullable();
 			$table->integer('updated_by')->default(0);
 			$table->timestamps();
-		});
+        });
     }
 
     /**
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('bank_accounts');
     }
 };

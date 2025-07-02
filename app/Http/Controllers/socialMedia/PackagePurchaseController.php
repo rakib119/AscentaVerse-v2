@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\socialMedia;
 
 use App\Http\Controllers\Controller;
+use App\Models\BankAccount;
 use App\Models\CompanyBankDtls;
 use App\Models\PackagePurchaseMst;
 use App\Models\SocialPackageBreakDown;
@@ -127,8 +128,9 @@ class PackagePurchaseController extends Controller
             );
 
             $banks                  = array();
-            $bank_type_drop_down    = createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');loadHtmlElement('".route('loadBankDtls')."', this.value, 'bank-details');",0,0 );
+            $bank_type_drop_down    = createDropDownUiKit( "payment_type","", $payment_type_array,"", 1, "-- Select --","", "loadDropDown('".route('loadBankName')."', this.value, 'bank-name-container');loadDropDown('".route('loadDropdownCompanyBank')."', this.value, 'company-bank-container');$('#company_account_no').val('');controlBankBranch(this.value);",0,0 );
             $bank_list              = createDropDownUiKit( "bank_name","", $banks,"", 1, "-- Select --","", "",0,0 );
+            $company_bank_list      = createDropDownUiKit( "company_bank_name","", $banks,"", 1, "-- Select --","", "",0,0 );
             $load_img_onchange      = 'onchange="loadFile(event,'."'imgOutput'".')"';
             $url                    = route('submitManualPayment');
             $package_data_array     = array_merge($package_info,$payment_info);
@@ -151,9 +153,17 @@ class PackagePurchaseController extends Controller
                                 <div class="uk-text-danger uk-margin-small-top" id="payment_type_error"></div>
                         </div>
                         <div>
+                            <label class="uk-form-label" for="company_bank">Company Bank Name</label>
+                            <div id="company-bank-container" class="uk-form-controls">
+                                '. $company_bank_list.'
+                            </div>
+                                <div class="uk-text-danger uk-margin-small-top" id="company_bank_error"></div>
+                        </div>
+                        <div>
                             <label class="uk-form-label" for="company_account_no">Company Account No</label>
-                            <div class="uk-form-controls">
+                            <div class="uk-form-controls" id="company-account-container">
                                 <input class="uk-input" name="company_account_no" id="company_account_no" type="text" placeholder="Company Account No">
+                                <input class="uk-input" name="company_account_id" id="company_account_id" type="hidden">
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="company_account_no_error"></div>
                         </div>
@@ -236,32 +246,23 @@ class PackagePurchaseController extends Controller
 
     public function loadBankName(Request $request)
     {
-        return createDropDownUiKit( "bank_name","", "SELECT id,name from banks where bank_type=$request->data order by name","id,name", 1, "-- Select --","", "",0,0 );
+        return createDropDownUiKit( "bank_name","", "SELECT id,name from banks where bank_type=$request->data and status_active=1 and is_deleted=0 order by name","id,name", 1, "-- Select --","", "",0,0 );
+    }
+    public function loadDropdownCompanyBank(Request $request)
+    {
+
+        return createDropDownUiKit( "company_bank_name","", "SELECT a.id,a.name from banks a,bank_accounts b where a.id=b.bank_id and a.bank_type=$request->data and a.status_active=1 and a.is_deleted=0  and b.status_active=1 and b.is_deleted=0 order by a.name","id,name", 1, "-- Select --","","loadHtmlElement('".route('loadBankDtls')."', this.value, 'company-account-container');",0,0 );
     }
     public function loadBankDtls(Request $request)
     {
         if (!$request->data) return "";
 
-        $bank_dtls = CompanyBankDtls::where('bank_type', $request->data)->get();
+        $bank_dtls = BankAccount::select('id','account_number')->where('bank_id', $request->data)->first();
         $body_div = "";
 
-        foreach ($bank_dtls as $v) {
-            $branch_info = ($request->data == 1) ? "<strong>Branch:</strong> $v->branch<br>" : "";
-            $body_div .= '
-                <div class="uk-card uk-card-default uk-card-body">
-                    <strong>Bank Name:</strong> ' . $v->bank_name . '<br>
-                    <strong>Account No:</strong> ' . $v->account_number . '<br>
-                    ' . $branch_info . '
-                </div>';
-        }
-
         $html = '
-        <div class="uk-card uk-card-default uk-card-hover uk-card-body" style="margin-bottom:15px;">
-            <h3 class="uk-card-title">Bank Details</h3>
-            <div class="uk-child-width-1-1@s uk-child-width-1-1@m" uk-grid>
-                ' . $body_div . '
-            </div>
-        </div>';
+            <input class="uk-input" name="company_account_no" id="company_account_no" type="text" placeholder="Company Account No" value="'.$bank_dtls?->account_number.'" readonly>
+            <input class="uk-input" name="company_account_id" id="company_account_id" type="hidden" value="'.$bank_dtls?->id.'">';
 
         return $html;
 
@@ -274,6 +275,7 @@ class PackagePurchaseController extends Controller
         $request->validate([
             'payment_type'      => 'required|in:1,2|not_in:0',
             'bank_name'         => 'required|numeric|not_in:0',
+            'company_bank_name' => 'required|numeric',
             'company_account_no'=> 'required|numeric',
             'account_holder'    => 'nullable|required_if:payment_type,1|string|max:255',
             'account_no'        => 'required|numeric',
@@ -289,6 +291,7 @@ class PackagePurchaseController extends Controller
             'bank_name.not_in'           => 'The bank name  is required.',
             'bank_name.numeric'          => 'Invalid bank name.',
             'company_account_no.numeric' => 'Invalid company account no.',
+            'company_bank_name.numeric'  => 'Invalid company bank.',
             'account_no.numeric'         => 'Invalid account no.'
         ]);
 
@@ -314,6 +317,7 @@ class PackagePurchaseController extends Controller
             'payment_type'          => $request->payment_type,
             'bank_name'             => $request->bank_name,
             'account_holder'        => $request->account_holder,
+            'company_account_id'    => $request->company_bank_name,
             'company_account_no'    => $request->company_account_no,
             'account_no'            => $request->account_no,
             'branch'                => $request->branch,
@@ -349,13 +353,14 @@ class PackagePurchaseController extends Controller
         } catch (\Exception $e) {
             return back()->with('page_error', 'Invalid package purchase ID.');
         }
-
+        $query = "SELECT id, name FROM banks WHERE status_active = 1 AND is_deleted = 0 ORDER BY name";
+        $bank_array =  return_library_array($query,'id','name');
         $data = DB::table('package_purchase_mst','a')
         ->leftJoin('users as b', 'b.id', '=','a.user_id' )
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks' )
+        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks','a.company_account_id' )
         ->where('a.id', $id)
         ->orderBy('a.id','desc')
         ->first();
@@ -363,7 +368,7 @@ class PackagePurchaseController extends Controller
             return back()->with('page_error', 'Data not found.');
         }
 
-        return view('dashboard.socialMedia.package_purchage_history.show', compact('data'));
+        return view('dashboard.socialMedia.package_purchage_history.show', compact('data','bank_array'));
     }
     public function update_purchage_status(Request $request, string $encrypt_id)
     {

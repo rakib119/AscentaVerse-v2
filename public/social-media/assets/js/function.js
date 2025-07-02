@@ -211,7 +211,7 @@ function handleFormSubmit(stepNumber, formData) {
             currentStep = stepNumber + 1;
             $('#multi-step-form-container').html(response.html);
             UIkit.notification({message: 'Saved successfully!', status: 'success'});
-            console.log(currentStep);
+            // console.log(currentStep);
             if (stepNumber == 4) {
                 location.reload();
             }
@@ -408,7 +408,7 @@ function loadDropDown(routeUrl, data, containerId) {
         method: 'GET',
         data: "data="+data,
         success: function(response) {
-            console.log(containerId);
+            // console.log(containerId);
 
             $('#' + containerId).html(response);
             // set_all_onclick();
@@ -449,7 +449,7 @@ function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
     // $('#checkboxError').html('');
     // console.log(method,routeUrl, data, containerId,$('#cbox').prop('checked'));
     checked_status = checked ?? $('#cbox').prop('checked');
-    if (1==1)
+    if (checked_status==1)
     {
         if(method==1)
         {
@@ -638,3 +638,13 @@ $(function() {
 //====================================================================================================
                                     //INPUT VALIDATION SCRIPTS END
 //====================================================================================================
+function controlBankBranch(paymentType) {
+    console.log(paymentType);
+
+    if (paymentType == 1) { // If payment type is bank transfer
+        $('#branch-container').attr('style', 'display: block;');
+
+    } else {
+        $('#branch-container').attr('style', 'display: none;');
+    }
+}

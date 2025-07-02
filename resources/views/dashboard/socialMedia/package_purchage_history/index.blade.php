@@ -35,7 +35,6 @@
                                             <tr>
                                                 <th width="30">SL</th>
                                                 <th width="40">Purchase For</th>
-                                                <th width="40">Payment</th>
                                                 <th width="40">Cust. Acc. No</th>
                                                 <th width="40">Trnx Id	</th>
                                                 <th width="40">Com. Acc</th>
@@ -52,7 +51,6 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $payment_for_array[$v->payment_for] }}</td>
-                                                    <td>{{ $v->account_holder }}</td>
                                                     <td>{{ $v->account_no }}</td>
                                                     <td>{{ $v->transaction_id }}</td>
                                                     <td>{{ $v->company_account_no }}</td>

@@ -115,6 +115,10 @@
                                                                 <td> : {{$data->account_no}} </td>
                                                             </tr>
                                                             <tr>
+                                                                <td> <b> Comp. Acount </b> </td>
+                                                                <td> : {{ $bank_array[$data->company_account_id] ?? ""}} </td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td> <b> Comp. Acount No </b> </td>
                                                                 <td> : {{$data->company_account_no}} </td>
                                                             </tr>
