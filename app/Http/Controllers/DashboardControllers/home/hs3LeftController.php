@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DashboardControllers\home;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\DeletePhotoLink;
+use App\Models\SingleSection;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -66,12 +67,15 @@ class hs3LeftController extends Controller
     {
         try
          {
+
+            $SingleSection = SingleSection::where('section_id',4)->first();
+
             $Banner = Banner::where(['section_id'=>5,'status_active'=>1])->get();
             $no_of_photo = $Banner->count();
-            if ($no_of_photo<6 ) {
+            /* if ($no_of_photo<6 ) {
                 return back()->with('error','At least 6 logo needed for published');
-            }
-            $data = ['banners'=> $Banner];
+            } */
+            $data = ['banners'=> $Banner,'data'=> $SingleSection];
             // return  $data;
             $content = View::make('fontend.section.homePageSection.s3Left.s3LeftTemplate',$data)->render();
 

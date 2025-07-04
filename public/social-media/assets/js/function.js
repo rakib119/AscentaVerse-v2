@@ -448,7 +448,17 @@ function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
 {
     // $('#checkboxError').html('');
     // console.log(method,routeUrl, data, containerId,$('#cbox').prop('checked'));
-    checked_status = checked ?? $('#cbox').prop('checked');
+    // checked_status = checked ?? $('#cbox').prop('checked');
+    if(!checked)
+    {
+        if ($('.link-checkbox:checked').length === $('.link-checkbox').length) {
+           checked=true;
+        } else {
+            checked=false;
+        }
+    }
+    checked_status = checked ;
+
     if (checked_status==1)
     {
         if(method==1)

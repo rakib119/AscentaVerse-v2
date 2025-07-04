@@ -31,7 +31,7 @@
                                     <div class="float-end d-none d-sm-block">
                                         <form action="{{route('homeS3Right.publish')}}" method="post">
                                             @csrf
-                                            <button class="btn btn-warning" type="submit">Publish</button>
+                                            <button class="btn btn-warning d-none" type="submit">Publish</button>
                                         </form>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="title">Title
-                                                        <span class="text-danger">*</span></label>
+                                                        <span class="text-danger"></span></label>
                                                     <input id="title" type="text" class="form-control"
                                                         value="{{ $data->title ?? old('title') }}" name="title"
                                                         placeholder="Enter title" >
@@ -76,7 +76,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-12 d-none">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="project_name">Description <span class="text-danger">*&nbsp;&nbsp;NB: max 600 characters</span></label>
                                                     <input id="short_description" type="text" class="form-control"

@@ -1,57 +1,25 @@
 <section class="fluid-one">
     <div class="auto-container">
+            <div class="team-heading pb-5">
+            <div class="sub-title ">Our Partners</div>
+            @php
+                $title = preg_replace('/\*\*(.*?)\*\*/', "<span class='highlight'>$1</span>", "We are proud to be associated with **leading** partners in the");
+            @endphp
+            <div class="title mt-3">
+                {!! $title !!}
+            </div>
+        </div>
         <div class="outer-container d-flex align-items-center">
+            <div class="owl-carousel owl-theme py-5">
+                <div class="item"><img class="img-fluid" src="https://ascentaverse.com/assets/images/partners/Nl49T3MIxisY1qe.png" alt="Nl49T3MIxisY1qe.png" /></div>
+                <div class="item"><img class="img-fluid" src="https://ascentaverse.com/assets/images/partners/PLGPGOtkZdbt4Cm.png" alt="PLGPGOtkZdbt4Cm.png" /></div>
+                <div class="item"><img class="img-fluid" src="https://ascentaverse.com/assets/images/partners/trBSzAmQEgIHnd7.png" alt="trBSzAmQEgIHnd7.png" /></div>
+                <div class="item"><img class="img-fluid" src="https://ascentaverse.com/assets/images/partners/Fs6ZTu8bq48jkYP.png" alt="trBSzAmQEgIHnd7.png" /></div>
+                <div class="item"><img class="img-fluid" src="https://ascentaverse.com/assets/images/partners/jnPxCZLvPRgE0tW.png" alt="jnPxCZLvPRgE0tW.png" /></div>
+                <!-- Add more logos as needed -->
+            </div>
 
-            @include('fontend.section.homePageSection.s3Right.s3Right')
-            @include('fontend.section.homePageSection.s3Left.s3Left')
         </div>
     </div>
 </section>
 
-<!-- ===============>> partner section start here <<================= -->
-  <div class="partner partner--gradient">
-    <div class="container">
-      <div class="partner__wrapper">
-        <div class="partner__slider swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="partner__item">
-                <div class="partner__item-inner">
-                  <img src="assets/images/partner/light/1.png" alt="partner logo" class="dark">
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="partner__item">
-                <div class="partner__item-inner">
-                  <img src="assets/images/partner/light/2.png" alt="partner logo" class="dark">
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="partner__item">
-                <div class="partner__item-inner">
-                  <img src="assets/images/partner/light/3.png" alt="partner logo" class="dark">
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="partner__item">
-                <div class="partner__item-inner">
-                  <img src="assets/images/partner/light/4.png" alt="partner logo" class="dark">
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="partner__item">
-                <div class="partner__item-inner">
-                  <img src="assets/images/partner/light/5.png" alt="partner logo" class="dark">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ===============>> partner section end here <<================= -->

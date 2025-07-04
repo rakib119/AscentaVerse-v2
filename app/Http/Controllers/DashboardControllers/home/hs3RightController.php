@@ -27,8 +27,8 @@ class hs3RightController extends Controller
     {
         $request->validate([
             'lebel'=>'required|max:40',
-            'title'=>'required|max:150',
-            'short_description'=>'required|max:600',
+            'title'=>'nullable|max:150',
+            'short_description'=>'nullable|max:600',
         ]);
 
         try
@@ -79,8 +79,8 @@ class hs3RightController extends Controller
     {
         $validatedData = $request->validate([
             'lebel'=>'required|max:40',
-            'title'=>'required|max:150',
-            'short_description'=>'required|max:600'
+            'title'=>'nullable|max:150',
+            'short_description'=>'nullable|max:600'
         ]);
 
         try {

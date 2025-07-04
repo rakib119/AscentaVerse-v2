@@ -9687,3 +9687,19 @@ button.accordion-button.collapsed, button.accordion-button {
     display: inline-block;
     transition: opacity 0.3s ease;
 }
+/***
+
+====================================================================
+	PARTNER SECTION
+====================================================================
+
+***/
+
+.partners-section .item {
+    text-align: center;
+    padding: 10px;
+}
+.partners-section img {
+    max-height: 80px;
+    object-fit: contain;
+}
