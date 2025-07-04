@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'RoutePermission' => RoutePermission::class
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'payment/success',
+            'payment/fail',
+            'payment/cancel'
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

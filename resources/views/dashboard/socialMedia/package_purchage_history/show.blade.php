@@ -106,26 +106,28 @@
                                                                 <td> <b> Discount </b></td>
                                                                 <td> : {{$data->discount_per}} % </td>
                                                             </tr>
-                                                            <tr>
-                                                                <td> <b> Acount Holder </b></td>
-                                                                <td> : {{$data->account_holder}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <b> Acount No </b></td>
-                                                                <td> : {{$data->account_no}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <b> Comp. Acount </b> </td>
-                                                                <td> : {{ $bank_array[$data->company_account_id] ?? ""}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <b> Comp. Acount No </b> </td>
-                                                                <td> : {{$data->company_account_no}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td valign="top"> <b> Remarks </b> </td>
-                                                                <td valign="top"> <p>: {{$data->remarks}}</p> </td>
-                                                            </tr>
+                                                            @if ($data->payment_method==2) {{-- Offline Payment --}}
+                                                                <tr>
+                                                                    <td> <b> Acount No </b></td>
+                                                                    <td> : {{$data->account_no}} </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> <b> Acount Holder </b></td>
+                                                                    <td> : {{$data->account_holder}} </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> <b> Comp. Acount </b> </td>
+                                                                    <td> : {{ $bank_array[$data->company_account_id] ?? ""}} </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> <b> Comp. Acount No </b> </td>
+                                                                    <td> : {{$data->company_account_no}} </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top"> <b> Remarks </b> </td>
+                                                                    <td valign="top"> <p>: {{$data->remarks}}</p> </td>
+                                                                </tr>
+                                                            @endif
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -142,21 +144,23 @@
                                                 </div>
                                             </div>
 
+                                            @if ($data->payment_method!=1)
+                                                <form id="success-form" action="{{$update_route}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="1">
+                                                </form>
 
-                                            <form id="success-form" action="{{$update_route}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="status" value="1">
-                                            </form>
+                                                <form id="cancel-form" action="{{$update_route}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="2">
+                                                </form>
 
-                                            <form id="cancel-form" action="{{$update_route}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="status" value="2">
-                                            </form>
+                                                <form id="pending-form" action="{{$update_route}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="0">
+                                                </form>
+                                            @endif
 
-                                            <form id="pending-form" action="{{$update_route}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="status" value="0">
-                                            </form>
                                         </div>
                                     </div>
                                 @else

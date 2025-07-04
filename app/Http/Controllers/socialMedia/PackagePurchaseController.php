@@ -80,6 +80,7 @@ class PackagePurchaseController extends Controller
             );
             Session::put('package_info',$package_data_array);
             $method_route ="'".route('social.load_payment_method')."'";
+            $online_payment ="'".route('pay.online')."'";
             $html_container ="'main_payment_container'";
             return  $html ='<div class="uk-card uk-card-default uk-card-body uk-border-rounded uk-text-center">
                 <div>
@@ -92,7 +93,7 @@ class PackagePurchaseController extends Controller
                 </div>
                 <div>
                     <h6 class="uk-text-danger uk-text-center" id="checkboxError"> </h6>
-                    <button class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" onclick=" getPaymentComponent(1,'.$method_route.', '.$id.', '.$html_container.')">Online Payment</button>
+                    <button class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" onclick=" getPaymentComponent(1,'.$online_payment.', '.$id.', '.$html_container.')">Online Payment</button>
                     <button class="uk-button uk-button-primary uk-border-rounded uk-margin-small-top" onclick="getPaymentComponent(2,'.$method_route.', '.$id.', '.$html_container.')"">Offline Payment</button>
                 </div>
 
@@ -340,7 +341,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks' )
+        ->select('a.id','a.payment_method','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks' )
         ->orderBy('a.id','desc')
         ->get();
 
@@ -360,7 +361,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks','a.company_account_id' )
+        ->select('a.id','a.payment_method','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks','a.company_account_id' )
         ->where('a.id', $id)
         ->orderBy('a.id','desc')
         ->first();
@@ -529,7 +530,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.package_mst_id','a.id','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','b.verification_code','b.email','b.phone_number','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.created_at','a.updated_at','a.remarks' )
+        ->select('a.package_mst_id','a.id','a.payment_method','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','b.verification_code','b.email','b.phone_number','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.created_at','a.updated_at','a.remarks' )
         ->where('a.id', $id)
         ->where('a.payment_status', 1) // Only verified payments
         ->first();

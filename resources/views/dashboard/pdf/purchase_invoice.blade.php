@@ -200,60 +200,60 @@
                 </tr>
             </table>
         @endif
-
-        <table class="payment-section-table">
-            <tr>
-                <td width="45%" class="payment-box" v-align="top">
-                    <div class="section-title">Payment Sent From</div>
-                    <table>
-                        <tr>
-                            <td><strong>Bank Name</strong></td>
-                            <td><strong>:</strong> {{ $data->bank_name }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Account Holder</strong></td>
-                            <td><strong>:</strong> {{ $data->account_holder }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Account Number</strong></td>
-                            <td><strong>:</strong> {{ $data->account_no }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Transaction ID</strong></td>
-                            <td><strong>:</strong> {{ $data->transaction_id }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Date</strong></td>
-                            <td><strong>:</strong> {{ $data->created_at }}</td>
-                        </tr>
-                    </table>
-                </td>
-                <td  class="payment-box" v-align="top">
-                    <div class="section-title">Payment Received To</div>
-                    <table>
-                        <tr>
-                            <td><strong>Bank Name</strong></td>
-                            <td><strong>:</strong> {{ $data->bank_name }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Account Number</strong></td>
-                            <td><strong>:</strong> {{ $data->company_account_no }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Date</strong></td>
-                            <td><strong>:</strong> {{ $data->updated_at }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-
+        @if ($data->payment_method!=1)
+            <table class="payment-section-table">
+                <tr>
+                    <td width="45%" class="payment-box" v-align="top">
+                        <div class="section-title">Payment Sent From</div>
+                        <table>
+                            <tr>
+                                <td><strong>Bank Name</strong></td>
+                                <td><strong>:</strong> {{ $data->bank_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Account Holder</strong></td>
+                                <td><strong>:</strong> {{ $data->account_holder }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Account Number</strong></td>
+                                <td><strong>:</strong> {{ $data->account_no }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transaction ID</strong></td>
+                                <td><strong>:</strong> {{ $data->transaction_id }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date</strong></td>
+                                <td><strong>:</strong> {{ $data->created_at }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td  class="payment-box" v-align="top">
+                        <div class="section-title">Payment Received To</div>
+                        <table>
+                            <tr>
+                                <td><strong>Bank Name</strong></td>
+                                <td><strong>:</strong> {{ $data->bank_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Account Number</strong></td>
+                                <td><strong>:</strong> {{ $data->company_account_no }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date</strong></td>
+                                <td><strong>:</strong> {{ $data->updated_at }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        @endif
         <div class="footer">
             Thank you for your purchase. Please contact us if you have any questions.
         </div>

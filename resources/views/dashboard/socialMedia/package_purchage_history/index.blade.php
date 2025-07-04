@@ -34,6 +34,7 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th width="30">SL</th>
+                                                <th width="40">Payment Method</th>
                                                 <th width="40">Purchase For</th>
                                                 <th width="40">Cust. Acc. No</th>
                                                 <th width="40">Trnx Id	</th>
@@ -45,11 +46,14 @@
                                         <tbody>
                                             @foreach ( $history as $v)
                                                 @php
-                                                    $payment_status_array = array(0=>'pending',1=>'Confirmed',2=>'Reject');
-                                                    $badge_color_array = array(0=>'info',1=>'success',2=>'danger');
+                                                    $payment_status_array   = array(0=>'pending',1=>'Confirmed',2=>'Reject');
+                                                    $badge_color_array      = array(0=>'info',1=>'success',2=>'danger');
+                                                    $payment_method_badge   = array(0=>'info',1=>'success',2=>'info');
+                                                    $payment_method_array   = array(1=>'Online',2=>'Offline');
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td> <span class="badge bg-{{$payment_method_badge[$v->payment_method]}}"> {{$payment_method_array[$v->payment_method]}} </span></td>
                                                     <td>{{ $payment_for_array[$v->payment_for] }}</td>
                                                     <td>{{ $v->account_no }}</td>
                                                     <td>{{ $v->transaction_id }}</td>

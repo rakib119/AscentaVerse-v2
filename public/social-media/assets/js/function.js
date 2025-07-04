@@ -463,7 +463,8 @@ function getPaymentComponent(method,routeUrl, data, containerId,checked=false)
     {
         if(method==1)
         {
-            $('#checkboxError').html('Online Payment not available');
+            // redirect to payment page but not open in new tab
+            window.location.href = routeUrl;
             return;
         }
         else if(method==2)

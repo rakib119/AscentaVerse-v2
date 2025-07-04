@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AamarPayController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\DashboardControllers\BlogCategoryController;
 use App\Http\Controllers\DashboardControllers\home\BlogController;
@@ -146,7 +147,12 @@ Route::middleware(['auth','RoutePermission'])->group(function () {
     Route::post('email/reply',[ContactController::class, 'email_reply'])->name('email.reply');
 
 
+
+
 });
+
+
+
 
 Route::middleware(['auth'])->group(function ()
 {
@@ -154,9 +160,20 @@ Route::middleware(['auth'])->group(function ()
     Route::post('select-options', [PermissionController::class, 'get_options'])->name('permission.getOptions');
     Route::post('get-role', [PermissionController::class, 'get_role'])->name('permission.getRole');
     Route::post('update-role', [PermissionController::class, 'update_role'])->name('role.update');
+
+
+    // Aamar Pay Route
+    Route::get('payment/online',[AamarPayController::class,'payment'])->name('pay.online');
+    Route::get('renewal-fees/{id}',[AamarPayController::class, 'submitRenewalFees'])->name('pay.renewal_fees');
+
+
 });
-
-
+Route::middleware(['web'])->group(function () {
+    //without verify csf use this route
+    Route::post('payment/success',[AamarPayController::class,'success'])->name('pay.success');
+    Route::post('payment/fail',[AamarPayController::class,'fail'])->name('pay.fail');
+    Route::get('payment/cancel',[AamarPayController::class,'cancel'])->name('pay.cancel');
+});
 // Social Media Route
 Route::middleware(['auth'])->prefix('social-media')->group(function () {
     Route::get('/home',[SocialMediaController::class, 'social_home'])->name('social.home');

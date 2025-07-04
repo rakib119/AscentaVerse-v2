@@ -538,6 +538,15 @@
             </div>
         </div>
         @yield('mainContent')
+        <div id="payment-status-modal" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title" id="payment-status-title"></h2>
+                <p id="payment-status-message"></p>
+                <p class="uk-text-right">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                </p>
+            </div>
+        </div>
         @yield('rightBar')
 
     </div>
@@ -590,8 +599,62 @@
     <script src="{{ asset('social-media/assets/js/main.js')}}"></script>
     <script src="{{ asset('dashboard/assets/js/cropper-1.5.6.js') }}"></script>
     <script src="{{ asset('social-media/assets/js/select2.min.js')}}"></script>
+    <script src="{{ asset('dashboard/assets/js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('social-media/assets/js/function.js') }}"></script> {{-- Always on Bottom --}}
     @yield('javaScript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('payment_status');
 
+            if (status === 'success' || status === 'fail') {
+                const title = document.getElementById('payment-status-title');
+                const message = document.getElementById('payment-status-message');
+
+                if (status === 'success') {
+                    title.innerText = "🎉 Payment Successful";
+                    message.innerText = "Your payment was completed successfully.";
+                } else {
+                    title.innerText = "❌ Payment Failed";
+                    message.innerText = "Your payment could not be completed. Please try again.";
+                }
+
+                UIkit.modal('#payment-status-modal').show();
+
+                // Optional: Clean the URL
+                const newUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+            }
+        });
+    </script>
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            })
+        </script>
+    @endif
+
+    @if (session('page_error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "{{ session('page_error') }}",
+            });
+        </script>
+    @endif
 </body>
 </html>

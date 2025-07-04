@@ -30,7 +30,7 @@
                                         </div>
                                         <!-- Choose Plan Button -->
                                         <div>
-                                            <a class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" href="javaScript:void(0)">Online Payment</a>
+                                            <a class="uk-button uk-button-secondary uk-border-rounded uk-margin-small-top" href="{{route('pay.renewal_fees',Crypt::encrypt($v->id))}}">Online Payment</a>
                                             <a class="uk-button uk-button-primary uk-border-rounded uk-margin-small-top" href="{{route('social.offline_renewal_fees',Crypt::encrypt($v->id))}}" >Offline Payment</a>
                                         </div>
 

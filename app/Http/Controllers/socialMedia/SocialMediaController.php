@@ -24,6 +24,7 @@ class SocialMediaController extends Controller
 
     public function social_home()
     {
+        
         $web_info   = Session::get('web_field_info', []);
         // return $web_info['logo'];
         $user       = auth()->id();
