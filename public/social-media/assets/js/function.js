@@ -435,6 +435,31 @@ function loadHtmlElement(routeUrl, data, containerId) {
         }
     });
 }
+function loadHtmlElement_multiple(routeUrl, data, inputIds,columnNames) {
+    splitInputIds   = inputIds.split('*');
+    splitcolumnName = columnNames.split('*');
+    if (splitInputIds.length != splitcolumnName.length) {
+        console.error("Input IDs and column names do not match in length.");
+        return;
+    }
+    $.ajax({
+        url: routeUrl,
+        method: 'GET',
+        data: "data="+data,
+        success: function(responseJSON) {
+            for (let i = 0; i < splitInputIds.length; i++) {
+                let InputId     = splitInputIds[i];
+                let columnName  = splitcolumnName[i];
+                let value       = responseJSON[columnName] || ''; 
+                // console.log(`Setting value for ${InputId}: ${value}`);
+                $(`#${InputId}`).val(value);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("There was an error loading:", error);
+        }
+    });
+}
 
 function handleCheckboxClick(input)
 {
@@ -653,9 +678,9 @@ function controlBankBranch(paymentType) {
     console.log(paymentType);
 
     if (paymentType == 1) { // If payment type is bank transfer
-        $('#branch-container').attr('style', 'display: block;');
+        $('.only-for-bank').attr('style', 'display: block;');
 
     } else {
-        $('#branch-container').attr('style', 'display: none;');
+        $('.only-for-bank').attr('style', 'display: none;');
     }
 }

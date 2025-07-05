@@ -68,7 +68,18 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="branch_name">Branch Name <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="account_number">Account Number <span class="text-danger">*</span></label>
+                                                        <input id="account_number" type="text" class="form-control"
+                                                            value="{{  old('account_number')??"" }}" name="account_number"
+                                                            placeholder="Enter Account Number" >
+                                                        @error('account_number')
+                                                            <h6 class="text-danger"> {{ $message }}</h6>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="branch_name">Branch Name</label>
                                                         <input id="branch_name" type="text" class="form-control"
                                                             value="{{  old('branch_name')??"" }}" name="branch_name"
                                                             placeholder="Enter Branch Name" >
@@ -79,18 +90,25 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="account_number">Account Number <span class="text-danger">*</span></label>
-                                                        <input id="account_number" type="text" class="form-control"
-                                                            value="{{  old('account_number')??"" }}" name="account_number"
-                                                            placeholder="Enter Bank Name" >
-                                                        @error('account_number')
+                                                        <label class="form-label" for="branch_code">Branch Code</label>
+                                                        <input id="branch_code" type="text" class="form-control" value="{{  old('branch_code')??"" }}" name="branch_code" placeholder="Enter Routing No" >
+                                                        @error('branch_code')
                                                             <h6 class="text-danger"> {{ $message }}</h6>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="account_holder">Account holder <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="routing_no">Routing No</label>
+                                                        <input id="routing_no" type="text" class="form-control" value="{{  old('routing_no')??"" }}" name="routing_no" placeholder="Enter Routing No" >
+                                                        @error('routing_no')
+                                                            <h6 class="text-danger"> {{ $message }}</h6>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="account_holder">Account holder</label>
                                                         <input id="account_holder" type="text" class="form-control"
                                                             value="{{  old('account_holder')??"" }}" name="account_holder"
                                                             placeholder="Enter Account Holder Name" >

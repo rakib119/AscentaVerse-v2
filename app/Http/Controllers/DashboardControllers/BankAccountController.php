@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class BankAccountController extends Controller
 {
@@ -33,9 +34,15 @@ class BankAccountController extends Controller
     {
         $request->validate([
             'bank_name'      => 'required',
-            'branch_name'    => 'required',
-            'account_number' => 'required|unique:bank_accounts,account_number',
-            'account_holder' => 'required',
+            'branch_name'    => 'nullable',
+            'account_number' => ['required',
+                Rule::unique('bank_accounts')->where(function ($query) use ($request) {
+                    return $query->where('bank_id', $request->bank_name);
+                }),
+            ],
+            'account_holder'    => 'nullable',
+            'routing_no'        => 'nullable',
+            'branch_code'       => 'nullable',
         ]);
 
         try
@@ -45,6 +52,8 @@ class BankAccountController extends Controller
                 'branch_name'       => $request->branch_name,
                 'account_number'    => $request->account_number,
                 'account_holder'    => $request->account_holder,
+                'routing_no'        => $request->routing_no,
+                'branch_code'       => $request->branch_code,
                 'created_by'        => auth()->id(),
                 'created_at'        => Carbon::now(),
             ]);
@@ -87,9 +96,15 @@ class BankAccountController extends Controller
 
         $request->validate([
             'bank_name'      => 'required',
-            'branch_name'    => 'required',
-            'account_number' => 'required|unique:bank_accounts,account_number,' . $id . ',id',
-            'account_holder' => 'required',
+            'branch_name'    => 'nullable',
+            'account_number' => ['required',
+                Rule::unique('bank_accounts')->where(function ($query) use ($request,$id) {
+                    return $query->where('bank_id', $request->bank_name)->where('id', '!=', $id);
+                }),
+            ],
+            'account_holder' => 'nullable',
+            'routing_no'     => 'nullable',
+            'branch_code'    => 'nullable',
             'status_active'  => 'required|in:1,2',
             'is_deleted'     => 'required|in:0,1'
         ]);
@@ -125,6 +140,8 @@ class BankAccountController extends Controller
             $Bank_account->branch_name      = $request->branch_name;
             $Bank_account->account_number   = $request->account_number;
             $Bank_account->account_holder   = $request->account_holder;
+            $Bank_account->routing_no       = $request->routing_no;
+            $Bank_account->branch_code      = $request->branch_code;
             $Bank_account->status_active    = $request->status_active;
             $Bank_account->is_deleted       = $request->is_deleted;
             $Bank_account->updated_by       = auth()->id();

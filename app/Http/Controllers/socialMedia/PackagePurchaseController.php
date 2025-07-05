@@ -168,6 +168,18 @@ class PackagePurchaseController extends Controller
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="company_account_no_error"></div>
                         </div>
+                        <div class="only-for-bank" style="display: none;">
+                            <label class="uk-form-label" for="branch_code">Branch Code</label>
+                            <div class="uk-form-controls">
+                                <input readonly class="uk-input" id="branch_code" type="text" name="branch_code">
+                            </div>
+                        </div>
+                        <div class="only-for-bank" style="display: none;">
+                            <label class="uk-form-label" for="routing_no">Routing No</label>
+                            <div class="uk-form-controls">
+                                <input readonly class="uk-input" id="routing_no" type="text" name="routing_no">
+                            </div>
+                        </div>
                         <div>
                             <label class="uk-form-label" for="bank-name">Bank Name</label>
                             <div id="bank-name-container" class="uk-form-controls">
@@ -175,8 +187,7 @@ class PackagePurchaseController extends Controller
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="bank_name_error"></div>
                         </div>
-
-                        <div>
+                        <div class="only-for-bank" style="display: none;">
                             <label class="uk-form-label" for="account_holder">Account Holder</label>
                             <div class="uk-form-controls">
                                 <input name="account_holder" class="uk-input" id="account_holder" type="text" placeholder="Enter Account Holder Name">
@@ -190,7 +201,7 @@ class PackagePurchaseController extends Controller
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="account_no_error"></div>
                         </div>
-                        <div id="branch-container" style="display: none;">
+                        <div class="only-for-bank" style="display: none;">
                             <label class="uk-form-label" for="branch">Branch</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="branch" type="text" name="branch"  placeholder="Enter branch Name">
@@ -252,20 +263,19 @@ class PackagePurchaseController extends Controller
     public function loadDropdownCompanyBank(Request $request)
     {
 
-        return createDropDownUiKit( "company_bank_name","", "SELECT a.id,a.name from banks a,bank_accounts b where a.id=b.bank_id and a.bank_type=$request->data and a.status_active=1 and a.is_deleted=0  and b.status_active=1 and b.is_deleted=0 order by a.name","id,name", 1, "-- Select --","","loadHtmlElement('".route('loadBankDtls')."', this.value, 'company-account-container');",0,0 );
+        return createDropDownUiKit( "company_bank_name","", "SELECT a.id,a.name from banks a,bank_accounts b where a.id=b.bank_id and a.bank_type=$request->data and a.status_active=1 and a.is_deleted=0  and b.status_active=1 and b.is_deleted=0 order by a.name","id,name", 1, "-- Select --","","loadHtmlElement_multiple('".route('loadBankDtls')."', this.value, 'company_account_no*company_account_id*branch_code*routing_no', 'account_number*id*branch_code*routing_no');",0,0 );
     }
     public function loadBankDtls(Request $request)
     {
         if (!$request->data) return "";
 
-        $bank_dtls = BankAccount::select('id','account_number')->where('bank_id', $request->data)->first();
-        $body_div = "";
-
-        $html = '
-            <input class="uk-input" name="company_account_no" id="company_account_no" type="text" placeholder="Company Account No" value="'.$bank_dtls?->account_number.'" readonly>
-            <input class="uk-input" name="company_account_id" id="company_account_id" type="hidden" value="'.$bank_dtls?->id.'">';
-
-        return $html;
+        $bank_dtls = BankAccount::select('id','account_number','branch_code','routing_no')->where('bank_id', $request->data)->first();
+        return response()->json([
+            'account_number' => $bank_dtls->account_number ?? '',
+            'id'             => $bank_dtls->id ?? '',
+            'branch_code'    => $bank_dtls->branch_code ?? '',
+            'routing_no'     => $bank_dtls->routing_no ?? ''
+        ]);
 
     }
 
@@ -318,7 +328,8 @@ class PackagePurchaseController extends Controller
             'payment_type'          => $request->payment_type,
             'bank_name'             => $request->bank_name,
             'account_holder'        => $request->account_holder,
-            'company_account_id'    => $request->company_bank_name,
+            'company_bank_id'       => $request->company_bank_name,
+            'company_account_id'    => $request->company_account_id,
             'company_account_no'    => $request->company_account_no,
             'account_no'            => $request->account_no,
             'branch'                => $request->branch,
@@ -361,7 +372,7 @@ class PackagePurchaseController extends Controller
         ->leftJoin('social_package_break_down as c', 'c.id', '=','a.package_break_down_id' )
         ->leftJoin('social_package_mst as d', 'd.id', '=','a.package_mst_id' )
         ->leftJoin('banks as e', 'e.id', '=','a.bank_name' )
-        ->select('a.id','a.payment_method','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks','a.company_account_id' )
+        ->select('a.id','a.payment_method','a.payment_for','c.sub_package_name','d.package_name','b.name as purchase_by','a.package_value','a.discount_per','a.payment_amount','e.name as bank_name','a.account_holder','a.company_account_no','a.account_no','a.branch','a.transaction_id','a.image','a.payment_status','a.remarks','a.company_account_id','a.company_bank_id' )
         ->where('a.id', $id)
         ->orderBy('a.id','desc')
         ->first();
@@ -452,6 +463,8 @@ class PackagePurchaseController extends Controller
             'payment_type'          => $request->payment_type,
             'bank_name'             => $request->bank_name,
             'account_holder'        => $request->account_holder,
+            'company_bank_id'       => $request->company_bank_name,
+            'company_account_id'    => $request->company_account_id,
             'company_account_no'    => $request->company_account_no,
             'account_no'            => $request->account_no,
             'branch'                => $request->branch,

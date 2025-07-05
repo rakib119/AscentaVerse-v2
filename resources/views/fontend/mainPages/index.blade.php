@@ -24,6 +24,7 @@
                 autoplay: true,
                 // autoplayTimeout: 3000,
                 autoplayHoverPause: true,
+                dots: false,
                 responsive:{
                     0:{ items:3 },
                     576:{ items:4 },

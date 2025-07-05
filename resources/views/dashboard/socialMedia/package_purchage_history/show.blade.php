@@ -117,7 +117,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td> <b> Comp. Acount </b> </td>
-                                                                    <td> : {{ $bank_array[$data->company_account_id] ?? ""}} </td>
+                                                                    <td> : {{ $bank_array[$data->company_bank_id] ?? ""}} </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td> <b> Comp. Acount No </b> </td>

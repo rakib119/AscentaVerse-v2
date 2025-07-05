@@ -17,6 +17,8 @@ return new class extends Migration
 			$table->string('branch_name', 255)->nullable();
 			$table->string('account_number', 50)->nullable();
 			$table->string('account_holder', 255)->nullable();
+			$table->string('routing_no', 255)->nullable();
+			$table->string('branch_code', 255)->nullable();
 			$table->integer('bank_type')->nullable();
 			$table->integer('status_active')->default(1);
 			$table->integer('is_deleted')->default(0);

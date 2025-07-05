@@ -50,6 +50,18 @@
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="company_account_no_error"></div>
                         </div>
+                        <div class="only-for-bank" style="display: none;">
+                            <label class="uk-form-label" for="branch_code">Branch Code</label>
+                            <div class="uk-form-controls">
+                                <input readonly class="uk-input" id="branch_code" type="text" name="branch_code">
+                            </div>
+                        </div>
+                        <div class="only-for-bank" style="display: none;">
+                            <label class="uk-form-label" for="routing_no">Routing No</label>
+                            <div class="uk-form-controls">
+                                <input readonly class="uk-input" id="routing_no" type="text" name="routing_no">
+                            </div>
+                        </div>
                         <div>
                             <label class="uk-form-label" for="bank-name">Bank Name</label>
                             <div id="bank-name-container" class="uk-form-controls">
@@ -58,7 +70,7 @@
                             <div class="uk-text-danger uk-margin-small-top" id="bank_name_error"></div>
                         </div>
 
-                        <div>
+                        <div class="only-for-bank" style="display: none;">
                             <label class="uk-form-label" for="account_holder">Account Holder</label>
                             <div class="uk-form-controls">
                                 <input name="account_holder" class="uk-input" id="account_holder" type="text" placeholder="Enter Account Holder Name">
@@ -72,7 +84,7 @@
                             </div>
                             <div class="uk-text-danger uk-margin-small-top" id="account_no_error"></div>
                         </div>
-                        <div id="branch-container" style="display: none;">
+                        <div class="only-for-bank" style="display: none;">
                             <label class="uk-form-label" for="branch">Branch</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="branch" type="text" name="branch"  placeholder="Enter branch Name">
